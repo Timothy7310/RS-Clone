@@ -86,10 +86,36 @@
         gap: 5px;
         position: relative;
         width: 150px;
+        &-link{
+            &:hover{
+                & .tickets__slide-name{
+                    color: var(--color-accent);
+                }
+                & .tickets__slide-img-wrap::before{
+                    opacity: 1;
+                }
+            }
+        }
         &-img{
             width: 150px;
             height: 214px;
             object-fit: cover;
+            vertical-align: bottom;
+            &-wrap{
+                position: relative;
+                &::before{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    content: "";
+                    opacity: 0;
+                    background-color: rgba(0,0,0,0.15);
+                    transition: opacity 0.2s ease-in-out;
+                }
+            }
         }
         &-rate{
             position: absolute;
@@ -104,6 +130,7 @@
             line-height: 18px;
             letter-spacing: 0.03em;
             color: var(--color-black);
+            transition: color 0.2s ease-in-out;
         }
         &-genres{
             font-size: 13px;
