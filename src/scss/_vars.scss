@@ -1,5 +1,13 @@
 :root {
-  --color-black: #000;
+  --color-black: #141414;
   --color-white: #fff;
   --color-focus: #036fc7;
+  --search-bar-bg: #373737;
+  --color-secondary: rgba(0, 0, 0, 0.6);
+  --main-bg: linear-gradient(90deg, #F76417 0%, #FB6416 79.25%, #DDA82D 92.3%);
+  --popular-bg: linear-gradient(90deg, #000000 38.46%, rgba(0, 0, 0, 0.05) 82.28%);
+  --rate-good: #3BB33B;
+  --rate-common: #777777;
+  --rate-gold: linear-gradient(110.67deg, #EDCC86 17.02%, #AA9B79 83.33%);
+  --color-accent: #FF5500;
 }

@@ -1,13 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RS-Clone Кинопоиск</title>
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
 </head>
+
 <body>
-    <h1>Test title</h1>
+    <header class="header">
+        <h1 class="visually-hidden">RS-Clone Кинопоиск</h1>
+        <div class="container">
+            <div class="header__wrap">
+                <a href="index.html" class="header__logo" aria-label="Главная страница">
+                    <svg class="header__logo-icon">
+                        <use href="./assets/img/sprite.svg#logo"></use>
+                    </svg>
+                </a>
+
+                <nav class="header__nav">
+                    <ul class="header__list">
+                        <li class="header__item">
+                            <a href="" class="header__link">
+                                <svg class="header__link-icon">
+                                    <use href="./assets/img/sprite.svg#icon_main"></use>
+                                </svg>
+                                <span class="header__link-text">Главная</span>
+                            </a>
+                        </li>
+                        <li class="header__item">
+                            <a href="" class="header__link">
+                                <svg class="header__link-icon">
+                                    <use href="./assets/img/sprite.svg#icon_movies"></use>
+                                </svg>
+                                <span class="header__link-text">Фильмы</span>
+                            </a>
+                        </li>
+                        <li class="header__item">
+                            <a href="" class="header__link">
+                                <svg class="header__link-icon">
+                                    <use href="./assets/img/sprite.svg#icon_tickets"></use>
+                                </svg>
+                                <span class="header__link-text">Билеты&nbsp;в&nbsp;кино</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <form action="" class="header__search-form">
+                    <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
+                    <button type="submit" class="header__search-btn" aria-label="Найти">
+                        <svg class="header__search-btn-icon">
+                            <use href="./assets/img/sprite.svg#icon_search"></use>
+                        </svg>
+                    </button>
+                </form>
+
+                <button class="header__enter-btn">Войти</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="popular">
+            <h2 class="visually-hidden">Популярное сейчас</h2>
+            <div class="container">
+                <div class="popular__wrap">
+                    <div class="popular__info">
+                        <img src="https://avatars.mds.yandex.net/get-bunker/998550/1e48e69639b2609a530c881bd92ac990546b16e6/800x124"
+                            class="popular__logo" alt="">
+                        <p class="popular__story">
+                            Всё смешалось в доме вампиров. Казалось, все проблемы
+                            решены и можно жить вечно, но нет — семью поджидают новые
+                            трудности
+                        </p>
+                        <p class="popular__cast">
+                            В главных ролях: Юрий Стоянов, Татьяна Догилева, Екатерина Кузнецова,
+                            Анастасия Стежко, Мартин Герохинович, Артём Ткаченко, Ольга Медынич
+                        </p>
+                        <p class="popular__directors">
+                            Режиссер: Антон Маслов, Андрей Богатырев, Дмитрий Грибанов
+                        </p>
+                        <button class="popular__btn">
+                            <svg class="popular__btn-icon">
+                                <use href="./assets/img/sprite.svg#icon_play"></use>
+                            </svg>
+                            <span class="popular__btn-text">Смотреть</span>
+                        </button>
+                    </div>
+                    <div class="popular__bg"></div>
+                    <div class="popular__trailer-container">
+                       <img class="popular__trailer-back" src="http://avatars.mds.yandex.net/get-bunker/128809/2338ca99dc9f4cd91a430012b5d73480f4f0fa64/940x400" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tickets">
+            <div class="container">
+                <div class="tickets__wrap">
+                    <a href="" class="tickets__link">
+                        <h2 class="tickets__link-title">Билеты в кино</h2>
+                        <svg class="tickets__link-icon">
+                            <use href="./assets/img/sprite.svg#icon_back"></use>
+                        </svg>
+                    </a>
+                    <div class="tickets__slider-container">
+                        <button class="tickets__slider-btn tickets__slider-btn--prev" aria-label="Предыдущий слайд">
+                            <svg class="tickets__slider-btn-icon">
+                                <use href="./assets/img/sprite.svg#prev_slide"></use>
+                            </svg>
+                        </button>
+                        <ul class="tickets__slider">
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--gold">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--common">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--good">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--good">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--good">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--good">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                            <li class="tickets__slide">
+                                <a href="" class="tickets__slide-link">
+                                    <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
+                                    <div class="tickets__slide-rate rate--good">7.5</div>
+                                    <h3 class="tickets__slide-name">Чебурашка</h3>
+                                    <span class="tickets__slide-genres">2022, семейный</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <button class="tickets__slider-btn tickets__slider-btn--next" aria-label="Следующий слайд">
+                            <svg class="tickets__slider-btn-icon">
+                                <use href="./assets/img/sprite.svg#next_slide"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="soon">
+            <div class="container">
+                <h2 class="soon__title">Календарь релизов</h2>
+                <hr>
+                <div class="soon__wrap">
+                    <div class="soon-cinema">
+                        <a href="" class="soon-cinema__link">
+                            <h3 class="soon-cinema__link-title">Скоро в кино</h3>
+                            <svg class="soon-cinema__link-icon">
+                                <use href="./assets/img/sprite.svg#icon_back"></use>
+                            </svg>
+                        </a>
+                        <ol class="soon-cinema__list">
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/4bddfb1b-e001-4292-ba26-1b12f5aec370/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Больше чем никогда</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">Plus que jamais</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/4bddfb1b-e001-4292-ba26-1b12f5aec370/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Больше чем никогда</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">Plus que jamais</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/4bddfb1b-e001-4292-ba26-1b12f5aec370/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Больше чем никогда</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">Plus que jamais</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/4bddfb1b-e001-4292-ba26-1b12f5aec370/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Больше чем никогда</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">Plus que jamais</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/4bddfb1b-e001-4292-ba26-1b12f5aec370/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Больше чем никогда</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">Plus que jamais</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="soon-cinema">
+                        <a href="" class="soon-cinema__link">
+                            <h3 class="soon-cinema__link-title">Цифровые релизы</h3>
+                            <svg class="soon-cinema__link-icon">
+                                <use href="./assets/img/sprite.svg#icon_back"></use>
+                            </svg>
+                        </a>
+                        <ol class="soon-cinema__list">
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4774061/cf197df2-d1ee-4121-a413-f7eebb78a1e9/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Отзвуки прошлого</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">The Old Way</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4774061/cf197df2-d1ee-4121-a413-f7eebb78a1e9/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Отзвуки прошлого</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">The Old Way</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4774061/cf197df2-d1ee-4121-a413-f7eebb78a1e9/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Отзвуки прошлого</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">The Old Way</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4774061/cf197df2-d1ee-4121-a413-f7eebb78a1e9/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Отзвуки прошлого</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">The Old Way</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li class="soon-cinema__item">
+                                <a href="">
+                                    <img class="soon-cinema__item-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4774061/cf197df2-d1ee-4121-a413-f7eebb78a1e9/40x60" alt="">
+                                </a>
+                                <div class="soon-cinema__item-name-container">
+                                    <a href="">
+                                        <span class="soon-cinema__item-name">Отзвуки прошлого</span>
+                                    </a>
+                                    <span class="soon-cinema__item-name-original">The Old Way</span>
+                                </div>
+                                <div class="soon-cinema__item-date">
+                                    <span class="soon-cinema__item-date-day">9</span>
+                                    <span class="soon-cinema__item-date-mounth">февраля</span>
+                                </div>
+                                <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                                    <svg class="soon-cinema__item-marker-icon">
+                                        <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cash">
+            <div class="container">
+                <h2 class="cash__title">Кассовые сборы за уик-энд</h2>
+                <hr>
+                <div class="cash__wrap">
+                    <div class="cash__card">
+                        <a href="" class="cash__card-link">
+                            <h3 class="cash__card-link-title">Россия и СНГ</h3>
+                            <svg class="cash__card-link-icon">
+                                <use href="./assets/img/sprite.svg#icon_back"></use>
+                            </svg>
+                        </a>
+                        <ol class="cash__card-list">
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Чебурашка</span>
+                                        </a>
+                                        <span class="cash__card-item-total">761.5 млн ₽</span>
+                                    </div>
+                                    <span class="cash__card-item-time">4.3 млрд  ₽ за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Чебурашка</span>
+                                        </a>
+                                        <span class="cash__card-item-total">761.5 млн ₽</span>
+                                    </div>
+                                    <span class="cash__card-item-time">4.3 млрд  ₽ за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Чебурашка</span>
+                                        </a>
+                                        <span class="cash__card-item-total">761.5 млн ₽</span>
+                                    </div>
+                                    <span class="cash__card-item-time">4.3 млрд  ₽ за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Чебурашка</span>
+                                        </a>
+                                        <span class="cash__card-item-total">761.5 млн ₽</span>
+                                    </div>
+                                    <span class="cash__card-item-time">4.3 млрд  ₽ за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Чебурашка</span>
+                                        </a>
+                                        <span class="cash__card-item-total">761.5 млн ₽</span>
+                                    </div>
+                                    <span class="cash__card-item-time">4.3 млрд  ₽ за 5 недель</span>
+                               </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="cash__card">
+                        <a href="" class="cash__card-link">
+                            <h3 class="cash__card-link-title">Мир</h3>
+                            <svg class="cash__card-link-icon">
+                                <use href="./assets/img/sprite.svg#icon_back"></use>
+                            </svg>
+                        </a>
+                        <ol class="cash__card-list">
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/2e51cb8b-fd51-4166-84a2-63559733baac/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Аватар: Путь воды</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$76 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$2 млрд  за 6 недель </span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/2e51cb8b-fd51-4166-84a2-63559733baac/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Аватар: Путь воды</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$76 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$2 млрд  за 6 недель </span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/2e51cb8b-fd51-4166-84a2-63559733baac/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Аватар: Путь воды</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$76 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$2 млрд  за 6 недель </span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/2e51cb8b-fd51-4166-84a2-63559733baac/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Аватар: Путь воды</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$76 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$2 млрд  за 6 недель </span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/2e51cb8b-fd51-4166-84a2-63559733baac/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Аватар: Путь воды</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$76 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$2 млрд  за 6 недель </span>
+                               </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="cash__card">
+                        <a href="" class="cash__card-link">
+                            <h3 class="cash__card-link-title">США и Канада</h3>
+                            <svg class="cash__card-link-icon">
+                                <use href="./assets/img/sprite.svg#icon_back"></use>
+                            </svg>
+                        </a>
+                        <ol class="cash__card-list">
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Кот в сапогах 2: 
+                                            Последнее желание</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$11.8 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$126.8 млн  за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Кот в сапогах 2: 
+                                            Последнее желание</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$11.8 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$126.8 млн  за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Кот в сапогах 2: 
+                                            Последнее желание</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$11.8 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$126.8 млн  за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Кот в сапогах 2: 
+                                            Последнее желание</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$11.8 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$126.8 млн  за 5 недель</span>
+                               </div>
+                            </li>
+                            <li class="cash__card-item">
+                                <a href="" class="cash__card-item-poster-wrap">
+                                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/40x60" alt="" class="cash__card-item-poster">
+                                </a>
+                               <div class="cash__card-item-info">
+                                    <div class="cash__card-item-info-head">
+                                        <a href="" class="cash__card-item-name-wrap">
+                                            <span class="cash__card-item-name">Кот в сапогах 2: 
+                                            Последнее желание</span>
+                                        </a>
+                                        <span class="cash__card-item-total">$11.8 млн</span>
+                                    </div>
+                                    <span class="cash__card-item-time">$126.8 млн  за 5 недель</span>
+                               </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__wrap">
+                <a href="index.html" class="footer__logo" aria-label="Главная страница">
+                    <svg class="footer__logo-icon">
+                        <use href="./assets/img/sprite.svg#logo"></use>
+                    </svg>
+                </a>
+                <div class="footer__students">
+                    <span>Students:</span>
+                    <a class="footer__students-link" href="https://github.com/Timothy7310">timothy7310</a>
+                    <a class="footer__students-link" href="https://github.com/geras1m">geras1m</a>
+                    <a class="footer__students-link" href="https://github.com/AnastasiaSyt">anastasiasyt</a>
+                </div> 
+                <a href="https://rs.school/js/" class="footer__school">
+                    <svg class="footer__school-icon">
+                        <use href="./assets/img/sprite.svg#rs_school_logo"></use>
+                    </svg>
+                </a>
+                <span class="footer__year">Year of creation: 2023</span>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

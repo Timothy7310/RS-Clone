@@ -1,0 +1,71 @@
+.popular{
+    margin-top: 30px;
+    &__wrap{
+        background: #000;
+        display: flex;
+        position: relative;
+    }
+    &__info{
+        width: 68%;
+        max-width: 495px;
+        color: var(--color-white);
+        font-size: 14px;
+        line-height: 17px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 17px;
+        align-items: start;
+        padding: 40px;
+        z-index: 4;
+    }
+    &__story{
+        margin: 0px;
+    }
+    &__cast{
+        margin: 0px;
+    }
+    &__directors{
+        margin: 0px;
+    }
+    &__btn{
+        background: var(--main-bg);
+        padding: 16px 30px;
+        border-radius: 30px;
+        border: none;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+        color: var(--color-white);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transition: transform 0.2s ease-in-out;
+        &-icon{
+            width: 24px;
+            height: 24px;
+            fill: var(--color-white);
+        }
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+    &__bg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--popular-bg);
+        z-index: 3;
+    }
+    &__trailer{
+        &-container{
+            position: relative;
+            width: 100%;
+        }
+        &-back{
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+        }
+    }
+}

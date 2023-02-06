@@ -1,0 +1,92 @@
+.header{
+    background-color: var(--color-black);
+    padding: 16px 0px;
+    &__wrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 10px;
+    }
+    &__logo-icon{
+        width: 178px;
+        height: 40px;
+    }
+    &__list{
+        list-style: none;
+        display: flex;
+        gap: 22px;
+        padding: 0px;
+        margin: 0px;
+    }
+    &__link{
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.5);
+        gap: 10px;
+        &-text{
+            color: inherit;
+            transition: color 0.4s ease-in-out;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+        }
+        &-icon{
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 255, 255, 0.5);
+            transition: fill 0.4s ease-in-out;
+        }
+        &:hover{
+            & .header__link-icon{
+                fill: var(--color-white);
+            }
+            color: var(--color-white);
+        }
+    }
+    &__search{
+        &-form{
+            width: 100%;
+            max-width: 360px;
+            justify-self: end;
+            background-color: var(--search-bar-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            padding: 9px 17px;
+        }
+        &-input{
+            width: 100%;
+            background-color: inherit;
+            border: none;
+            color: var(--color-white);
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.015em;
+        }
+        &-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+            &-icon{
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+    &__enter-btn{
+        color: rgba(255, 255, 255, 0.5);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: color 0.4s ease-in-out;
+        &:hover{
+            color: var(--color-white);
+        }
+    }
+}
