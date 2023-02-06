@@ -19,6 +19,11 @@
         "no-console": "off",
         "linebreak-style": 0,
         "@typescript-eslint/indent": ["error", 4],
-        "@typescript-eslint/no-explicit-any": "error"
+        "@typescript-eslint/no-explicit-any": "error",
+        "import/no-extraneous-dependencies": [
+            "warn", {
+                "bundledDependencies": false
+            }
+        ]
     }
 }
