@@ -1,6 +1,6 @@
 import './index.html';
 import './scss/main.scss';
-import App from './components/controller/router/app';
+import App from './components/router/app';
 
 // For example
 // import Controller from './components/controller/controller';

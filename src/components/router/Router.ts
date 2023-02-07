@@ -1,5 +1,5 @@
-import { Error } from "../../pages/error_404/ErrorPage";
-import Page from "../../pages/Page";
+import { Error } from "../pages/error_404/ErrorPage";
+import Page from "../pages/Page";
 import { IPath, Paths } from "./Paths";
 
 export interface IRouter {

@@ -1,6 +1,8 @@
-import { Main } from "../../pages/main/Main"
-import { Movie } from "../../pages/movie/movie_test";
-import Page from "../../pages/Page";
+import { Cinema } from "../pages/cinema/Cinema";
+import { Main } from "../pages/main/Main"
+import { Movie } from "../pages/movie/MoviePage";
+import { MoviesPage } from "../pages/movies/MoviesPage";
+import Page from "../pages/Page";
 
 export interface IPath {
     path: string;
@@ -29,5 +31,13 @@ export const Paths = [
   {
     path: PagePaths.moviePage,
     getPage: (path?: string) => new Movie(path),
+  },
+  {
+    path: PagePaths.moviesPage,
+    getPage: (path?: string) => new MoviesPage(path),
+  },
+  {
+    path: PagePaths.cinemaPage,
+    getPage: (path?: string) => new Cinema(path),
   },
 ];
