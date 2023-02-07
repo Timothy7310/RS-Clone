@@ -1,6 +1,6 @@
 import Component from "../Component";
 
-export class ErrorContent extends Component{
+export class ErrorContent extends Component {
   constructor() {
     super('section', 'error');
   }
