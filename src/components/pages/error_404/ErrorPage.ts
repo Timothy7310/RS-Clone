@@ -1,11 +1,18 @@
 import Page from '../Page';
 import ErrorContent from './ErrorContent';
 
-export default class Error extends Page {
+export default class Error {
+    page: Page;
+
+    container: HTMLElement;
+
     content: ErrorContent;
 
+    path: string | undefined;
+
     constructor(path?: string) {
-        super(path);
+        this.page = new Page(path);
+        this.container = this.page.draw();
         this.content = new ErrorContent();
     }
 
@@ -16,7 +23,7 @@ export default class Error extends Page {
     }
 
     clear(): void {
-        super.clear();
+        this.page.clear();
         this.content.clear();
     }
 }

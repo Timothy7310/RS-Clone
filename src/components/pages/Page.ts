@@ -1,7 +1,7 @@
 export default class Page {
     container: HTMLElement;
 
-    path: string;
+    path: string | undefined;
 
     constructor(path?: string) {
         this.container = document.createElement('div');
@@ -13,7 +13,9 @@ export default class Page {
     }
 
     draw(): HTMLElement {
-        this.container.insertAdjacentHTML('afterbegin', this.path);
+        if (this.path) {
+            this.container.insertAdjacentHTML('afterbegin', this.path);
+        }
         return this.container;
     }
 

@@ -1,8 +1,13 @@
 import Component from '../../Component';
 
-export default class Soon extends Component {
+export default class Soon {
+    component: Component;
+
+    container: HTMLElement;
+
     constructor() {
-        super('section', 'soon');
+        this.component = new Component('section', 'soon');
+        this.container = this.component.draw();
     }
 
     draw(): HTMLElement {

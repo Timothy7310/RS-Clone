@@ -1,8 +1,13 @@
 import Component from '../../Component';
 
-export default class Tickets extends Component {
+export default class Tickets {
+    component: Component;
+
+    container: HTMLElement;
+
     constructor() {
-        super('section', 'tickets');
+        this.component = new Component('section', 'tickets');
+        this.container = this.component.draw();
     }
 
     draw(): HTMLElement {

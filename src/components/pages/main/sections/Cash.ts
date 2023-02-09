@@ -1,8 +1,13 @@
 import Component from '../../Component';
 
-export default class Cash extends Component {
+export default class Cash {
+    component: Component;
+
+    container: HTMLElement;
+
     constructor() {
-        super('section', 'cash');
+        this.component = new Component('section', 'cash');
+        this.container = this.component.draw();
     }
 
     draw(): HTMLElement {

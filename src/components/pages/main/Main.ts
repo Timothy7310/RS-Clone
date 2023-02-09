@@ -4,7 +4,13 @@ import Popular from './sections/Popular';
 import Soon from './sections/soon';
 import Tickets from './sections/Tickets';
 
-export default class Main extends Page {
+export default class Main {
+    page: Page;
+
+    container: HTMLElement;
+
+    path: string | undefined;
+
     popular: Popular;
 
     tickets: Tickets;
@@ -14,7 +20,8 @@ export default class Main extends Page {
     cash: Cash;
 
     constructor(path?: string) {
-        super(path);
+        this.page = new Page(path);
+        this.container = this.page.draw();
         this.popular = new Popular();
         this.tickets = new Tickets();
         this.soon = new Soon();
@@ -32,6 +39,6 @@ export default class Main extends Page {
     }
 
     clear(): void {
-        super.clear();
+        this.page.clear();
     }
 }

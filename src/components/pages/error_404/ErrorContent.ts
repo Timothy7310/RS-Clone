@@ -5,9 +5,14 @@ interface IErrorComponent {
     draw:() => HTMLElement,
 }
 
-export default class ErrorContent extends Component implements IErrorComponent {
+export default class ErrorContent implements IErrorComponent {
+    component: Component;
+
+    container: HTMLElement;
+
     constructor() {
-        super('section', 'error');
+        this.component = new Component('section', 'error');
+        this.container = this.component.draw();
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -47,5 +52,9 @@ export default class ErrorContent extends Component implements IErrorComponent {
         this.container.appendChild(video);
 
         return this.container;
+    }
+
+    clear(): void {
+        this.container.remove();
     }
 }

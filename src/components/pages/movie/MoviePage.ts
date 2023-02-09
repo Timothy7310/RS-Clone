@@ -1,9 +1,15 @@
 import Page from '../Page';
 
-export default class Movie extends Page {
-    // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+export default class Movie {
+    page: Page;
+
+    container: HTMLElement;
+
+    path: string | undefined;
+
     constructor(path?: string) {
-        super(path);
+        this.page = new Page(path);
+        this.container = this.page.draw();
     }
 
     draw(): HTMLElement {
@@ -16,6 +22,6 @@ export default class Movie extends Page {
     }
 
     clear(): void {
-        super.clear();
+        this.page.clear();
     }
 }

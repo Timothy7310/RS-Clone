@@ -1,8 +1,13 @@
 import Component from '../../Component';
 
-export default class Popular extends Component {
+export default class Popular {
+    component: Component;
+
+    container: HTMLElement;
+
     constructor() {
-        super('section', 'popular');
+        this.component = new Component('section', 'popular');
+        this.container = this.component.draw();
     }
 
     draw(): HTMLElement {
