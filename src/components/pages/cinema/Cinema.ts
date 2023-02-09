@@ -1,4 +1,5 @@
 import Page from '../Page';
+import billboardTemplate from '../../templates/billboard';
 
 export default class Cinema {
     page: Page;
@@ -17,7 +18,8 @@ export default class Cinema {
         title.textContent = 'Тут будет страница сеансов кино в кинотеатре';
         this.container.appendChild(title);
 
-        this.container.classList.add('cinema', 'container');
+        this.container.classList.add('cinema');
+        this.container.innerHTML = billboardTemplate;
         return this.container;
     }
 
