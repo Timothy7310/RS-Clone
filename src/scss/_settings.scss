@@ -16,6 +16,14 @@ body {
     scroll-behavior: smooth;
 }
 
+main {
+    min-height: calc(100vh - 207.4px);
+}
+
+#content {
+    min-height: calc(100vh - 207.4px);
+}
+
 img {
     max-width: 100%;
 }

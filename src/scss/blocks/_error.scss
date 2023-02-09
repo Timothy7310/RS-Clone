@@ -1,5 +1,6 @@
 .error_404 {
     background: var(--color-black);
+    min-height: calc(100vh - 207.4px);
 }
 .error {
     background: inherit;
