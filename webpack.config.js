@@ -1,4 +1,5 @@
 const path = require('path');
+const glob = require('glob').sync;
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {
     CleanWebpackPlugin,
@@ -66,8 +67,10 @@ module.exports = {
         {
             test: /\.(?:|gif|png|jpg|jpeg|svg)$/,
             type: 'asset/resource',
+            // TODO: либо убрать хэширования только у svg, либо придумать как менять путь у svg
             generator: {
-                filename: 'img/[hash][ext][query]',
+                // filename: 'img/[hash][ext][query]',
+                filename: 'assets/img/[name][ext]',
             },
         },
         {
