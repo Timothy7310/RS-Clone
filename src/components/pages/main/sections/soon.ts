@@ -1,14 +1,14 @@
-import Component from "../../Component";
+import Component from '../../Component';
 
-export class Soon extends Component{
-  constructor() {
-    super('section', 'soon');
-  }
+export default class Soon extends Component {
+    constructor() {
+        super('section', 'soon');
+    }
 
-  draw(): HTMLElement {
-    this.container.insertAdjacentHTML(
-      'afterbegin',
-      `
+    draw(): HTMLElement {
+        this.container.insertAdjacentHTML(
+            'afterbegin',
+            `
       <div class="container">
           <h2 class="soon__title">Календарь релизов</h2>
           <hr>
@@ -235,8 +235,8 @@ export class Soon extends Component{
               </div>
           </div>
       </div>
-    `
-    );
-    return this.container;
-  }
+    `,
+        );
+        return this.container;
+    }
 }

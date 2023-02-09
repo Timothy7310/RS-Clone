@@ -1,14 +1,14 @@
-import Component from "../../Component";
+import Component from '../../Component';
 
-export class Tickets extends Component{
-  constructor() {
-    super('section', 'tickets');
-  }
+export default class Tickets extends Component {
+    constructor() {
+        super('section', 'tickets');
+    }
 
-  draw(): HTMLElement {
-    this.container.insertAdjacentHTML(
-      'afterbegin',
-      `
+    draw(): HTMLElement {
+        this.container.insertAdjacentHTML(
+            'afterbegin',
+            `
       <div class="container">
           <div class="tickets__wrap">
               <a href="" class="tickets__link">
@@ -103,8 +103,8 @@ export class Tickets extends Component{
               </div>
           </div>
       </div>
-    `
-    );
-    return this.container;
-  }
+    `,
+        );
+        return this.container;
+    }
 }

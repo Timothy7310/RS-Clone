@@ -1,19 +1,19 @@
-import Router, { IRouter } from "./Router";
+import Router, { IRouter } from './Router';
 
 const rootElement = document.querySelector('#content');
 
 export default class App {
-  router!: IRouter;
-  
-  constructor() {
-    if (rootElement) {
-      this.router = new Router(rootElement);
+    router!: IRouter;
+
+    constructor() {
+        if (rootElement) {
+            this.router = new Router(rootElement);
+        }
+        this.drawContent();
     }
-    this.drawContent();
-  }
-  
-  drawContent() {
-    this.router.listen();
-    this.router.navigateToPage();
-  }
+
+    drawContent() {
+        this.router.listen();
+        this.router.navigateToPage();
+    }
 }

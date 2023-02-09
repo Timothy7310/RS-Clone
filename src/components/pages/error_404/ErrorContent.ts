@@ -1,45 +1,51 @@
-import Component from "../Component";
+import Component from '../Component';
 
-export class ErrorContent extends Component {
-  constructor() {
-    super('section', 'error');
-  }
+interface IErrorComponent {
+    getRandomInteger: (min: number, max: number) => number,
+    draw:() => HTMLElement,
+}
 
-  draw(): HTMLElement {
-    const errorContent = document.createElement('div');
-    errorContent.classList.add('error__textContentError');
-    this.container.appendChild(errorContent);
+export default class ErrorContent extends Component implements IErrorComponent {
+    constructor() {
+        super('section', 'error');
+    }
 
-    const title = document.createElement('p');
-    title.textContent = '404. Страница не найдена';
-    title.classList.add('error__textContentError_title');
-    errorContent.appendChild(title);
+    // eslint-disable-next-line class-methods-use-this
+    getRandomInteger(min: number, max: number): number {
+        const minInteger = Math.ceil(min);
+        const maxInteger = Math.floor(max);
+        return Math.floor(Math.random() * (maxInteger - minInteger + 1)) + minInteger;
+    }
 
-    const message = document.createElement('p');
-    message.textContent = 'Возможно, она была перемещена, или вы просто неверно указали адрес страницы.';
-    message.classList.add('error__textContentError_message');
-    errorContent.appendChild(message);
+    draw(): HTMLElement {
+        const errorContent = document.createElement('div');
+        errorContent.classList.add('error__textContentError');
+        this.container.appendChild(errorContent);
 
-    const videoNumber = this.getRandomInteger(1, 5); //we have 5 movies mp4
+        const title = document.createElement('p');
+        title.textContent = '404. Страница не найдена';
+        title.classList.add('error__textContentError_title');
+        errorContent.appendChild(title);
 
-    const video = document.createElement('video');
-    video.classList.add('error__videoContentError')
-    video.setAttribute('autoplay', '');
-    video.setAttribute('loop', '');
-    video.setAttribute('playsinline', '');
+        const message = document.createElement('p');
+        message.textContent = 'Возможно, она была перемещена, или вы просто неверно указали адрес страницы.';
+        message.classList.add('error__textContentError_message');
+        errorContent.appendChild(message);
 
-    //TODO add video from assets folder, so far mp4 and webpack don't interact
-    video.src = `https://www.kinopoisk.ru/public/videos/errors/desktop/404/${videoNumber}.mp4`;
+        const videoNumber = this.getRandomInteger(1, 5); // we have 5 movies mp4
 
-    video.setAttribute('width', '500');
-    this.container.appendChild(video);
+        const video = document.createElement('video');
+        video.classList.add('error__videoContentError');
+        video.setAttribute('autoplay', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('playsinline', '');
 
-    return this.container;
-  }
+        // TODO add video from assets folder, so far mp4 and webpack don't interact
+        video.src = `https://www.kinopoisk.ru/public/videos/errors/desktop/404/${videoNumber}.mp4`;
 
-  getRandomInteger(min: number, max: number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+        video.setAttribute('width', '500');
+        this.container.appendChild(video);
+
+        return this.container;
+    }
 }

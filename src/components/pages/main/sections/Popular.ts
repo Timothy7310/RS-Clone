@@ -1,14 +1,14 @@
-import Component from "../../Component";
+import Component from '../../Component';
 
-export class Popular extends Component{
-  constructor() {
-    super('section', 'popular');
-  }
+export default class Popular extends Component {
+    constructor() {
+        super('section', 'popular');
+    }
 
-  draw(): HTMLElement {
-    this.container.insertAdjacentHTML(
-      'afterbegin',
-      `
+    draw(): HTMLElement {
+        this.container.insertAdjacentHTML(
+            'afterbegin',
+            `
       <h2 class="visually-hidden">Популярное сейчас</h2>
       <div class="container">
           <div class="popular__wrap">
@@ -40,8 +40,8 @@ export class Popular extends Component{
               </div>
           </div>
       </div>
-    `
-    );
-    return this.container;
-  }
+    `,
+        );
+        return this.container;
+    }
 }

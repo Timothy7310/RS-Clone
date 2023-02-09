@@ -1,14 +1,14 @@
-import Component from "../../Component";
+import Component from '../../Component';
 
-export class Cash extends Component{
-  constructor() {
-    super('section', 'cash');
-  }
+export default class Cash extends Component {
+    constructor() {
+        super('section', 'cash');
+    }
 
-  draw(): HTMLElement {
-    this.container.insertAdjacentHTML(
-      'afterbegin',
-      `
+    draw(): HTMLElement {
+        this.container.insertAdjacentHTML(
+            'afterbegin',
+            `
       <div class="container">
           <h2 class="cash__title">Кассовые сборы за уик-энд</h2>
           <hr>
@@ -260,8 +260,8 @@ export class Cash extends Component{
               </div>
           </div>
       </div>
-    `
-    );
-    return this.container;
-  }
+    `,
+        );
+        return this.container;
+    }
 }
