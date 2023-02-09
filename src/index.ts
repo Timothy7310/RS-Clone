@@ -3,15 +3,13 @@ import './scss/main.scss';
 import App from './components/router/app';
 
 // For example
-import Controller from './components/controller/controller';
+// import Controller from './components/controller/controller';
 
-const controller = new Controller();
+// const controller = new Controller();
 
-const movie = await controller.searchMovie('326', 'id');
-const test = movie.poster;
+// const movie = await controller.searchMovie('326', 'id');
 
-console.log(movie);
-console.log(test);
+// console.log(movie);
 
 // eslint-disable-next-line no-new
 new App();
