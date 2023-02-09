@@ -62,3 +62,15 @@ a {
         background: var(--rate-gold);
     }
 }
+
+.rate-num {
+    &--good {
+        color: var(--rate-good);
+    }
+    &--common{
+        color: var(--rate-common);
+    }
+    &--gold{
+        color: var(--rate-gold);
+    }
+}

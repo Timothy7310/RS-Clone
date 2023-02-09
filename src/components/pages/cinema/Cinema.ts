@@ -14,10 +14,6 @@ export default class Cinema {
     }
 
     draw(): HTMLElement {
-        const title = document.createElement('p');
-        title.textContent = 'Тут будет страница сеансов кино в кинотеатре';
-        this.container.appendChild(title);
-
         this.container.classList.add('cinema');
         this.container.innerHTML = billboardTemplate;
         return this.container;
