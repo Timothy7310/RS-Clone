@@ -39,6 +39,8 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "qs": "^6.11.0",
+    "ts-routes": "^2.0.0"
   }
 }

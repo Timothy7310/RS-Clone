@@ -1,0 +1,35 @@
+.error_404 {
+    background: var(--color-black);
+    min-height: calc(100vh - 207.4px);
+}
+.error {
+    background: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 89vw;
+    max-width: 1080px;
+    height: 80vh;
+    margin: auto;
+    &__textContentError{
+        display: flex;
+        flex-direction: column;
+        max-width: 410px;
+        &_title{
+            font-family: 'Tahoma';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 50px;
+            line-height: 103%;
+            color: var(--color-white);
+        }
+        &_message{
+            font-family: 'Tahoma';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 127%;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+}

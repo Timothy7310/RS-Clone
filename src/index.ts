@@ -1,7 +1,7 @@
 import './index.html';
 import './scss/main.scss';
 import './firebase';
-
+import App from './components/router/app';
 import FirebaseAuthUser from './components/firebaseAuthUser';
 
 const authUser = new FirebaseAuthUser();
@@ -20,3 +20,6 @@ await authUser.isUserAuth();
 // const movie = await controller.searchMovie('326', 'id');
 
 // console.log(movie);
+
+// eslint-disable-next-line no-new
+new App();
