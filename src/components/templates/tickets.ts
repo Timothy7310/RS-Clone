@@ -16,7 +16,7 @@ const ticketsTemplate = `
                 </button>
                 <ul class="tickets__slider">
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
@@ -26,7 +26,7 @@ const ticketsTemplate = `
                         </a>
                     </li>
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
@@ -36,7 +36,7 @@ const ticketsTemplate = `
                         </a>
                     </li>
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
@@ -46,7 +46,7 @@ const ticketsTemplate = `
                         </a>
                     </li>
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
@@ -56,7 +56,7 @@ const ticketsTemplate = `
                         </a>
                     </li>
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
@@ -66,7 +66,7 @@ const ticketsTemplate = `
                         </a>
                     </li>
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
@@ -76,7 +76,7 @@ const ticketsTemplate = `
                         </a>
                     </li>
                     <li class="tickets__slide">
-                        <a href="" class="tickets__slide-link">
+                        <a href="#/cinema/seances" class="tickets__slide-link">
                             <div class="tickets__slide-img-wrap">
                                 <img class="tickets__slide-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/150x225" alt="">
                             </div>
