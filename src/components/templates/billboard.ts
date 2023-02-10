@@ -60,7 +60,7 @@ const billboardTemplate = `
                 </div>
                 <ul class="billboard__list">
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -68,7 +68,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
@@ -78,7 +78,7 @@ const billboardTemplate = `
                         </a>
                     </li>
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -86,7 +86,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
@@ -96,7 +96,7 @@ const billboardTemplate = `
                         </a>
                     </li>
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -104,7 +104,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
@@ -114,7 +114,7 @@ const billboardTemplate = `
                         </a>
                     </li>
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -122,7 +122,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
@@ -132,7 +132,7 @@ const billboardTemplate = `
                         </a>
                     </li>
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -140,7 +140,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
@@ -150,7 +150,7 @@ const billboardTemplate = `
                         </a>
                     </li>
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -158,7 +158,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
@@ -168,7 +168,7 @@ const billboardTemplate = `
                         </a>
                     </li>
                     <li class="billboard__item">
-                        <a href="" class="billboard__item-link">
+                        <a href="#/cinema/seances" class="billboard__item-link">
                             <span class="billboard__item-rate rate--common">6.7</span>
                             <div class="billboard__item-tickets">
                                 <svg class="billboard__item-tickets-icon">
@@ -176,7 +176,7 @@ const billboardTemplate = `
                                 </svg>
                                 <span class="billboard__item-tickets-text">Билеты</span>
                             </div>
-                            <div href="" class="billboard__item-poster-wrap">
+                            <div class="billboard__item-poster-wrap">
                                 <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8e0994cf-f72d-4aed-ab5f-1abf29530200/300x450" alt="" class="billboard__item-poster">
                             </div>
                             <h3 class="billboard__item-name">
