@@ -1,0 +1,296 @@
+.modal-ticket{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    display: none;
+    &--active{
+        display: flex;
+    }
+    &__overlay{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+        background: rgba(41, 41, 41, 0.6);
+        cursor: pointer;
+    }
+    &__content{
+        background-color: var(--color-white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1032px;
+        box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 15px;
+        position: relative;
+        z-index: 101;
+        padding: 48px;
+        // overflow-x: scroll;
+        &-name{
+            font-weight: 700;
+            font-size: 21px;
+            line-height: 26px;
+            color: var(--color-black);
+            margin-bottom: 8px;
+        }
+        &-date{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: var(--color-secondary);
+            margin-bottom: 25px;
+        }
+        &-times{
+            display: flex;
+            gap: 10px;
+        }
+        &-time{
+            width: 54px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            cursor: pointer;
+            color: var(--color-white);
+            border: none;
+            border-radius: 2.16px;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: background-color 0.25s;
+            &:hover{
+                background-color: #e7e7ec;
+            }
+            &--active{
+                background-color: var(--color-accent);
+                &:hover{
+                    background-color: var(--color-accent);
+                }
+            }
+        }
+        &-prices{
+            display: flex;
+            gap: 16px;
+        }
+        &-price{
+            &-wrap{
+                display: flex;
+                gap: 4px;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+            &-color{
+                width: 12px;
+                height: 12px;
+                border-radius: 2px;
+                &--low-cost{
+                    background-color: var(--low-cost-spot);
+                }
+                &--common-cost{
+                    background-color: var(--free-spot);
+                }
+                &--high-cost{
+                    background-color: var(--sofa-spot);
+                }
+                &--disable{
+                    border-radius: 50%;
+                    background-color: var(--disable-spot)
+                }
+            }
+            &-text{
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                color: var(--color-black);
+            }
+        }
+        &-monitor{
+            width: 720px;
+            height: 60px;
+            margin-bottom: 60px;
+        }
+        &-hall{
+            row-gap: 6px;
+            column-gap: 4px;
+            width: 672px;
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        &-hall-wrap{
+            display: flex;
+            gap: 5px;
+        }
+        &-hall-rows{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        &-hall-row{
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 12px;
+            color: var(--color-secondary);
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        &-splitter{
+            width: calc(100% + 48px * 2);
+            height: 1px;
+            background-color: #E8E8E8;
+            margin: 20px 0px;
+        }
+        &-buy{
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            &-total{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                align-items: center;
+                &-text{
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 16px;
+                    color: var(--color-secondary);
+                }
+                &-num{
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 24px;
+                }
+            }
+            &-btn{
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 18px;
+                width: 125px;
+                min-height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 30px;
+                background-color: var(--color-accent);
+                border: none;
+                color: var(--color-white);
+                cursor: pointer;
+                border: 1px solid var(--color-accent);
+                transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+                &:hover{
+                    background-color: transparent;
+                    color: var(--color-accent);
+                }
+            }
+        }
+    }
+    &__spot{
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        background-color: var(--free-spot);
+        border-radius: 2px;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &-num{
+            font-size: 13px;
+            opacity: 0;
+            visibility: hidden;
+            color: var(--color-white);
+        }
+        &-sofa-warp{
+            display: flex;
+            gap: 2px;
+            &:hover{
+                & .modal-ticket__spot--sofa{
+                    background-color: var(--color-accent);
+                    & .modal-ticket__spot-num{
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+        &:hover{
+            background-color: var(--color-accent);
+            & .modal-ticket__spot-num{
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+        &--low-cost{
+            background-color: var(--low-cost-spot);
+        }
+        &--sofa{
+            background-color: var(--sofa-spot);
+        }
+        &--active{
+            background-color: transparent;
+            border: 1px solid var(--free-spot);
+            & .modal-ticket__spot-num{
+                opacity: 1;
+                visibility: visible;
+                color: var(--free-spot);
+            }
+            &:hover{
+                background-color: transparent;
+            }
+        }
+        &:disabled{
+            cursor: inherit;
+            background-color: transparent;
+            position: relative;
+            &::before{
+                content: '';
+                position: absolute;
+                display: block;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                height: 12px;
+                width: 12px;
+                background-color: var(--disable-spot);
+                border-radius: 50%;
+            }
+        }
+    }
+    &__close{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        top: 20px;
+        right: 20px;
+        &-icon{
+            width: 24px;
+            height: 24px;
+            fill: var(--color-secondary);
+        }
+        &:hover{
+            & .modal-ticket__close-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+}
