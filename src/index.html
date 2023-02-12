@@ -10,84 +10,155 @@
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="visually-hidden">RS-Clone Кинопоиск</h1>
-        <div class="container">
-            <div class="header__wrap">
-                <a href="#/main" class="header__logo" aria-label="Главная страница">
-                    <svg class="header__logo-icon">
-                        <use href="./assets/img/sprite.svg#logo"></use>
+<header class="header">
+    <h1 class="visually-hidden">RS-Clone Кинопоиск</h1>
+    <div class="container">
+        <div class="header__wrap">
+            <a href="#/main" class="header__logo" aria-label="Главная страница">
+                <svg class="header__logo-icon">
+                    <use href="./assets/img/sprite.svg#logo"></use>
+                </svg>
+            </a>
+
+            <nav class="header__nav">
+                <ul class="header__list">
+                    <li class="header__item">
+                        <a href="#/main" class="header__link">
+                            <svg class="header__link-icon">
+                                <use href="./assets/img/sprite.svg#icon_main"></use>
+                            </svg>
+                            <span class="header__link-text">Главная</span>
+                        </a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#/movies" class="header__link">
+                            <svg class="header__link-icon">
+                                <use href="./assets/img/sprite.svg#icon_movies"></use>
+                            </svg>
+                            <span class="header__link-text">Фильмы</span>
+                        </a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#/cinema" class="header__link">
+                            <svg class="header__link-icon">
+                                <use href="./assets/img/sprite.svg#icon_tickets"></use>
+                            </svg>
+                            <span class="header__link-text">Билеты&nbsp;в&nbsp;кино</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form action="" class="header__search-form">
+                <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
+                <button type="submit" class="header__search-btn" aria-label="Найти">
+                    <svg class="header__search-btn-icon">
+                        <use href="./assets/img/sprite.svg#icon_search"></use>
                     </svg>
-                </a>
+                </button>
+            </form>
 
-                <nav class="header__nav">
-                    <ul class="header__list">
-                        <li class="header__item">
-                            <a href="#/main" class="header__link">
-                                <svg class="header__link-icon">
-                                    <use href="./assets/img/sprite.svg#icon_main"></use>
-                                </svg>
-                                <span class="header__link-text">Главная</span>
-                            </a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#/movies" class="header__link">
-                                <svg class="header__link-icon">
-                                    <use href="./assets/img/sprite.svg#icon_movies"></use>
-                                </svg>
-                                <span class="header__link-text">Фильмы</span>
-                            </a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#/cinema" class="header__link">
-                                <svg class="header__link-icon">
-                                    <use href="./assets/img/sprite.svg#icon_tickets"></use>
-                                </svg>
-                                <span class="header__link-text">Билеты&nbsp;в&nbsp;кино</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+            <button class="header__enter-btn">Войти</button>
+        </div>
+    </div>
+</header>
+<main>
+    <!--        <div id="content"></div>-->
+    <section class="profile">
+        <div class="container display-flex">
+            <ul class="profile__user">
+                <li class="profile__photo">
+                    <div class="profile__photo-wrap-img">
+                        <img src="assets/img/user.png" alt="user">
+                    </div>
+                </li>
+                <li class="profile__user-name">Имя пользователя</li>
+                <li class="profile__location">
+                    <span class="profile__city">Город</span>,
+                    <span class="profile__country">страна</span>
+                </li>
+                <li class="profile__email">primer_email@mail.com</li>
+                <li class="profile__line"></li>
+                <li class="profile__delete">
+                    <a href="" class="profile__link">
+                        <img src="assets/img/delete-logo.svg" alt="delete">
+                        <span class="profile__link-text">Удалить аккаунт</span>
+                    </a>
+                </li>
+                <li class="profile__line"></li>
+                <li class="profile__list">
+                    <a href="" class="profile__link">
+                        <img src="assets/img/user-logo.svg" alt="#">
+                        <span class="profile__link-text">Настройки профиля</span>
+                    </a>
+                </li>
+                <li class="profile__list">
+                    <a href="" class="profile__link">
+                        <img src="assets/img/list-logo.svg" alt="#">
+                        <span class="profile__link-text">Оценки (456)</span>
+                    </a>
+                </li>
+                <li class="profile__list">
+                    <a href="" class="profile__link">
+                        <img src="assets/img/review-logo.svg" alt="#">
+                        <span class="profile__link-text">Рецензии (4)</span>
+                    </a>
+                </li>
+                <li class="profile__list">
+                    <a href="" class="profile__link">
+                        <img class="profile__logo" src="assets/img/movie-logo.svg" alt="#">
+                        <span class="profile__link-text">Фильмы (2)</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="profile__content">
 
-                <form action="" class="header__search-form">
-                    <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
-                    <button type="submit" class="header__search-btn" aria-label="Найти">
-                        <svg class="header__search-btn-icon">
-                            <use href="./assets/img/sprite.svg#icon_search"></use>
-                        </svg>
-                    </button>
-                </form>
-
-                <button class="header__enter-btn">Войти</button>
+            </div>
+            <div class="profile__activity">
+                <h3 class="profile__title-activity">Ваша активность:</h3>
+                <h4 class="profile__category-activity">вы оценили:</h4>
+                <p class="profile__item-activity">
+                    фильмы <span class="count-movies count">431</span>
+                </p>
+                <p class="profile__item-activity">
+                    сериалы <span class="count-serials count">15</span>
+                </p>
+                <p class="profile__item-activity">
+                    короткометражки <span class="count-short-movies count">10</span>
+                </p>
+                <h4 class="profile__category-activity">вы написали:</h4>
+                <p class="profile__item-activity">рецензий
+                    <span class="count-review count">4</span>
+                </p>
+                <h4 class="profile__category-activity">ваша средняя оценка:</h4>
+                <p class="profile__item-activity count">7.88</p>
             </div>
         </div>
-    </header>
-    <main>
-        <div id="content"></div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__wrap">
-                <a href="#/main" class="footer__logo" aria-label="Главная страница">
-                    <svg class="footer__logo-icon">
-                        <use href="./assets/img/sprite.svg#logo"></use>
-                    </svg>
-                </a>
-                <div class="footer__students">
-                    <span>Students:</span>
-                    <a class="footer__students-link" href="https://github.com/Timothy7310">timothy7310</a>
-                    <a class="footer__students-link" href="https://github.com/geras1m">geras1m</a>
-                    <a class="footer__students-link" href="https://github.com/AnastasiaSyt">anastasiasyt</a>
-                </div> 
-                <a href="https://rs.school/js/" class="footer__school">
-                    <svg class="footer__school-icon">
-                        <use href="./assets/img/sprite.svg#rs_school_logo"></use>
-                    </svg>
-                </a>
-                <span class="footer__year">Year of creation: 2023</span>
+    </section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__wrap">
+            <a href="#/main" class="footer__logo" aria-label="Главная страница">
+                <svg class="footer__logo-icon">
+                    <use href="./assets/img/sprite.svg#logo"></use>
+                </svg>
+            </a>
+            <div class="footer__students">
+                <span>Students:</span>
+                <a class="footer__students-link" href="https://github.com/Timothy7310">timothy7310</a>
+                <a class="footer__students-link" href="https://github.com/geras1m">geras1m</a>
+                <a class="footer__students-link" href="https://github.com/AnastasiaSyt">anastasiasyt</a>
             </div>
+            <a href="https://rs.school/js/" class="footer__school">
+                <svg class="footer__school-icon">
+                    <use href="./assets/img/sprite.svg#rs_school_logo"></use>
+                </svg>
+            </a>
+            <span class="footer__year">Year of creation: 2023</span>
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 
 </html>
