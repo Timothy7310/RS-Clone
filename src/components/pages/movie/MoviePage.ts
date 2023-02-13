@@ -1,4 +1,5 @@
 import Page from '../Page';
+import Basic from './section/basic';
 
 export default class Movie {
     page: Page;
@@ -7,17 +8,16 @@ export default class Movie {
 
     path: string | undefined;
 
+    basic: Basic;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
+        this.basic = new Basic();
     }
 
     draw(): HTMLElement {
-        const title = document.createElement('p');
-        title.textContent = 'Тут будет страница с конкретным фильмом';
-        this.container.appendChild(title);
-
-        this.container.classList.add('movie', 'container');
+        this.basic.draw(this.container);
         return this.container;
     }
 
