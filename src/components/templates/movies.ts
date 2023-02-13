@@ -63,7 +63,7 @@ const moviesTemplates = `
                 <ul class="movies__list">
                     <li class="movies__card">
                         <div class="movies__card-first-info">
-                            <a href="">
+                            <a href="#/movie">
                                 <img class="movies__card-poster" src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/300x450" alt="">
                             </a>
                             <div class="movies__card-text">
