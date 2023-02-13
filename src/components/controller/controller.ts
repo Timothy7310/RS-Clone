@@ -14,7 +14,7 @@ class Controller {
     seasonURL;
 
     constructor() {
-        this.token = '?token=W0QWBBA-C83483K-GYKVDAT-GTSVVSJ';
+        this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
         this.baseURL = 'https://api.kinopoisk.dev';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.personURL = `${this.baseURL}/person${this.token}`;
