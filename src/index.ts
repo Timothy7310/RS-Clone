@@ -10,14 +10,5 @@ import './firebase';
 // await authUser.isUserAuth();
 // await authUser.deleteUser();
 
-// For example
-// import Controller from './components/controller/controller';
-
-// const controller = new Controller();
-
-// const movie = await controller.searchMovie('326', 'id');
-
-// console.log(movie);
-
 // eslint-disable-next-line no-new
 // new App();

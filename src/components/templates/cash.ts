@@ -10,7 +10,7 @@ const cashTemplate = `
                         <use href="./assets/img/sprite.svg#icon_back"></use>
                     </svg>
                 </a>
-                <ol class="cash__card-list">
+                <ol class="cash__card-list cash__card-list--russia">
                     <li class="cash__card-item">
                         <a href="" class="cash__card-item-poster-wrap">
                             <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/a9f04abf-a08f-4633-84c3-a818d75a4daa/40x60" alt="" class="cash__card-item-poster">
@@ -90,7 +90,7 @@ const cashTemplate = `
                         <use href="./assets/img/sprite.svg#icon_back"></use>
                     </svg>
                 </a>
-                <ol class="cash__card-list">
+                <ol class="cash__card-list cash__card-list--world">
                     <li class="cash__card-item">
                         <a href="" class="cash__card-item-poster-wrap">
                             <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/2e51cb8b-fd51-4166-84a2-63559733baac/40x60" alt="" class="cash__card-item-poster">
@@ -170,7 +170,7 @@ const cashTemplate = `
                         <use href="./assets/img/sprite.svg#icon_back"></use>
                     </svg>
                 </a>
-                <ol class="cash__card-list">
+                <ol class="cash__card-list cash__card-list--usa">
                     <li class="cash__card-item">
                         <a href="" class="cash__card-item-poster-wrap">
                             <img src="//avatars.mds.yandex.net/get-kinopoisk-image/4303601/19b2a831-d81b-4364-a82a-dc6ca779023f/40x60" alt="" class="cash__card-item-poster">

@@ -1,4 +1,4 @@
-class Controller {
+class ControllerKP {
     token;
 
     baseURL;
@@ -14,7 +14,7 @@ class Controller {
     seasonURL;
 
     constructor() {
-        this.token = '?token=W0QWBBA-C83483K-GYKVDAT-GTSVVSJ';
+        this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
         this.baseURL = 'https://api.kinopoisk.dev';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.personURL = `${this.baseURL}/person${this.token}`;
@@ -58,6 +58,19 @@ class Controller {
         const seasons = await response.json();
         return seasons;
     }
+
+    // eslint-disable-next-line class-methods-use-this
+    // async getFees() {
+    //     const response = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/312/box_office', {
+    //         method: 'GET',
+    //         headers: {
+    //             'X-API-KEY': '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5',
+    //             'Content-Type': 'application/json',
+    //         },
+    //     });
+    //     const fees = await response.json();
+    //     return fees.items;
+    // }
 }
 
-export default Controller;
+export default ControllerKP;
