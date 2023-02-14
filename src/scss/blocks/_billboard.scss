@@ -89,6 +89,12 @@
                         color: var(--color-white);
                     }
                 }
+                &--active{
+                    & .billboard__days-calendar--day-month{
+                        background-color: var(--color-accent);
+                        color: var(--color-white);
+                    }
+                }
                 &--holiday{
                     color: red;
                 }
@@ -147,7 +153,7 @@
             border-radius: 0px 2px 2px 0px;
             position: absolute;
             left: 0px;
-            top: 45px;
+            top: 20px;
             z-index: 2;
             &-icon{
                 width: 19px;
@@ -164,6 +170,9 @@
         &-poster{
             object-fit: cover;
             vertical-align: bottom;
+            min-height: 387px;
+            max-height: 387px;
+            width: 100%;
             &-wrap{
                 margin-bottom: 12px;
                 display: block;
