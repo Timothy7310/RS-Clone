@@ -92,6 +92,15 @@ export type TVotes = {
     _id: string,
 };
 
+export type TPrequels = {
+    alternativeName: string,
+    enName: string,
+    id: number,
+    name: string,
+    type: string,
+    _id: string,
+};
+
 export type TMovie = {
     // ageRating: number,
     alternativeName: string,
@@ -107,7 +116,7 @@ export type TMovie = {
     // facts: [{…}],
     fees: TFees,
     genres: TGenres,
-    // id: number,
+    id: number,
     // images: {postersCount: number, backdropsCount: number, framesCount: number},
     // imagesInfo: {_id: string, framesCount: number},
     // lists: [],
@@ -123,7 +132,7 @@ export type TMovie = {
     ratingMpaa: string,
     // releaseYears: [],
     // seasonsInfo: [],
-    // sequelsAndPrequels: [{…}, {…}, {…}, {…}],
+    sequelsAndPrequels: TPrequels[],
     // shortDescription: string,
     // similarMovies: [],
     slogan: string,

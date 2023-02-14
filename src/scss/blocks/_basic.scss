@@ -243,6 +243,13 @@
                 width: 150px;
                 min-width: 150px;
                 cursor: pointer;
+                &_movie{
+                    &_img{
+                        min-width: 150px;
+                        height: 225px;
+                        object-fit: cover;
+                    }
+                }
             }
             &_text{
                 margin-top: 8px;
