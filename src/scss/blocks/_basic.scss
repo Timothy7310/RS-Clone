@@ -341,6 +341,9 @@
                 font-size: 12px;
                 line-height: 14px;
                 color: var(--color-secondary);
+                &_kp{
+                    margin-right: 8px;
+                }
             }
         }
         &_button{
@@ -392,4 +395,14 @@
     color: var(--color-black);
 }
 
- 
+.trailers{
+    &__video{
+        display: flex;
+        &_item{
+            margin-right: 8px;
+            margin-bottom: 8px;
+            width: 306px;
+            height: 172px;
+        }
+    }
+}

@@ -101,6 +101,19 @@ export type TPrequels = {
     _id: string,
 };
 
+export type TTrailer = {
+    _id: string,
+    url: string,
+    name: string,
+    site: string,
+};
+
+export type TVideos = {
+    _id: string,
+    trailers: TTrailer[],
+    teasers: [],
+};
+
 export type TMovie = {
     // ageRating: number,
     alternativeName: string,
@@ -109,7 +122,7 @@ export type TMovie = {
     // collections: [],
     countries: TCountries,
     // createDate: string,
-    // description: string,
+    description: string,
     // distributors: {distributor: string, distributorRelease: string},
     // enName: string,
     // externalId: {kpHD: string, imdb: string, _id: string}
@@ -146,7 +159,7 @@ export type TMovie = {
     // typeNumber: number,
     // updateDates: [],
     // updatedAt: string,
-    // videos: {_id: string, trailers: Array(1), teasers: Array(0)},
+    videos: TVideos,
     votes: TVotes,
     // watchability: {_id: '6339ab16c22d011bb5a840c1', items: null},
     year: number,
