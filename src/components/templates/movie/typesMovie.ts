@@ -114,6 +114,12 @@ export type TVideos = {
     teasers: [],
 };
 
+export type TFacts = {
+    value: string,
+    type: string,
+    spoiler: boolean,
+};
+
 export type TMovie = {
     // ageRating: number,
     alternativeName: string,
@@ -126,7 +132,7 @@ export type TMovie = {
     // distributors: {distributor: string, distributorRelease: string},
     // enName: string,
     // externalId: {kpHD: string, imdb: string, _id: string}
-    // facts: [{…}],
+    facts: TFacts[],
     fees: TFees,
     genres: TGenres,
     id: number,
