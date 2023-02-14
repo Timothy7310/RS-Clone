@@ -16,7 +16,7 @@ const aboutTop = (movie: TMovie): string => `
     </div>
     <div class="about__top_score">
         <div class="about__top_score_raiting">
-            <div class="about__top_score_raiting_value">${movie.rating.kp}</div>
+            <div class="about__top_score_raiting_value">${movie.rating.kp.toFixed(1)}</div>
             <div class="about__top_score_raiting_count">${movie.votes.kp} оценок</div>
         </div>
         <button class="about__top_score_estimate">
