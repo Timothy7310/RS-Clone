@@ -1,7 +1,7 @@
 import './index.html';
 import './scss/main.scss';
 import './firebase';
-// import App from './components/router/app';
+import App from './components/router/app';
 // import FirebaseAuthUser from './components/firebaseAuthUser';
 // const authUser = new FirebaseAuthUser();
 // await authUser.registerUser('2abcde@gmail.com', 'qwerty1');
@@ -11,4 +11,4 @@ import './firebase';
 // await authUser.deleteUser();
 
 // eslint-disable-next-line no-new
-// new App();
+new App();
