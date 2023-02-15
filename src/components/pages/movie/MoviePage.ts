@@ -4,6 +4,7 @@ import Description from './section/description';
 import Facts from './section/facts';
 import Prequels from './section/prequels';
 import Rating from './section/raiting';
+import Reviews from './section/reviews';
 import Trailers from './section/trailers';
 
 export default class Movie {
@@ -25,6 +26,8 @@ export default class Movie {
 
     facts: Facts;
 
+    reviews: Reviews;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -34,6 +37,7 @@ export default class Movie {
         this.rating = new Rating();
         this.trailers = new Trailers();
         this.facts = new Facts();
+        this.reviews = new Reviews();
     }
 
     draw(): HTMLElement {
@@ -43,6 +47,7 @@ export default class Movie {
         this.rating.draw(this.container);
         // this.trailers.draw(this.container);
         this.facts.draw(this.container);
+        this.reviews.draw(this.container);
         return this.container;
     }
 

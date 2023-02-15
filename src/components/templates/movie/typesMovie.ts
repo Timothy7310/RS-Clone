@@ -170,3 +170,28 @@ export type TMovie = {
     // watchability: {_id: '6339ab16c22d011bb5a840c1', items: null},
     year: number,
 };
+
+export type TReview = {
+    author: string,
+    authorId: number,
+    createdAt: string,
+    date: string,
+    id: number,
+    movieId: number,
+    review: string,
+    reviewDislikes: number,
+    reviewLikes: number,
+    title: string,
+    type: string,
+    updatedAt: string,
+    userRating: number,
+    __v: number
+};
+
+export type TReviews = {
+    docs: TReview[],
+    total: number,
+    limit: number,
+    page: number,
+    pages: number,
+};
