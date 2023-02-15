@@ -1,4 +1,4 @@
-import Controller from '../../../controller/controller';
+import Controller from '../../../controller/controllerKP';
 import reviews from '../../../templates/movie/review';
 import { TReview } from '../../../templates/movie/typesMovie';
 import Component from '../../Component';

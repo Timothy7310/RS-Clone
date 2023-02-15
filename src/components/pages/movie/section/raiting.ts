@@ -1,4 +1,4 @@
-import Controller from '../../../controller/controller';
+import Controller from '../../../controller/controllerKP';
 import rating from '../../../templates/movie/rating';
 import Component from '../../Component';
 
