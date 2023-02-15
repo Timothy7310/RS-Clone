@@ -18,7 +18,7 @@ export default class Rating {
     async draw(parentContainer: HTMLElement): Promise<void> {
         const movie = await this.controller.searchMovie('505898', 'id');
 
-        this.container.insertAdjacentHTML('afterbegin', rating(movie));
+        this.container.insertAdjacentHTML('beforeend', rating(movie));
 
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('movie', 'container');

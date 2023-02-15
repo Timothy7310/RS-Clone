@@ -22,21 +22,21 @@ const reviews = (reviewsAll: TReviews, positive: number, negative: number, neutr
             <div class="reviews__content_statistic_nav_positive">
                 <div class="reviews__content_statistic_nav_positive_title">
                     <span class="reviews__content_statistic_nav_positive_title_count">${positive}</span>
-                    <span class="reviews__content_statistic_nav_positive_title_percent">${((positive * 100) / reviewsAll.total).toFixed(2)} %</span>
+                    <span class="reviews__content_statistic_nav_positive_title_percent">${((positive * 100) / reviewsAll.total).toFixed(2)}%</span>
                 </div>
                 <span class="reviews__content_statistic_nav_positive_text">Положительные</span>
             </div>
             <div class="reviews__content_statistic_nav_negative">
                 <div class="reviews__content_statistic_nav_negative_title">
                     <span class="reviews__content_statistic_nav_negative_title_count">${negative}</span>
-                    <span class="reviews__content_statistic_nav_negative_title_percent">${((negative * 100) / reviewsAll.total).toFixed(2)} %</span>
+                    <span class="reviews__content_statistic_nav_negative_title_percent">${((negative * 100) / reviewsAll.total).toFixed(2)}%</span>
                 </div>
                 <span class="reviews__content_statistic_nav_negative_text">Отрицательные</span>
             </div>
             <div class="reviews__content_statistic_nav_neutral">
                 <div class="reviews__content_statistic_nav_neutral_title">
                     <span class="reviews__content_statistic_nav_neutral_title_count">${neutral}</span>
-                    <span class="reviews__content_statistic_nav_neutral_title_percent">${((neutral * 100) / reviewsAll.total).toFixed(2)} %</span>
+                    <span class="reviews__content_statistic_nav_neutral_title_percent">${((neutral * 100) / reviewsAll.total).toFixed(2)}%</span>
                 </div>
                 <span class="reviews__content_statistic_nav_neutral_text">Нейтральные</span>
             </div>

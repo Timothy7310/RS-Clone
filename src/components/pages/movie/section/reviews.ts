@@ -20,13 +20,10 @@ export default class Reviews {
         const reviewsAll = await this.controller.searchReview('505898', 'movieId');
         const reviewAllItems = await this.controller.searchReviewCount('505898', 'movieId', reviewsAll.total);
         const positive = this.getCountPositive(reviewAllItems.docs);
-        console.log(positive);
         const negative = this.getCountNegative(reviewAllItems.docs);
-        console.log(negative);
         const neutral = this.getCountNeutral(reviewAllItems.docs);
-        console.log(neutral);
 
-        this.container.insertAdjacentHTML('afterbegin', reviews(reviewsAll, positive, negative, neutral));
+        this.container.insertAdjacentHTML('beforeend', reviews(reviewsAll, positive, negative, neutral));
 
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('movie', 'container');

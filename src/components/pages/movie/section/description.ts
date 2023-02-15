@@ -18,7 +18,7 @@ export default class Description {
     async draw(parentContainer: HTMLElement): Promise<void> {
         const movie = await this.controller.searchMovie('505898', 'id');
 
-        this.container.insertAdjacentHTML('afterbegin', description(movie));
+        this.container.insertAdjacentHTML('beforeend', description(movie));
 
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('movie', 'container');

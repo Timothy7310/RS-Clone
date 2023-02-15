@@ -21,7 +21,6 @@ export default class Prequels {
         const prequelsId = this.getPrequelsId(movie.sequelsAndPrequels);
 
         const movies: TMovie[] = await Promise.all(prequelsId.map((id) => this.controller.searchMovie(id.toString(), 'id')));
-        console.log(movies);
 
         this.container.insertAdjacentHTML('beforeend', prequels(movies));
 

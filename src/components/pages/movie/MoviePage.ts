@@ -45,7 +45,7 @@ export default class Movie {
         this.prequels.draw(this.container);
         this.description.draw(this.container);
         this.rating.draw(this.container);
-        // this.trailers.draw(this.container);
+        this.trailers.draw(this.container);
         this.facts.draw(this.container);
         this.reviews.draw(this.container);
         return this.container;
