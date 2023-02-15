@@ -1,0 +1,12 @@
+.trailers{
+    &__title{
+        margin-bottom: 24px;
+    }
+    &__video{
+        display: flex;
+        &_item{
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+    }
+}

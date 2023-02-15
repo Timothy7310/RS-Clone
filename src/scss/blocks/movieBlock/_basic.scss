@@ -1,0 +1,24 @@
+.basic{
+    display: flex;
+    padding-top: 40px;
+    &__column{
+        flex: 0 0 302px;
+        width: 302px;
+        &_content{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        flex: 1;
+        min-height: 624px;
+        &_poster{
+            position: relative;
+            margin-bottom: 20px;
+            &_img{
+                width: 302px;
+                height: 430px;
+            }
+        }
+        }
+    }
+}

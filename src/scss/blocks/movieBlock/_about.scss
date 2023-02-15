@@ -1,0 +1,171 @@
+.about{
+    display: block;
+    padding-right: 9px;
+    padding-left: 9px;
+    flex: 0 0 680px;
+    width: 680px;
+    &__top{
+        display: flex;
+        &_name{
+            flex: 0 0 680px;
+            width: 680px;
+            margin-bottom: 48px;
+            &_titles{
+                &_title{
+                    font-family: 'Tahoma';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 40px;
+                    line-height: 48px;
+                    color: var(--color-black);
+                    margin: 0;
+                    margin-bottom: 12px;
+                    overflow-wrap: break-word;
+                }
+                &_alternative{
+                    font-family: 'Tahoma';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: var(--color-secondary);
+                    margin-bottom: 25px;
+                }
+            }
+        }
+        &_score{
+            flex: 0 0 240px;
+            width: 240px;
+            &_raiting{
+                display: flex;
+                flex-direction: column;
+                align-items: baseline;
+                &_value{
+                    font-family: 'Tahoma';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 32px;
+                    line-height: 39px;
+                    text-align: center;
+                    color: var(--rate-good);
+                }
+                &_count{
+                    font-family: 'Tahoma';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 16px;
+                    color: var(--color-secondary);
+                }
+            }
+            &_estimate{
+                min-width: 32px;
+                min-height: 32px;
+                padding: 8px 52px;
+                font-size: 13px;
+                line-height: 16px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 30px;
+                border: none;
+                background: rgba(#000000, 0.05);
+                cursor: pointer;
+                color: var(--color-black);
+                margin-top: 12px;
+                transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+                &:hover{
+                    color: var(--color-white);
+                    background: var(--color-accent);
+                }
+            }
+            &_reviews{
+                margin-top: 16px;
+                cursor: pointer;
+                font-size: 13px;
+                line-height: 16px;
+                color: var(--color-secondary);
+                transition: color 0.3s ease-in-out;
+                &:hover{
+                    color: var(--color-accent);
+                }
+            }
+        }
+    }
+    &__middle{
+        display: flex;
+        &_movie{
+            flex: 0 0 680px;
+            width: 680px;
+            &_title{
+                margin-bottom: 9px;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+                color: var(--color-black);
+            }
+            &_table{
+                &_line{
+                    display: flex;
+                    align-items: baseline;
+                    padding: 8px 0;
+                    &_title{
+                        width: 160px;
+                        font-size: 13px;
+                        line-height: 16px;
+                        color: var(--color-secondary);
+                    }
+                    &_text{
+                        flex: 1;
+                        font-weight: 400;
+                        font-size: 13px;
+                        line-height: 16px;
+                        color: var(--color-black);
+                    }
+                }
+            }
+        }
+        &_actors{
+            flex: 0 0 240px;
+            width: 240px;
+            &_roles{
+                padding-top: 20px;
+                &_main{
+                    margin-bottom: 24px;
+                    &_title{
+                        display: flex;
+                        font-weight: 700;
+                        font-size: 14px;
+                        line-height: 17px;
+                        color: var(--color-black);
+                    }
+                    &_content{
+                        margin-top: 0;
+                        margin-bottom: 12px;
+                        padding-left: 0;
+                        font-weight: 400;
+                        font-size: 13px;
+                        line-height: 16px;
+                        color: var(--color-secondary);
+                        transition: color 0.3s ease-in-out;
+                        &_text{
+                            list-style: none;
+                            line-height: 15px;
+                            margin-bottom: 7px;
+                            &:hover{
+                                color: var(--color-accent);
+                            }
+                        }
+                    }
+                    &_count{
+                        font-weight: 400;
+                        font-size: 13px;
+                        line-height: 16px;
+                        color: var(--color-accent);
+                    }
+                }
+            }
+        }
+    }
+}

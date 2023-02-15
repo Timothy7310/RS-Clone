@@ -14,6 +14,13 @@
 @import "blocks/error";
 @import "blocks/movies";
 @import "blocks/movie";
-@import "blocks/basic";
+@import "blocks/movieBlock/basic";
+@import "blocks/movieBlock/about";
+@import "blocks/movieBlock/description";
+@import "blocks/movieBlock/facts";
+@import "blocks/movieBlock/prequels";
+@import "blocks/movieBlock/raiting";
+@import "blocks/movieBlock/reviews";
+@import "blocks/movieBlock/trailers";
 
 @import "media";
