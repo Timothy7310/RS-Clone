@@ -47,7 +47,9 @@ const userProfileTemplates = `
                     </li>
                 </ul>
                 <div class="profile__content">
-                    
+                <input type="email" placeholder="email">
+                <input type="password" placeholder="password">
+                <button>submit</button>
                 </div>
                 <div class="profile__activity">
                     <h3 class="profile__title-activity">Ваша активность:</h3>
