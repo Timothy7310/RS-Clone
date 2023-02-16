@@ -71,6 +71,15 @@ export default class App {
         });
 
         window.addEventListener('popstate', () => {
+            const isAuth = localStorage.getItem('isLogIn') === 'true';
+            const location = window.location.href;
+            if (isAuth && location.includes('#/login')) {
+                window.location.href = '#/404';
+            }
+
+            if (!isAuth && location.includes('#/profile')) {
+                window.location.href = '#/404';
+            }
             this.swapHeader();
         });
 
