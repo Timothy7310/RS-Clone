@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -18,12 +17,12 @@ export default class FirebaseAuthUser {
 
     registerUser = async (email: string, password: string) => {
         const res = await createUserWithEmailAndPassword(this.auth, email, password)
-            .then((userCredential: any) => {
+            .then((userCredential) => {
                 console.log(userCredential, userCredential.user.uid);
                 localStorage.setItem('userID', userCredential.user.uid);
                 // return userCredential;
             })
-            .catch((error: any) => {
+            .catch((error) => {
                 console.log(error.message);
             });
         return res;
@@ -31,10 +30,10 @@ export default class FirebaseAuthUser {
 
     logInUser = async (email: string, password: string): Promise<void> => {
         await signInWithEmailAndPassword(this.auth, email, password)
-            .then((userCredential: any) => {
+            .then((userCredential) => {
                 console.log(userCredential);
             })
-            .catch((error: any) => {
+            .catch((error) => {
                 console.log(error.message);
             });
     };
@@ -45,7 +44,7 @@ export default class FirebaseAuthUser {
                 console.log('user sign out successful');
                 // Sign-out successful.
             })
-            .catch((error: any) => {
+            .catch((error) => {
                 console.log(error.message);
             });
     };
@@ -61,7 +60,7 @@ export default class FirebaseAuthUser {
                     // ...
                     console.log('User has deleted');
                 })
-                .catch((error: any) => {
+                .catch((error) => {
                     console.log(error.message);
                     // An error occurred
                     // ...
@@ -77,7 +76,7 @@ export default class FirebaseAuthUser {
                 .then(() => {
                     // User deleted.
                 })
-                .catch((error: any) => {
+                .catch((error) => {
                     console.log(error.message);
                     // An error ocurred
                     // ...
@@ -86,7 +85,7 @@ export default class FirebaseAuthUser {
     };
 
     isUserAuth = async (): Promise<void> => {
-        await onAuthStateChanged(this.auth, (user: any) => {
+        await onAuthStateChanged(this.auth, (user) => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/firebase.User
