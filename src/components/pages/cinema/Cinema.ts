@@ -188,6 +188,7 @@ export default class Cinema {
                 </button>`;
             default:
                 console.log('Ошибка с датой');
+                return '';
         }
     }
 }
