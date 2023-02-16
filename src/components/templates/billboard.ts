@@ -10,9 +10,9 @@ const billboardTemplate = `
                 </div>
                 <div class="billboard__days">
                     <div class="billboard__days-btns">
-                        <button class="billboard__days-btn">Сегодня</button>
-                        <button class="billboard__days-btn">Завтра</button>
-                        <button class="billboard__days-btn billboard__days-btn-choose">
+                        <button class="billboard__days-btn" id="billboard-today">Сегодня</button>
+                        <button class="billboard__days-btn" id="billboard-tomorrow">Завтра</button>
+                        <button class="billboard__days-btn billboard__days-btn-choose" id="billboard-choose">
                             <span class="billboard__days-btn-choose-text">Выбрать день</span>
                             <svg class="billboard__days-btn-choose-icon">
                                 <use href="./assets/img/sprite.svg#icon_back"></use>
