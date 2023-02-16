@@ -148,6 +148,29 @@ type MovieType = {
     lists: []
 };
 
+type UserType = {
+    avatar: string,
+    country: string,
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    nickname: string,
+    id: string,
+    reviews: {
+        total: number,
+        items: [{
+            date: string,
+            filmID: string,
+            score: null | number,
+            text: string,
+            title: string,
+        }],
+    },
+    watched: number,
+    willWatch: number,
+};
+
 export {
-    Countries, Genres, Premieres, BoxOffice, FeesType, MovieType,
+    Countries, Genres, Premieres, BoxOffice, FeesType, MovieType, UserType,
 };
