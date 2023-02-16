@@ -20,9 +20,7 @@ export default class Prequels {
     async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
         const movie = await this.controller.searchMovie(idNumber, 'id');
         const prequelsId = this.getPrequelsId(movie.sequelsAndPrequels);
-        console.log(prequelsId);
         if (prequelsId[0] === undefined) {
-            console.log('hello');
             this.container.insertAdjacentHTML('afterbegin', noPrequels);
         } else {
             const movies: TMovie[] = await Promise.all(prequelsId.map((id) => this.controller.searchMovie(id.toString(), 'id')));

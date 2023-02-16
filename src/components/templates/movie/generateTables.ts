@@ -35,7 +35,7 @@ export default class GenerateTables {
             [TableTitle.year]: movie.year,
             [TableTitle.countries]: movie.countries.map((x: { name: string; }) => x.name).join(', '),
             [TableTitle.genres]: movie.genres.map((x: { name: string; }) => x.name).join(', '),
-            [TableTitle.slogan]: movie.slogan,
+            [TableTitle.slogan]: movie.slogan ?? '-',
             [TableTitle.director]: this.getDirector(movie.persons),
             [TableTitle.writer]: this.getWriters(movie.persons),
             [TableTitle.producer]: this.getProducer(movie.persons),
@@ -43,11 +43,11 @@ export default class GenerateTables {
             [TableTitle.composer]: this.getComposer(movie.persons),
             [TableTitle.designer]: this.getDesigner(movie.persons),
             [TableTitle.editor]: this.getEditor(movie.persons),
-            [TableTitle.budget]: `${movie.budget.currency} ${movie.budget.value}`,
-            [TableTitle.feesUSA]: `${movie.fees.usa.currency} ${movie.fees.usa.value}`,
-            [TableTitle.feesWorld]: `${movie.fees.world.currency} ${movie.fees.world.value}`,
-            [TableTitle.premiere]: new Date(movie.premiere.world).toLocaleDateString(),
-            [TableTitle.ageRating]: movie.ratingMpaa.toUpperCase(),
+            [TableTitle.budget]: this.checkBudget(movie),
+            [TableTitle.feesUSA]: `${movie.fees.usa?.currency ?? '-'} ${movie.fees.usa?.value ?? '-'}`,
+            [TableTitle.feesWorld]: `${movie.fees.world?.currency ?? '-'} ${movie.fees.world?.value ?? '-'}`,
+            [TableTitle.premiere]: new Date(movie.premiere?.world ?? '-').toLocaleDateString(),
+            [TableTitle.ageRating]: movie.ratingMpaa?.toUpperCase() ?? '-',
             [TableTitle.movieLength]: `${movie.movieLength} мин`,
         };
         const result = Object.entries(tableData).map(([title, value]) => tableLine(title, value ?? ''));
@@ -116,5 +116,13 @@ export default class GenerateTables {
     getEditor(persons: TPersons[]): string {
         const editor = this.helper.getPersons(persons, 'editor', 3);
         return editor.join(', ');
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    checkBudget(movie: TMovie) {
+        if (movie.budget === undefined) {
+            return '-';
+        }
+        return `${movie.budget.currency ?? '-'} ${movie.budget.value ?? '-'}`;
     }
 }

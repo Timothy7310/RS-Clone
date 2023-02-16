@@ -35,7 +35,7 @@ const aboutMiddle = (movie: TMovie): string => `
                 <ul class="about__middle_actors_roles_main_content">
                     ${test.getVoiceActors(movie.persons)}
                 </ul>
-                <a href="#" class="about__middle_actors_roles_main_count">${test.getCountVoiceActors(movie.persons)} актер</a>
+                <a href="#" class="about__middle_actors_roles_main_count">${test.getCountVoiceActors(movie.persons)} актеров</a>
             </div>
         </div>
     </div>
