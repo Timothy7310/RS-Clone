@@ -1,0 +1,280 @@
+.seances{
+    margin-top: 40px;
+    &__logo{
+        width: 125px;
+        height: 44px;
+        margin-bottom: 24px;
+    }
+    &__days{
+        margin-bottom: 60px;
+        &-btns{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        &-btn{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            border: 1px solid #e7e7ec;
+            background-color: transparent;
+            color: var(--color-black);
+            border-radius: 16px;
+            transition: border 0.25s ease-in-out;
+            &:hover{
+                border: 1px solid var(--color-accent);
+            }
+            &--active{
+                background-color: var(--color-accent);
+                color: var(--color-white);
+                & .seances__days-btn-choose-icon{
+                    fill: var(--color-white);
+                }
+            }
+            &-choose{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                &-icon{
+                    width: 18px;
+                    height: 18px;
+                    transform: rotate(90deg);
+                    fill: var(--color-black);
+                }
+            }
+        }
+        &-calendar{
+            position: relative;
+            left: 0px;
+            top: 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            height: 0px;
+            overflow-x: auto;
+            transition: height 0.3s, opacity 0.3s;
+            visibility: hidden;
+            opacity: 0;
+            &--active{
+                height: 70px;
+                visibility: visible;
+                opacity: 1;
+            }
+            &-btn{
+                display: flex;
+                gap: 3px;
+                flex-direction: column;
+                border: none;
+                background-color: transparent;
+                color: var(--color-black);
+                cursor: pointer;
+                &:hover{
+                    .seances__days-calendar--day-month{
+                        background-color: var(--color-accent);
+                        color: var(--color-white);
+                    }
+                }
+                &--holiday{
+                    color: red;
+                }
+            }
+            &--day-week{
+                font-size: 12px;
+            }
+            &--day-month{
+                font-size: 18px;
+                height: 32px;
+                width: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            }
+        }
+    }
+    &__movie{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        position: relative;
+        padding-bottom: 30px;
+        &::after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color:  #E8E8E8;
+        }
+        &-poster{
+            width: 280px;
+            object-fit: cover;
+            vertical-align: bottom;
+        }
+        &-info-block{
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        &-rates{
+            display: flex;
+            flex-direction: column;
+        }
+        &-rate{
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 39px;
+            display: block;
+            margin-bottom: 8px;
+            &-count{
+                font-weight: 400;
+                font-size: 13px;
+                line-height: 16px;
+                color: var(--color-secondary);
+                display: block;
+                margin-bottom: 12px;
+            }
+        }
+        &-review-btn{
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 14px;
+            color: var(--color-black);
+            min-height: 31px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            border: none;
+            margin-bottom: 16px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            &:hover{
+                color: var(--color-white);
+                background-color: var(--color-accent);
+            }
+        }
+        &-reviews{
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            color: var(--color-secondary);
+        }
+        &-name{
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 48px;
+            color: var(--color-black);
+            margin: 0;
+            margin-bottom: 12px;
+            transition: color 0.3s ease-in-out;
+            &:hover{
+                color: var(--color-accent);
+            }
+        }
+        &-info{
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.03em;
+            color: var(--color-secondary);
+            margin-bottom: 24px;
+            display: block;
+        }
+        &-desc{
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 133.7%;
+            color: var(--color-black);
+            margin: 0;
+            margin-bottom: 16px;
+        }
+        &-trailer-btn{
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 14px;
+            padding: 9px 40px;
+            border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--color-black);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            &:hover{
+                color: var(--color-white);
+                background-color: var(--color-accent);
+            }
+        }
+    }
+    &__list{
+        margin: 0px 0px 60px 0px;
+        padding: 0;
+        list-style: none;
+    }
+    &__item{
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        column-gap: 50px;
+        align-items: center;
+        padding: 30px 0px;
+        border-bottom: 1px solid #E8E8E8;;
+        &-place{
+            &-title{
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+                color: var(--color-black);
+                margin: 0;
+                margin-bottom: 8px;
+            }
+            &-type{
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 18px;
+                color: var(--color-secondary);
+            }
+        }
+        &-time{
+            display: flex;
+            flex-direction: column;
+            &-type{
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+                color: var(--color-black);
+                margin-bottom: 24px;
+            }
+            &-list{
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+                gap: 10px;
+            }
+            &-option-btn{
+                width: 54px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 2.16px;
+                background-color: var(--color-accent);
+                color: var(--color-white);
+                cursor: pointer;
+                border: none;
+                transition: background-color 0.25s ease-in-out;
+                &:hover{
+                    background-color: #f26100;
+                }
+            }
+        }
+    }
+}
