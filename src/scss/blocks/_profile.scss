@@ -24,11 +24,13 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    overflow: hidden;
   }
 
   &__photo img {
-    width: 138px;
-    height: 138px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__user-name {
@@ -74,6 +76,17 @@
 
     &:hover {
       color: var(--color-accent);
+    }
+  }
+  &__link{
+    &-icon{
+      width: 24px;
+      height: 24px;
+      fill: var(--color-secondary);
+      &--list{
+        fill: transparent;
+        stroke: var(--color-secondary);
+      }
     }
   }
 
@@ -372,6 +385,66 @@
   &__movies-btn {
     margin-top: 19px;
     height: 37px;
+  }
+  &-settings{
+    &__wrap{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 30px;
+      row-gap: 24px;
+      margin-bottom: 60px;
+    }
+    &__title{
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: var(--color-black);
+      margin: 0;
+      margin-bottom: 28px;
+    }
+    &__input{
+      width: 100%;
+      max-width: 250px;
+      height: 40px;
+      padding: 0px 8px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-black);
+      border-radius: 8px;
+      background-color: #E8E8E8;
+      border: none;
+      &-wrap{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      &-label{
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--color-black);
+      }
+    }
+    &__save{
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      color: var(--color-white);
+      background: var(--main-bg);
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 165px;
+      max-width: 200px;
+      min-height: 52px;
+      border: none;
+      cursor: pointer;
+      &:hover{
+        background: var(--main-hover-bg)
+      }
+    }
   }
 }
 

@@ -18,12 +18,29 @@ export default class FirebaseAuthUser {
     registerUser = async (email: string, password: string) => {
         const res = await createUserWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
                 console.log(userCredential, userCredential.user.uid);
                 localStorage.setItem('userID', userCredential.user.uid);
+                errorContainer.textContent = '';
+                errorContainer.classList.remove('error-message--active');
                 // return userCredential;
             })
             .catch((error) => {
-                console.log(error.message);
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
+                if (error.message === 'Firebase: Error (auth/invalid-email).') {
+                    errorContainer.textContent = 'Неправильный E-mail';
+                    errorContainer.classList.add('error-message--active');
+                }
+                if (error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+                    errorContainer.textContent = 'Пароль должен состоять минимум из 6 символов';
+                    errorContainer.classList.add('error-message--active');
+                }
+                if (error.message === 'FirebaseError: Firebase: Error (auth/email-already-in-use).') {
+                    errorContainer.textContent = '';
+                    errorContainer.classList.remove('error-message--active');
+                    this.logInUser(email, password);
+                }
+                console.log(error, error.message);
             });
         return res;
     };
@@ -31,10 +48,20 @@ export default class FirebaseAuthUser {
     logInUser = async (email: string, password: string): Promise<void> => {
         await signInWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
+                errorContainer.textContent = '';
+                errorContainer.classList.remove('error-message--active');
+                window.location.href = '#/profile';
                 console.log(userCredential);
             })
             .catch((error) => {
-                console.log(error.message);
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
+                if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    console.log('test');
+                    errorContainer.textContent = 'Неправильный пароль';
+                    errorContainer.classList.add('error-message--active');
+                }
+                console.log(error, error.message);
             });
     };
 

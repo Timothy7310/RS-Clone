@@ -157,6 +157,7 @@ type UserType = {
     lastName: string,
     nickname: string,
     id: string,
+    city: string,
     reviews: {
         total: number,
         items: [{

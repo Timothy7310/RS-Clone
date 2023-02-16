@@ -8,7 +8,8 @@ const userBlank: UserType = {
     firstName: '',
     lastName: '',
     nickname: '',
-    id: '',
+    city: '',
+    id: localStorage.getItem('userID') || '',
     reviews: {
         total: 0,
         items: [{

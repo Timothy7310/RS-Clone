@@ -25,6 +25,7 @@ class FirebaseStore {
         userBlank.password = password;
         userBlank.id = id;
         await setDoc(doc(db, 'users', id), userBlank);
+        this.firebaseAuthUser.logInUser(email, password);
     };
 
     // eslint-disable-next-line class-methods-use-this
@@ -38,10 +39,24 @@ class FirebaseStore {
     };
 
     // eslint-disable-next-line class-methods-use-this
-    updateUserInfo = async <T extends keyof UserType>(field: T, value: UserType[T]) => {
-        userBlank[field] = value;
+    getCurrentUser = async () => {
         const id = localStorage.getItem('userID') as string;
-        await setDoc(doc(db, 'users', id), userBlank);
+        const users = await this.readUsers();
+        const res = users.filter((x) => x.id === id);
+        return res;
+    };
+
+    // eslint-disable-next-line class-methods-use-this
+    // updateUserInfo = async <T extends keyof UserType>(field: T, value: UserType[T]) => {
+    //     userBlank[field] = value;
+    //     const id = localStorage.getItem('userID') as string;
+    //     await setDoc(doc(db, 'users', id), userBlank);
+    // };
+
+    // eslint-disable-next-line class-methods-use-this
+    updateUserInfo = async (userObj: UserType) => {
+        const id = localStorage.getItem('userID') as string;
+        await setDoc(doc(db, 'users', id), userObj);
     };
 
     // eslint-disable-next-line class-methods-use-this
