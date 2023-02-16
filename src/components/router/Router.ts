@@ -64,5 +64,19 @@ export default class Router {
         this.rootElement.append(page.draw());
     }
 
+    // addRoute(path: IPath): void {
+    //     this.paths.push(path);
+    // }
+
+    // updateQuery(query: string): void {
+    //     const [hash] = window.location.hash.split('?');
+    //     window.history.pushState('', '', `${hash}${query ? `?${query}` : ''}`);
+    // }
+
+    // transition(path: string): void {
+    //     window.history.pushState('', '', path);
+    //     this.navigateToPage();
+    // }
+
     // TODO add method to work with Query String
 }
