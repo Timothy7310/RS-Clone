@@ -15,7 +15,7 @@ const reviewItem = (review: TReview): string => `
         <div class=${className(review)}>
             <div class="reviews__content_items_item_head">
                 <div class="reviews__content_items_item_head_user">
-                    <p class="reviews__content_items_item_head_user_name">${review.author}</p>
+                    <p class="reviews__content_items_item_head_user_name">${review.author ? review.author : ''}</p>
                 </div>
                 <div class="reviews__content_items_item_head_date">
                     ${new Date(review.date).toLocaleDateString()} в ${(new Date(review.date).toTimeString()).slice(0, 5)}

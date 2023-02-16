@@ -60,6 +60,11 @@ export default class GenerateTables {
         return result.join('');
     }
 
+    getActorsMovies(persons: TPersons[]): string {
+        const actors = this.helper.getPersons(persons, 'actor', 3);
+        return actors.join(', ');
+    }
+
     getCountActors(persons: TPersons[]): number {
         const actors = this.helper.getCountPersons(persons, 'actor');
         const count = actors.length;
