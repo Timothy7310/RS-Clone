@@ -23,6 +23,7 @@ export default class FirebaseAuthUser {
                 localStorage.setItem('userID', userCredential.user.uid);
                 errorContainer.textContent = '';
                 errorContainer.classList.remove('error-message--active');
+                this.logInUser(email, password);
                 // return userCredential;
             })
             .catch((error) => {
@@ -69,7 +70,7 @@ export default class FirebaseAuthUser {
         await signOut(this.auth)
             .then(() => {
                 console.log('user sign out successful');
-                // Sign-out successful.
+                // Sign-out successful.;
             })
             .catch((error) => {
                 console.log(error.message);
@@ -111,7 +112,7 @@ export default class FirebaseAuthUser {
         }
     };
 
-    isUserAuth = async (): Promise<void> => {
+    isUserAuth = async () => {
         await onAuthStateChanged(this.auth, (user) => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
@@ -120,11 +121,15 @@ export default class FirebaseAuthUser {
                 console.log(user);
                 // console.log(this.auth.currentUser);
                 // ...
-            } else {
-                // User is signed out
-                // ...
-                console.log('user log out');
+                localStorage.setItem('isLogIn', 'true');
+                return true;
             }
+            // User is signed out
+            // ...
+            console.log('user log out');
+            localStorage.setItem('isLogIn', 'false');
+            return false;
         });
+        return localStorage.getItem('isLogIn') === 'true';
     };
 }

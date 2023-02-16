@@ -8,7 +8,7 @@
 
   &__user {
     margin-top: 0;
-    height: 567px;
+    min-height: 567px;
     max-width: 302px;
     width: 100%;
     background-color: #E8E8E87F;
@@ -96,6 +96,23 @@
     gap: 20px;
     text-align: left;
     margin-bottom: 16px;
+  }
+
+  &__list--log-out{
+    justify-content: center;
+    display: flex;
+  }
+
+  &__log-out{
+    justify-content: center;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--color-black);
+    text-decoration: underline;
+    transition: color 0.25s ease-in;
+    &:hover{
+      color: var(--color-accent);
+    }
   }
 
   &__content {

@@ -1,6 +1,7 @@
 import Page from '../Page';
 import userProfileTemplate from '../../templates/userProfile/userProfile';
 import FirebaseStore from '../../server/firebaseStore';
+import FirebaseAuthUser from '../../server/firebaseAuthUser';
 import { UserType } from '../../types/types';
 
 export default class UserProfile {
@@ -12,10 +13,13 @@ export default class UserProfile {
 
     firebaseStore;
 
+    firebaseAuthUser;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
         this.firebaseStore = new FirebaseStore();
+        this.firebaseAuthUser = new FirebaseAuthUser();
     }
 
     draw(): HTMLElement {
@@ -130,6 +134,9 @@ export default class UserProfile {
                                 <span class="profile__link-text">Моё (${userInfo.willWatch})</span>
                             </a>
                         </li>
+                        <li class="profile__list profile__list--log-out">
+                            <a class="profile__log-out" href="#/main">Выйти</a>
+                        </li>
                     </ul>
                     <div class="profile__content">
 
@@ -189,6 +196,12 @@ export default class UserProfile {
             userCountry.textContent = userObj.country;
 
             target.disabled = false;
+        }
+
+        if (target.closest('.profile__log-out')) {
+            event.preventDefault();
+            await this.firebaseAuthUser.signOut();
+            window.location.href = '#/main';
         }
     }
 }
