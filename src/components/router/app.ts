@@ -1,5 +1,6 @@
 import Router, { IRouter } from './Router';
 import Cinema from '../pages/cinema/Cinema';
+import Burger from '../utils/burger';
 
 const rootElement = document.querySelector('#content');
 
@@ -8,16 +9,20 @@ export default class App {
 
     cinema;
 
+    burger;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
         }
         this.cinema = new Cinema();
+        this.burger = new Burger();
     }
 
     start() {
         this.drawContent();
         this.initEvent();
+        this.burger.listen();
     }
 
     drawContent() {
