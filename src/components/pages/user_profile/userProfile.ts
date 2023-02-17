@@ -324,7 +324,7 @@ export default class UserProfile {
                 elem.innerHTML = `
                     <div class="profile__score-info-wrap">
                         <div class="profile__score-img-info-wrap">
-                            <img class="profile__score-img" src="${movie.poster.previewUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
+                            <img class="profile__score-img" src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
                             <div class="profile__score-title-wrap">
                                 <h2 class="profile__score-title">${movie.name} (${movie.year})</h2>
                                 <h3 class="profile__title-english">${movie.alternativeName || ''}</h3>
@@ -463,7 +463,7 @@ export default class UserProfile {
                 elem.innerHTML = `
                     <div class="profile__review-info-wrap">
                         <div class="profile__review-img-info-wrap">
-                            <img class="profile__review-img" src="${movie.poster.previewUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
+                            <img class="profile__review-img" src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
                             <div class="profile__review-title-wrap">
                                 <h2 class="profile__review-title">${movie.name} (${movie.year})</h2>
                                 <h3 class="profile__title-english">${movie.alternativeName}</h3>
@@ -608,7 +608,7 @@ export default class UserProfile {
                 elem.classList.add('profile__will-watch-card');
                 elem.innerHTML = `
                     <a href="">
-                        <img src="${movie.poster.previewUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" class="profile__will-watch-card-poster" alt="">
+                        <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" class="profile__will-watch-card-poster" alt="">
                     </a>
                     <div class="profile__will-watch-card-info">
                         <a href="" class="profile__will-watch-card-name-wrap">
