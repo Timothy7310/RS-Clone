@@ -30,6 +30,7 @@ type BoxOffice = {
 };
 // TODO: разбить на несколько типов
 type MovieType = {
+    kinopoiskId: number;
     id: number,
     externalId: {
         tmdb: 278,

@@ -16,8 +16,8 @@ export default class Facts {
         this.controller = new Controller();
     }
 
-    async draw(parentContainer: HTMLElement): Promise<void> {
-        const movie = await this.controller.searchMovie('505898', 'id');
+    async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
+        const movie = await this.controller.searchMovie(idNumber, 'id');
         const factsArray = this.getFacts(movie.facts);
         const noFacts = ['Фактов об этом фильме у нас пока еще нет'];
         if (factsArray === undefined) {

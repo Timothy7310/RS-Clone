@@ -28,7 +28,9 @@ export default class Movie {
 
     reviews: Reviews;
 
-    constructor(path?: string) {
+    id?: string;
+
+    constructor(path?: string, id?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
         this.basic = new Basic();
@@ -38,16 +40,19 @@ export default class Movie {
         this.trailers = new Trailers();
         this.facts = new Facts();
         this.reviews = new Reviews();
+        this.id = id;
     }
 
     draw(): HTMLElement {
-        this.basic.draw(this.container);
-        this.prequels.draw(this.container);
-        this.description.draw(this.container);
-        this.rating.draw(this.container);
-        this.trailers.draw(this.container);
-        this.facts.draw(this.container);
-        this.reviews.draw(this.container);
+        if (this.id !== undefined) {
+            this.basic.draw(this.container, this.id);
+            this.prequels.draw(this.container, this.id);
+            this.description.draw(this.container, this.id);
+            this.rating.draw(this.container, this.id);
+            this.trailers.draw(this.container, this.id);
+            this.facts.draw(this.container, this.id);
+            this.reviews.draw(this.container, this.id);
+        }
         return this.container;
     }
 

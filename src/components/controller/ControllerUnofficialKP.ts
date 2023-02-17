@@ -1,4 +1,4 @@
-import { Premieres, FeesType, BoxOffice } from '../types/types';
+import { Premieres, BoxOffice, FeesType } from '../types/types';
 
 class ControllerUnofficialKP {
     rootURL;
@@ -13,7 +13,8 @@ class ControllerUnofficialKP {
 
     constructor() {
         this.rootURL = 'https://kinopoiskapiunofficial.tech/api/v2.2';
-        this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
+        // this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
+        this.apiKey = '1081c1fd-9b5b-43b4-905b-878e960e39ca'; // еще один ключ, на всякий случай
         this.premieresURL = 'films/premieres';
         this.moviesURL = 'films';
         this.boxOffice = [];

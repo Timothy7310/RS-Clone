@@ -15,14 +15,14 @@ const reviewItem = (review: TReview): string => `
         <div class=${className(review)}>
             <div class="reviews__content_items_item_head">
                 <div class="reviews__content_items_item_head_user">
-                    <p class="reviews__content_items_item_head_user_name">${review.author}</p>
+                    <p class="reviews__content_items_item_head_user_name">${review.author ? review.author : ''}</p>
                 </div>
                 <div class="reviews__content_items_item_head_date">
                     ${new Date(review.date).toLocaleDateString()} в ${(new Date(review.date).toTimeString()).slice(0, 5)}
                 </div>
             </div>
             <div class="reviews__content_items_item_body">
-                <div class="reviews__content_items_item_body_title">${review.title}</div>
+                <div class="reviews__content_items_item_body_title">${review.title ?? ''}</div>
                 <div class="reviews__content_items_item_body_text">
                     <span>${review.review}</span>
                 </div>
@@ -35,14 +35,14 @@ const reviewItem = (review: TReview): string => `
                             <use href="./assets/img/sprite.svg#like"></use>
                         </svg>
                         <span class="reviews__content_items_item_body_likes_like_title">Полезно</span>
-                        <span class="reviews__content_items_item_body_likes_like_count">${review.reviewLikes}</span>
+                        <span class="reviews__content_items_item_body_likes_like_count">${review.reviewLikes ?? ''}</span>
                     </button>
                     <button class="reviews__content_items_item_body_likes_like">
                         <svg class="tickets__link-icon">
                             <use href="./assets/img/sprite.svg#dislike"></use>
                         </svg>
                         <span class="reviews__content_items_item_body_likes_like_title">Нет</span>
-                        <span class="reviews__content_items_item_body_likes_like_count">${review.reviewDislikes}</span>
+                        <span class="reviews__content_items_item_body_likes_like_count">${review.reviewDislikes ?? ''}</span>
                     </button>
                 </div>
             </div>

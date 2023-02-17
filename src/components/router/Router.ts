@@ -7,9 +7,10 @@ export interface IRouter {
     listen: () => void;
     navigateToPage(): void;
     updateCurrentPage(page: Page): void;
+    // updateQuery: (query: string) => void;
 }
 
-export default class Router {
+export default class Router implements IRouter {
     paths: IPath[];
 
     currentPage: Page | null;
@@ -46,11 +47,13 @@ export default class Router {
             hash = '#/main';
             window.history.pushState('', '', `${hash}`);
         }
+        const hashParts = hash.split('/');
+        const pathFromHash = [hashParts[0], hashParts[1]].join('/');
+        const pathName = this.paths.find((route) => pathFromHash === route.path);
 
-        const pathName = this.paths.find((route) => hash === route.path);
-
+        const id = window.location.hash.split('/').pop();
         if (pathName) {
-            const pageContent = pathName.getPage(path);
+            const pageContent = pathName.getPage(path, id);
             this.updateCurrentPage(pageContent);
         } else {
             const pageContent = this.getErrorPage().getPage(path);
@@ -63,20 +66,4 @@ export default class Router {
         this.currentPage = page;
         this.rootElement.append(page.draw());
     }
-
-    // addRoute(path: IPath): void {
-    //     this.paths.push(path);
-    // }
-
-    // updateQuery(query: string): void {
-    //     const [hash] = window.location.hash.split('?');
-    //     window.history.pushState('', '', `${hash}${query ? `?${query}` : ''}`);
-    // }
-
-    // transition(path: string): void {
-    //     window.history.pushState('', '', path);
-    //     this.navigateToPage();
-    // }
-
-    // TODO add method to work with Query String
 }

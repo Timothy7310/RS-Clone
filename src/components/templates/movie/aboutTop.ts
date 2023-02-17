@@ -5,7 +5,7 @@ const aboutTop = (movie: TMovie): string => `
     <div class="about__top_name">
         <div class="about__top_name_titles">
             <h1 class="about__top_name_titles_title">${movie.name}</h1>
-            <div class="about__top_name_titles_alternative">${movie.alternativeName}</div>
+            <div class="about__top_name_titles_alternative">${movie.alternativeName ?? ''}</div>
         </div>
         <button class="movies__card-rates-will-watch">
             <svg class="movies__card-rates-will-watch-icon">

@@ -1,5 +1,6 @@
 import Controller from '../../../controller/controllerKP';
 import trailers from '../../../templates/movie/trailers';
+import { TTrailer } from '../../../templates/movie/typesMovie';
 import Component from '../../Component';
 
 export default class Trailers {
@@ -15,10 +16,13 @@ export default class Trailers {
         this.controller = new Controller();
     }
 
-    async draw(parentContainer: HTMLElement): Promise<void> {
-        const movie = await this.controller.searchMovie('505898', 'id');
+    async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
+        const movie = await this.controller.searchMovie(idNumber, 'id');
         const video = movie.videos.trailers;
-        const urlsVideo = video.map((x: { url: string; }) => x.url).slice(0, 3);
+        const trailersYoutube = video.filter(
+            (trailer: TTrailer) => trailer.site === 'youtube',
+        );
+        const urlsVideo = trailersYoutube.map((x: { url: string; }) => x.url).slice(0, 3);
 
         this.container.insertAdjacentHTML('beforeend', trailers(urlsVideo));
 
