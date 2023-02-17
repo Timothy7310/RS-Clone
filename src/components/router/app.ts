@@ -70,6 +70,10 @@ export default class App {
             this.userProfile.userProfileEvent(e);
         });
 
+        bodyDOM.addEventListener('change', (e) => {
+            this.userProfile.uploadAvatarEvent(e);
+        });
+
         window.addEventListener('popstate', () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;

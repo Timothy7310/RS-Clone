@@ -19,7 +19,6 @@ export default class FirebaseAuthUser {
         const res = await createUserWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
                 const errorContainer = document.querySelector('.error-message') as HTMLElement;
-                console.log(userCredential, userCredential.user.uid);
                 localStorage.setItem('userID', userCredential.user.uid);
                 errorContainer.textContent = '';
                 errorContainer.classList.remove('error-message--active');
@@ -41,7 +40,6 @@ export default class FirebaseAuthUser {
                     errorContainer.classList.remove('error-message--active');
                     this.logInUser(email, password);
                 }
-                console.log(error, error.message);
             });
         return res;
     };
@@ -58,11 +56,9 @@ export default class FirebaseAuthUser {
             .catch((error) => {
                 const errorContainer = document.querySelector('.error-message') as HTMLElement;
                 if (error.message === 'Firebase: Error (auth/wrong-password).') {
-                    console.log('test');
                     errorContainer.textContent = 'Неправильный пароль';
                     errorContainer.classList.add('error-message--active');
                 }
-                console.log(error, error.message);
             });
     };
 
@@ -118,7 +114,6 @@ export default class FirebaseAuthUser {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/firebase.User
                 // const uid = user.uid;
-                console.log(user);
                 // console.log(this.auth.currentUser);
                 // ...
                 localStorage.setItem('isLogIn', 'true');
@@ -126,7 +121,6 @@ export default class FirebaseAuthUser {
             }
             // User is signed out
             // ...
-            console.log('user log out');
             localStorage.setItem('isLogIn', 'false');
             return false;
         });

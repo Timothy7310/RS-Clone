@@ -44,27 +44,27 @@ export default class UserProfile {
             <div class="profile-settings__wrap">
                 <div class="profile-settings__input-wrap">
                     <label for="profileFirstName" class="profile-settings__input-label">Имя</label>
-                    <input type="text" name="firstName" id="profileFirstName" class="profile-settings__input" placeholder="Введите ваше имя" value="${userInfo.firstName || ''}">
+                    <input type="text" name="firstName" id="profileFirstName" class="profile-settings__input profile-input" placeholder="Введите ваше имя" value="${userInfo.firstName || ''}">
                 </div>
 
                 <div class="profile-settings__input-wrap">
                     <label for="profileLastName" class="profile-settings__input-label">Фамилия</label>
-                    <input type="text" name="lastName" id="profileLastName" class="profile-settings__input" placeholder="Введите вашу фамилию" value="${userInfo.lastName || ''}">
+                    <input type="text" name="lastName" id="profileLastName" class="profile-settings__input profile-input" placeholder="Введите вашу фамилию" value="${userInfo.lastName || ''}">
                 </div>
 
                 <div class="profile-settings__input-wrap">
                     <label for="profileNickname" class="profile-settings__input-label">Никнейм</label>
-                    <input type="text" name="nickname" id="profileNickname" class="profile-settings__input" placeholder="Введите ваш никнейм" value="${userInfo.nickname || 'Dude'}">
+                    <input type="text" name="nickname" id="profileNickname" class="profile-settings__input profile-input" placeholder="Введите ваш никнейм" value="${userInfo.nickname || 'Dude'}">
                 </div>
 
                 <div class="profile-settings__input-wrap">
                     <label for="profileFirstName" class="profile-settings__input-label">Город</label>
-                    <input type="text" name="city" id="profileFirstName" class="profile-settings__input" placeholder="Введите ваш город" value="${userInfo.city || ''}">
+                    <input type="text" name="city" id="profileFirstName" class="profile-settings__input profile-input" placeholder="Введите ваш город" value="${userInfo.city || ''}">
                 </div>
 
                 <div class="profile-settings__input-wrap">
                     <label for="profileCountry" class="profile-settings__input-label">Страна</label>
-                    <input type="text" name="country" id="profileCountry" class="profile-settings__input" placeholder="Введите вашу страну" value="${userInfo.country || ''}">
+                    <input type="text" name="country" id="profileCountry" class="profile-settings__input profile-input" placeholder="Введите вашу страну" value="${userInfo.country || ''}">
                 </div>
             </div>
 
@@ -85,6 +85,13 @@ export default class UserProfile {
                             <div class="profile__photo-wrap-img">
                                 <img src="${userInfo.avatar}" alt="user">
                             </div>
+                        </li>
+                        <li class="profile__photo-change">
+                            <label class="profile__photo-change-label">
+                                <span class="profile__photo-change-text">Изменить</span>
+                                <input name="uploadAvatar" type="file" class="profile-input profile__photo-change-input" accept="image/png, image/gif, image/jpeg">
+                            </label>
+                            <input name="avatar" type="hidden" class="profile-input">
                         </li>
                         <li class="profile__user-name">${userInfo.nickname || 'Dude'}</li>
                         <li class="profile__location">
@@ -174,7 +181,7 @@ export default class UserProfile {
             const res = await this.firebaseStore.getCurrentUser();
             const userObj = res[0] as UserType;
 
-            const inputs = Array.from(document.querySelectorAll('.profile-settings__input')) as HTMLInputElement[];
+            const inputs = Array.from(document.querySelectorAll('.profile-input')) as HTMLInputElement[];
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             inputs.map((input) => [input.name, input.value])
                 .forEach(<T extends keyof UserType>(item: string[]) => {
@@ -209,6 +216,18 @@ export default class UserProfile {
             await this.firebaseAuthUser.deleteUser();
             localStorage.removeItem('userID');
             window.location.href = '#/main';
+        }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    async uploadAvatarEvent(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        if (target.closest('[name="uploadAvatar"]')) {
+            const avatarInput = document.querySelector('[name="avatar"]') as HTMLInputElement;
+            const files = target.files as FileList;
+            await this.firebaseStore.uploadFile(files[0]);
+            avatarInput.value = localStorage.getItem('downloadURL') ?? 'https://vjoy.cc/wp-content/uploads/2020/11/1-35.jpg';
         }
     }
 }
