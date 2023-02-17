@@ -18,12 +18,28 @@ export default class FirebaseAuthUser {
     registerUser = async (email: string, password: string) => {
         const res = await createUserWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
-                console.log(userCredential, userCredential.user.uid);
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
                 localStorage.setItem('userID', userCredential.user.uid);
+                errorContainer.textContent = '';
+                errorContainer.classList.remove('error-message--active');
+                this.logInUser(email, password);
                 // return userCredential;
             })
             .catch((error) => {
-                console.log(error.message);
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
+                if (error.message === 'Firebase: Error (auth/invalid-email).') {
+                    errorContainer.textContent = 'Неправильный E-mail';
+                    errorContainer.classList.add('error-message--active');
+                }
+                if (error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+                    errorContainer.textContent = 'Пароль должен состоять минимум из 6 символов';
+                    errorContainer.classList.add('error-message--active');
+                }
+                if (error.message === 'FirebaseError: Firebase: Error (auth/email-already-in-use).') {
+                    errorContainer.textContent = '';
+                    errorContainer.classList.remove('error-message--active');
+                    this.logInUser(email, password);
+                }
             });
         return res;
     };
@@ -31,10 +47,19 @@ export default class FirebaseAuthUser {
     logInUser = async (email: string, password: string): Promise<void> => {
         await signInWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
+                errorContainer.textContent = '';
+                errorContainer.classList.remove('error-message--active');
                 console.log(userCredential);
+                localStorage.setItem('isLogIn', 'true');
+                window.location.href = '#/profile';
             })
             .catch((error) => {
-                console.log(error.message);
+                const errorContainer = document.querySelector('.error-message') as HTMLElement;
+                if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    errorContainer.textContent = 'Неправильный пароль';
+                    errorContainer.classList.add('error-message--active');
+                }
             });
     };
 
@@ -42,7 +67,8 @@ export default class FirebaseAuthUser {
         await signOut(this.auth)
             .then(() => {
                 console.log('user sign out successful');
-                // Sign-out successful.
+                // Sign-out successful.;
+                localStorage.setItem('isLogIn', 'false');
             })
             .catch((error) => {
                 console.log(error.message);
@@ -75,6 +101,7 @@ export default class FirebaseAuthUser {
             await deleteUser(user)
                 .then(() => {
                     // User deleted.
+                    localStorage.setItem('isLogIn', 'false');
                 })
                 .catch((error) => {
                     console.log(error.message);
@@ -84,20 +111,20 @@ export default class FirebaseAuthUser {
         }
     };
 
-    isUserAuth = async (): Promise<void> => {
+    isUserAuth = async () => {
         await onAuthStateChanged(this.auth, (user) => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/firebase.User
                 // const uid = user.uid;
-                console.log(user);
                 // console.log(this.auth.currentUser);
                 // ...
-            } else {
-                // User is signed out
-                // ...
-                console.log('user log out');
+                return true;
             }
+            // User is signed out
+            // ...
+            return false;
         });
+        return localStorage.getItem('isLogIn') === 'true';
     };
 }

@@ -1,5 +1,12 @@
 import Router, { IRouter } from './Router';
 import Cinema from '../pages/cinema/Cinema';
+import Login from '../pages/login/Login';
+import UserProfile from '../pages/user_profile/userProfile';
+
+import logInHeader from '../templates/log-in-header';
+import notLogInHeader from '../templates/not-log-in-header';
+import FirebaseAuthUser from '../server/firebaseAuthUser';
+import FirebaseStore from '../server/firebaseStore';
 
 const rootElement = document.querySelector('#content');
 
@@ -8,11 +15,23 @@ export default class App {
 
     cinema;
 
+    login;
+
+    userProfile;
+
+    firebaseAuthUser;
+
+    firebaseStore;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
         }
         this.cinema = new Cinema();
+        this.login = new Login();
+        this.userProfile = new UserProfile();
+        this.firebaseAuthUser = new FirebaseAuthUser();
+        this.firebaseStore = new FirebaseStore();
     }
 
     start() {
@@ -25,6 +44,21 @@ export default class App {
         this.router.navigateToPage();
     }
 
+    async swapHeader() {
+        const isAuth = await this.firebaseAuthUser.isUserAuth();
+        const header = document.querySelector('header') as HTMLElement;
+
+        if (isAuth) {
+            const user = await this.firebaseStore.getCurrentUser();
+            const src = user[0].avatar;
+            header.innerHTML = logInHeader;
+            const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
+            headerAvatar.src = src;
+        } else {
+            header.innerHTML = notLogInHeader;
+        }
+    }
+
     initEvent() {
         const bodyDOM = document.querySelector('body') as HTMLElement;
 
@@ -32,6 +66,29 @@ export default class App {
             const target = e.target as HTMLElement;
 
             this.cinema.cinemaEvent(target);
+            this.login.loginEvent(target, e);
+            this.userProfile.userProfileEvent(e);
+        });
+
+        bodyDOM.addEventListener('change', (e) => {
+            this.userProfile.uploadAvatarEvent(e);
+        });
+
+        window.addEventListener('popstate', () => {
+            const isAuth = localStorage.getItem('isLogIn') === 'true';
+            const location = window.location.href;
+            if (isAuth && location.includes('#/login')) {
+                window.location.href = '#/404';
+            }
+
+            if (!isAuth && location.includes('#/profile')) {
+                window.location.href = '#/404';
+            }
+            this.swapHeader();
+        });
+
+        window.addEventListener('load', async () => {
+            this.swapHeader();
         });
     }
 }
