@@ -324,9 +324,13 @@ export default class UserProfile {
                 elem.innerHTML = `
                     <div class="profile__score-info-wrap">
                         <div class="profile__score-img-info-wrap">
-                            <img class="profile__score-img" src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
+                            <a href="#/movie/${item.filmID}">
+                                <img class="profile__score-img" src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
+                            </a>
                             <div class="profile__score-title-wrap">
-                                <h2 class="profile__score-title">${movie.name} (${movie.year})</h2>
+                                <a href="#/movie/${item.filmID}">
+                                    <h2 class="profile__score-title">${movie.name} (${movie.year})</h2>
+                                </a>
                                 <h3 class="profile__title-english">${movie.alternativeName || ''}</h3>
                                 <p class="profile__score-timing">
                                     <span class="color-orange">${movie.rating.kp}</span> (${movie.votes.kp}) ${movie.movieLength} мин.
@@ -463,9 +467,13 @@ export default class UserProfile {
                 elem.innerHTML = `
                     <div class="profile__review-info-wrap">
                         <div class="profile__review-img-info-wrap">
-                            <img class="profile__review-img" src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
+                            <a href="#/movie/${item.filmID}">
+                                <img class="profile__review-img" src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="">
+                            </a>
                             <div class="profile__review-title-wrap">
-                                <h2 class="profile__review-title">${movie.name} (${movie.year})</h2>
+                                <a href="#/movie/${item.filmID}">
+                                    <h2 class="profile__review-title">${movie.name} (${movie.year})</h2>
+                                </a>
                                 <h3 class="profile__title-english">${movie.alternativeName}</h3>
                                 <p class="profile__score-timing">
                                     <span class="color-orange">${movie.rating.kp}</span> (${movie.votes.kp}) ${movie.movieLength} мин.
@@ -607,11 +615,11 @@ export default class UserProfile {
                 const elem = document.createElement('article');
                 elem.classList.add('profile__will-watch-card');
                 elem.innerHTML = `
-                    <a href="">
+                    <a href="#/movie/${item.filmID}">
                         <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" class="profile__will-watch-card-poster" alt="">
                     </a>
                     <div class="profile__will-watch-card-info">
-                        <a href="" class="profile__will-watch-card-name-wrap">
+                        <a href="#/movie/${item.filmID}" class="profile__will-watch-card-name-wrap">
                             <h3 class="profile__will-watch-card-name">${movie.name} (${movie.year})</h3>
                         </a>
                         <span class="profile__will-watch-card-original-name">${movie.alternativeName}</span>
