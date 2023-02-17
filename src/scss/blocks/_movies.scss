@@ -5,6 +5,10 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 32px;
+        @include media-mobile-520{
+            flex-direction: column;
+            gap: 20px;
+        }
     }
     &__title{
         font-weight: 700;
@@ -113,6 +117,9 @@
                 align-items: end;
             }
         }
+        @include media-mobile-520{
+            width: 60%;
+        }
     }
     &__list{
         padding: 0;
@@ -129,13 +136,14 @@
         gap: 10px;
         padding-bottom: 16px;
         border-bottom: 1px solid #E8E8E8;
+        position: relative;
         &-first-info{
             margin-left: auto;
             display: flex;
             align-items: flex-start;
             justify-self: start;
             width: 100%;
-            gap: 32px;
+            gap: 24px;
         }
         &-second-info{
             margin-left: auto;
@@ -148,6 +156,13 @@
             height: 168px;
             object-fit: cover;
             vertical-align: bottom;
+            @include media-tablet-980{
+                max-width: 112px;
+            }
+            @include media-mobile-520{
+                width: 90px;
+                height: 135px;
+            }
         }
         &-text{
             display: flex;
@@ -172,6 +187,17 @@
             }
             &:hover{
                 color: var(--color-accent);
+            }
+        }
+        &-rate{
+            display: none;
+            @include media-mobile-520{
+                display: block;
+                position: absolute;
+                color: var(--color-white);
+                padding: 3px;
+                top: 10px;
+                left: 10px;
             }
         }
         &-genres{
@@ -203,6 +229,9 @@
             &-directors{
                 color: var(--color-secondary);
             }
+            @include media-mobile-520{
+                display: none;
+            }
         }
         &-rates{
             display: flex;
@@ -227,8 +256,14 @@
                 margin: 0;
                 list-style: none;
                 display: flex;
-                gap: 5px;
+                gap: 4px;
                 margin-bottom: 24px;
+                @include media-desktopsmall{
+                    gap: 0px;
+                }
+                @include media-tablet-850{
+                    display: none;
+                }
             }
             &-star{
                 &-icon{
@@ -238,6 +273,22 @@
                     &--active{
                         fill: var(--color-accent);
                     }
+                    @include media-tablet-980{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+            &-will-tablet{
+                cursor: pointer;
+                width: 24px;
+                color: var(--color-black);
+                display: none;
+                @include media-tablet-850{
+                    display: flex;
+                }
+                @include media-tablet-660{
+                    display: none;
                 }
             }
             &-will-watch{
@@ -264,6 +315,19 @@
                         fill: var(--color-white);
                     }
                 }
+                @include media-tablet-850{
+                    display: none;
+                }
+            }
+            @include media-tablet{
+                flex-direction: row;
+                align-items: center;
+            }
+            @include media-tablet-660{
+                flex-direction: column;
+            }
+            @include media-mobile-520{
+                display: none;
             }
         }
         &-watch{
@@ -292,10 +356,13 @@
                 gap: 9px;
                 &-title{
                     font-weight: 700;
-                    font-size: 14px;
+                    font-size: 13px;
                     line-height: 17px;
                     text-align: center;
                     color: var(--color-black);
+                    @include media-tablet-850{
+                        margin-bottom: 10px;
+                    }
                 }
                 &-btn{
                     padding: 10px 18px;
@@ -335,8 +402,28 @@
                             fill: rgba(255, 255, 255, 0.5);
                         }
                     }
+                    @include media-tablet-850{
+                        display: none;
+                    }
                 }
             }
+            @include media-tablet{
+                display: none;
+            }
+            @include media-tablet-850{
+                padding: 20px 20px;
+                gap: 20px;
+            }
+            @include media-tablet{
+                padding: 10px;
+                gap: 10px;
+            }
+        }
+        @include media-tablet{
+            grid-template-columns: 3fr 1fr;
+        }
+        @include media-mobile-520{
+            grid-template-columns: 1fr 0fr;
         }
     }
 }

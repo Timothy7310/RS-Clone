@@ -14,6 +14,9 @@
 @mixin media-desktopsmall {
     @media (max-width: $desktop-small-width) { @content; }
 }
+@mixin media-tablet-980 {
+  @media (max-width: $tablet-980) { @content; }
+}
 @mixin media-tablet-850 {
   @media (max-width: $tablet-850) { @content; }
 }
