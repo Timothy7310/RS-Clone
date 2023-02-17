@@ -6,10 +6,16 @@
         align-items: center;
         justify-content: space-between;
         column-gap: 10px;
+        @include media-mobile-520{
+            justify-content: center;
+        }
     }
     &__logo-icon{
         width: 178px;
         height: 40px;
+        @include media-tablet-850{
+            display: none;
+        }
     }
     &__list{
         list-style: none;
@@ -17,6 +23,12 @@
         gap: 22px;
         padding: 0px;
         margin: 0px;
+        @include media-desktopsmall{
+            gap: 10px;
+        }
+        @include media-tablet-850{
+            display: none;
+        }
     }
     &__link{
         display: flex;
@@ -53,6 +65,12 @@
             overflow: hidden;
             display: flex;
             padding: 9px 17px;
+            @include media-desktopsmall{
+                width: 190px;
+            }
+            @include media-tablet-660{
+                display: none;
+            }
         }
         &-input{
             width: 100%;
@@ -79,6 +97,25 @@
             }
         }
     }
+    &__quizz-btn{
+        display: flex;
+        align-items: flex-start;
+        padding:10px 25px;
+        gap: 10px;
+        background: var(--online-bg);
+        border-style: none;
+        border-radius: 20px;
+        color: white;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover{
+            background: var(--online-hover-bg);
+        }
+        @include media-tablet-660{
+            display: none;
+        }
+    }
     &__enter-btn{
         color: rgba(255, 255, 255, 0.5);
         background-color: transparent;
@@ -87,6 +124,9 @@
         transition: color 0.4s ease-in-out;
         &:hover{
             color: var(--color-white);
+        }
+        @include media-mobile-520{
+            display: none;
         }
     }
 }

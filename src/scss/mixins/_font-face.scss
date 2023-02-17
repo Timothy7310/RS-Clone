@@ -7,3 +7,25 @@
       font-style: normal;
     }
   }
+
+@mixin media-desktop {
+    @media (max-width: $desktop-with) { @content; }
+}
+@mixin media-desktopsmall {
+    @media (max-width: $desktop-small-width) { @content; }
+}
+@mixin media-tablet-850 {
+  @media (max-width: $tablet-850) { @content; }
+}
+@mixin media-tablet-660 {
+  @media (max-width: $tablet-660) { @content; }
+}
+@mixin media-tablet {
+    @media (max-width: $tablet-width) { @content; }
+}
+@mixin media-mobile-520 {
+  @media (max-width: $mobile-520) { @content; }
+}
+@mixin media-mobile {
+    @media (max-width: $mobile-width) { @content; }
+}
