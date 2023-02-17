@@ -16,9 +16,9 @@ export default class Reviews {
         this.controller = new Controller();
     }
 
-    async draw(parentContainer: HTMLElement): Promise<void> {
-        const reviewsAll = await this.controller.searchReview('505898', 'movieId');
-        const reviewAllItems = await this.controller.searchReviewCount('505898', 'movieId', reviewsAll.total);
+    async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
+        const reviewsAll = await this.controller.searchReview(idNumber, 'movieId');
+        const reviewAllItems = await this.controller.searchReviewCount(idNumber, 'movieId', reviewsAll.total);
         const positive = this.getCountPositive(reviewAllItems.docs);
         const negative = this.getCountNegative(reviewAllItems.docs);
         const neutral = this.getCountNeutral(reviewAllItems.docs);

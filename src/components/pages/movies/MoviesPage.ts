@@ -1,5 +1,5 @@
 import Page from '../Page';
-import moviesTemplates from '../../templates/movies';
+import MoviesTop from './movies';
 
 export default class MoviesPage {
     page: Page;
@@ -8,13 +8,16 @@ export default class MoviesPage {
 
     path: string | undefined;
 
+    movies: MoviesTop;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
+        this.movies = new MoviesTop();
     }
 
     draw(): HTMLElement {
-        this.container.innerHTML = moviesTemplates;
+        this.movies.draw(this.container);
         return this.container;
     }
 

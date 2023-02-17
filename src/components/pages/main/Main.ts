@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Page from '../Page';
 import Cash from './sections/Cash';
 import Popular from './sections/Popular';
@@ -65,10 +66,10 @@ export default class Main {
                 <li class="tickets__slide">
                     <a href="#/cinema/seances/${movie.kinopoiskId}" class="tickets__slide-link">
                         <div class="tickets__slide-img-wrap">
-                            <img class="tickets__slide-img" src="${movie.posterUrlPreview}" alt="">
+                          <img class="tickets__slide-img" src="${movie.posterUrlPreview}" alt="">
                         </div>
-                        <h3 class="tickets__slide-name">${movie.nameRu ? movie.nameRu : movie.nameEn}</h3>
-                        <span class="tickets__slide-genres">${movie.year}, ${movie.genres[0].genre}</span>
+            <h3 class="tickets__slide-name">${movie.nameRu ? movie.nameRu : movie.nameEn}</h3>
+            <span class="tickets__slide-genres">${movie.year}, ${movie.genres[0].genre}</span>
                     </a>
                 </li>
             `;
@@ -78,7 +79,6 @@ export default class Main {
 
     async renderSoonInCinema(count: number) {
         const movies = await (await this.controllerUnofficialKP.getPremieres())
-            // eslint-disable-next-line max-len
             .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
@@ -141,7 +141,7 @@ export default class Main {
                 const currency = movie.fees?.[type]?.currency ?? '$';
                 result += `
                 <li class="cash__card-item">
-                        <a href="#/cinema/seances/${movie.id}" class="cash__card-item-poster-wrap">
+                        <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
                             <img src="${movie.poster.previewUrl}" alt="" class="cash__card-item-poster">
                         </a>
                     <div class="cash__card-item-info">

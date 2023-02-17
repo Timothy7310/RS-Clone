@@ -8,7 +8,7 @@ import Seances from '../pages/session/Seances';
 
 export interface IPath {
     path: string;
-    getPage: (path?: string) => Page;
+    getPage: (path?: string, id?: string) => Page;
 }
 
 export const enum PagePaths {
@@ -33,7 +33,7 @@ export const Paths = [
     },
     {
         path: PagePaths.moviePage,
-        getPage: (path?: string) => new Movie(path),
+        getPage: (path?: string, id?: string) => new Movie(path, id),
     },
     {
         path: PagePaths.moviesPage,

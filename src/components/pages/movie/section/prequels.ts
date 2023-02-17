@@ -1,5 +1,6 @@
 import Controller from '../../../controller/controllerKP';
 import prequels from '../../../templates/movie/prequels';
+import noPrequels from '../../../templates/movie/prequelsNon';
 import { TMovie, TPrequels } from '../../../templates/movie/typesMovie';
 import Component from '../../Component';
 
@@ -16,13 +17,15 @@ export default class Prequels {
         this.controller = new Controller();
     }
 
-    async draw(parentContainer: HTMLElement): Promise<void> {
-        const movie = await this.controller.searchMovie('505898', 'id');
+    async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
+        const movie = await this.controller.searchMovie(idNumber, 'id');
         const prequelsId = this.getPrequelsId(movie.sequelsAndPrequels);
-
-        const movies: TMovie[] = await Promise.all(prequelsId.map((id) => this.controller.searchMovie(id.toString(), 'id')));
-
-        this.container.insertAdjacentHTML('beforeend', prequels(movies));
+        if (prequelsId[0] === undefined) {
+            this.container.insertAdjacentHTML('afterbegin', noPrequels);
+        } else {
+            const movies: TMovie[] = await Promise.all(prequelsId.map((id) => this.controller.searchMovie(id.toString(), 'id')));
+            this.container.insertAdjacentHTML('beforeend', prequels(movies));
+        }
 
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('movie', 'container');
