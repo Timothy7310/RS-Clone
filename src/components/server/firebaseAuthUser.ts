@@ -50,8 +50,9 @@ export default class FirebaseAuthUser {
                 const errorContainer = document.querySelector('.error-message') as HTMLElement;
                 errorContainer.textContent = '';
                 errorContainer.classList.remove('error-message--active');
-                window.location.href = '#/profile';
                 console.log(userCredential);
+                localStorage.setItem('isLogIn', 'true');
+                window.location.href = '#/profile';
             })
             .catch((error) => {
                 const errorContainer = document.querySelector('.error-message') as HTMLElement;
@@ -67,6 +68,7 @@ export default class FirebaseAuthUser {
             .then(() => {
                 console.log('user sign out successful');
                 // Sign-out successful.;
+                localStorage.setItem('isLogIn', 'false');
             })
             .catch((error) => {
                 console.log(error.message);
@@ -99,6 +101,7 @@ export default class FirebaseAuthUser {
             await deleteUser(user)
                 .then(() => {
                     // User deleted.
+                    localStorage.setItem('isLogIn', 'false');
                 })
                 .catch((error) => {
                     console.log(error.message);
@@ -116,12 +119,10 @@ export default class FirebaseAuthUser {
                 // const uid = user.uid;
                 // console.log(this.auth.currentUser);
                 // ...
-                localStorage.setItem('isLogIn', 'true');
                 return true;
             }
             // User is signed out
             // ...
-            localStorage.setItem('isLogIn', 'false');
             return false;
         });
         return localStorage.getItem('isLogIn') === 'true';

@@ -20,8 +20,25 @@ const userBlank: UserType = {
             title: '',
         }],
     },
-    watched: 0,
-    willWatch: 0,
+    watched: {
+        total: 0,
+        items: [
+            {
+                date: '',
+                filmID: '',
+                score: null,
+            },
+        ],
+    },
+    willWatch: {
+        total: 0,
+        items: [
+            {
+                date: '',
+                filmID: '',
+            },
+        ],
+    },
 };
 
 export default userBlank;

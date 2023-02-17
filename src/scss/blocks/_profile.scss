@@ -93,7 +93,9 @@
       }
     }
   }
-
+  &__list {
+    display: flex;
+  }
   &__list a {
     display: flex;
     align-items: center;
@@ -253,6 +255,7 @@
     width: 63px;
     height: 79px;
     margin-right: 16px;
+    object-fit: cover;
   }
 
   &__review-title {
@@ -500,6 +503,110 @@
     &-input{
       position: absolute;
       top: -1000px;
+    }
+  }
+  &-page--active{
+    .profile__link-icon{
+      fill: var(--color-accent);
+    }
+    .profile__link-text{
+      color: var(--color-accent);
+    }
+  }
+  &__list--watched{
+    & .profile-page--active{
+      .profile__link-icon{
+        fill: transparent;
+        stroke: var(--color-accent);
+      }
+    }
+  }
+  &__will-watch{
+    &-list{
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    &-title{
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: var(--color-black);
+      margin: 0px;
+      margin-bottom: 24px;
+    }
+    &-count{
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 21px;
+      display: block;
+      margin-bottom: 16px;
+    }
+    &-card{
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #E8E8E8;
+      &-poster{
+        width: 60px;
+        height: 90px;
+        object-fit: cover;
+        vertical-align: bottom;
+      }
+      &-info{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-left: 16px;
+      }
+      &-name{
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        color: var(--color-black);
+        margin: 0;
+        transition: color 0.25s ease-in;
+        &:hover{
+          color: var(--color-accent);
+        }
+        &-wrap{
+          display: block;
+        }
+      }
+      &-original-name{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: var(--color-secondary);
+      }
+      &-subinfo{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: var(--color-secondary);
+      }
+      &-rate{
+        color: var(--color-accent);
+      }
+      &-delete{
+        margin-left: auto;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        &-icon{
+          width: 30px;
+          height: 30px;
+          fill: var(--color-secondary);
+          transition: fill 0.2s ease-in;
+        }
+        &:hover{
+          & .profile__will-watch-card-delete-icon{
+            fill: var(--color-accent);
+          }
+        }
+      }
     }
   }
 }

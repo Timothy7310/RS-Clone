@@ -1,5 +1,3 @@
-import settingsPageTemplates from './settingsPage';
-
 const userProfileTemplates = `
     <section class="profile">
             <div class="container display-flex">
@@ -7,7 +5,7 @@ const userProfileTemplates = `
 
                 </ul>
                 <div class="profile__content">
-                    ${settingsPageTemplates}
+                    
                 </div>
                 <div class="profile__activity">
                     
