@@ -94,7 +94,7 @@ export default class UserProfile {
                         <li class="profile__email">${userInfo.email}</li>
                         <li class="profile__line"></li>
                         <li class="profile__delete">
-                            <a href="" class="profile__link">
+                            <a href="" class="profile__link profile__link--delete">
                                 <svg class="profile__link-icon">
                                     <use href="./assets/img/sprite.svg#delete-logo"></use>
                                 </svg>
@@ -201,6 +201,13 @@ export default class UserProfile {
         if (target.closest('.profile__log-out')) {
             event.preventDefault();
             await this.firebaseAuthUser.signOut();
+            window.location.href = '#/main';
+        }
+
+        if (target.closest('.profile__link--delete')) {
+            event.preventDefault();
+            await this.firebaseAuthUser.deleteUser();
+            localStorage.removeItem('userID');
             window.location.href = '#/main';
         }
     }

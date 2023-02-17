@@ -6,6 +6,10 @@
     list-style-type: none;
   }
 
+  &__delete{
+    display: flex;
+  }
+
   &__user {
     margin-top: 0;
     min-height: 567px;

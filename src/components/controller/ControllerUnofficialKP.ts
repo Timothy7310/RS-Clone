@@ -1,6 +1,4 @@
-import { Premieres } from '../types/types';
-import { BoxOffice } from '../types/types';
-import { FeesType } from '../types/types';
+import { Premieres, FeesType, BoxOffice } from '../types/types';
 
 class ControllerUnofficialKP {
     rootURL;
