@@ -77,7 +77,7 @@ export default class UserProfile {
                         <li class="profile__photo-change">
                             <label class="profile__photo-change-label">
                                 <span class="profile__photo-change-text">Изменить</span>
-                                <input name="uploadAvatar" type="file" class="profile-input profile__photo-change-input" accept="image/png, image/gif, image/jpeg">
+                                <input name="uploadAvatar" type="file" class="profile__photo-change-input" accept="image/png, image/gif, image/jpeg">
                             </label>
                             <input name="avatar" type="hidden" class="profile-input">
                         </li>
