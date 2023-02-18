@@ -118,7 +118,7 @@ export default class UserProfile {
                                 <svg class="profile__link-icon">
                                     <use href="./assets/img/sprite.svg#review-logo"></use>
                                 </svg>
-                                <span class="profile__link-text">Рецензии (${userInfo.reviews.total})</span>
+                                <span class="profile__link-text profile--reviews-count">Рецензии (${userInfo.reviews.total})</span>
                             </a>
                         </li>
                         <li class="profile__list">
@@ -481,8 +481,8 @@ export default class UserProfile {
                             </div>
                         </div>
                         <div class="profile__review-btn-wrap">
-                            <button class="profile__review-btn">Изменить</button>
-                            <button class="profile__review-btn">Удалить</button>
+                            <button class="profile__review-btn profile__review-btn--change">Изменить</button>
+                            <button class="profile__review-btn profile__review-btn--delete" data-id="${item.filmID}">Удалить</button>
                         </div>
                     </div>
                     <div class="profile__review-text-wrap">
@@ -499,6 +499,9 @@ export default class UserProfile {
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
         }
+
+        const reviewsPageCount = document.querySelector('.profile--reviews-count') as HTMLElement;
+        reviewsPageCount.textContent = `Моё (${userInfoReviews.total})`;
     }
 
     async renderWillWatch() {
@@ -727,6 +730,24 @@ export default class UserProfile {
             };
             await this.firebaseStore.updateUserInfo(newUserInfo);
             await this.renderWillWatch();
+        }
+
+        if (target.closest('.profile__review-btn--delete')) {
+            event.preventDefault();
+            const delButton = target.closest('.profile__review-btn--delete') as HTMLButtonElement;
+            const id = delButton.dataset.id as string;
+
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+            const newReviewsList = newUserInfo.reviews.items.filter((x) => x.filmID !== id);
+            newUserInfo.reviews = {
+                items: newReviewsList,
+                total: newReviewsList.length,
+            };
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            await this.renderReviews();
         }
     }
 
