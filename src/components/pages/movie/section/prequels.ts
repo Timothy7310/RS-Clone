@@ -23,7 +23,7 @@ export default class Prequels {
         if (prequelsId[0] === undefined) {
             this.container.insertAdjacentHTML('afterbegin', noPrequels);
         } else {
-            const movies: TMovie[] = await Promise.all(prequelsId.map((id) => this.controller.searchMovie(id.toString(), 'id')));
+            const movies: TMovie[] = await Promise.all(prequelsId.map((id) => this.controller.searchMovie(id.toString(), 'id')).slice(0, 6));
             this.container.insertAdjacentHTML('beforeend', prequels(movies));
         }
 

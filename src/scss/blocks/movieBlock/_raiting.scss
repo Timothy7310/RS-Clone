@@ -6,12 +6,19 @@
     &__score{
         display: flex;
         align-items: flex-start;
+        @include media-mobile-520{
+            flex-direction: column-reverse;
+            justify-content: space-between;
+        }
         &_stars{
             flex-shrink: 0;
             margin-right: 32px;
             position: relative;
             font-size: 40px;
             display: inline-block;
+            @include media-mobile-520{
+                font-size: 28px;
+            }
             &_elements{
                 position: absolute;
                 width: 100%;
@@ -58,6 +65,9 @@
                 font-size: 44px;
                 color: var(--rate-good);
                 margin: 0;
+                @include media-mobile-520{
+                    margin-bottom: 16px;
+                }
             }
             &_count{
                 display: flex;
@@ -66,6 +76,9 @@
                 color: var(--color-secondary);
                 &_kp{
                     margin-right: 8px;
+                }
+                @include media-mobile-520{
+                    margin-bottom: 16px;
                 }
             }
         }
@@ -89,6 +102,9 @@
             &:hover{
                 color: var(--color-white);
                 background: var(--color-accent);
+            }
+            @include media-mobile-520{
+                display: none;
             }
     }
     }

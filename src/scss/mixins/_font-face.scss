@@ -9,7 +9,7 @@
   }
 
 @mixin media-desktop {
-    @media (max-width: $desktop-with) { @content; }
+    @media (max-width: $desktop-width) { @content; }
 }
 @mixin media-desktopsmall {
     @media (max-width: $desktop-small-width) { @content; }

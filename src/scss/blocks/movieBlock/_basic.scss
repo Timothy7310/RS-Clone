@@ -1,6 +1,11 @@
 .basic{
     display: flex;
     padding-top: 40px;
+    @include media-mobile-520{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     &__column{
         flex: 0 0 302px;
         width: 302px;
@@ -10,7 +15,7 @@
         height: 100%;
         position: relative;
         flex: 1;
-        min-height: 624px;
+        // min-height: 624px;
         &_poster{
             position: relative;
             margin-bottom: 20px;
@@ -18,7 +23,54 @@
                 width: 302px;
                 height: 430px;
             }
+            @include media-desktop{
+                width: 250px;
+                height: 356px;
+            }
+            @include media-desktopsmall{
+                width: 230px;
+                height: 328px;
+            }
+            @include media-tablet-850{
+                width: 180px;
+                height: 256px;
+            }
         }
+        &_trailer{
+            margin-top: 20px;
+            &_size{
+                width: 302px;
+                height: 170px;
+                @include media-desktop{
+                    width: 250px;
+                    height: 140px;
+                }
+                @include media-desktopsmall{
+                    width: 230px;
+                    height: 130px;
+                }
+                @include media-tablet-850{
+                    display: none;
+                }
+            }
+        }
+        &_title{
+            @include media-tablet-850{
+                display: none;
+            }
+        }
+        }
+        @include media-desktop{
+            flex: 0 0 250px;
+            width: 250px;
+        }
+        @include media-desktopsmall{
+            flex: 0 0 230px;
+            width: 230px;
+        }
+        @include media-tablet-850{
+            flex: none;
+            width: auto;
         }
     }
 }
