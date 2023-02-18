@@ -337,11 +337,12 @@ export default class UserProfile {
                                 </p>
                             </div>
                         </div>
-                        <div class="profile__score-btn-wrap">
+                        <div class="profile__score-btn-wrap profile__score-btn-wrap--${item.filmID}">
                             <p class="profile__score-your-mark">
-                                Ваша оценка: <span class="profile__mark">${item.score}</span>
+                                Ваша оценка: <span class="profile__mark profile__mark--${item.filmID}">${item.score}</span>
                             </p>
-                            <button class="profile__review-btn">Изменить</button>
+                            <button class="profile__review-btn profile-change-score profile__review-btn--change-move-score" data-id="${item.filmID}">Изменить</button>
+                            <button class="profile__review-btn profile-change-score profile-change-score--hidden profile__review-btn--save-move-score" data-id="${item.filmID}">Сохранить</button>
                         </div>
                     </div>
                 `;
@@ -351,6 +352,9 @@ export default class UserProfile {
 
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
         }
     }
 
@@ -498,10 +502,13 @@ export default class UserProfile {
 
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
         }
 
         const reviewsPageCount = document.querySelector('.profile--reviews-count') as HTMLElement;
-        reviewsPageCount.textContent = `Моё (${userInfoReviews.total})`;
+        reviewsPageCount.textContent = `Рецензии (${userInfoReviews.total})`;
     }
 
     async renderWillWatch() {
@@ -643,6 +650,9 @@ export default class UserProfile {
 
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
         }
 
         const willWatchPageCount = document.querySelector('.profile--will-watch-count') as HTMLElement;
@@ -749,6 +759,54 @@ export default class UserProfile {
             await this.firebaseStore.updateUserInfo(newUserInfo);
             await this.renderReviews();
         }
+
+        if (target.classList.contains('profile__review-btn--change-move-score')) {
+            const id = target.dataset.id as string;
+            const score = document.querySelector(`.profile__mark--${id}`) as HTMLElement;
+
+            const prevScore = score.textContent ?? '0';
+
+            const inputElem = document.createElement('input');
+            inputElem.type = 'number';
+            inputElem.max = '10';
+            inputElem.min = '1';
+            inputElem.classList.add('profile__mark-change-input', `profile__mark-change-input--${id}`);
+            inputElem.value = prevScore;
+
+            score.innerHTML = '';
+            score.append(inputElem);
+
+            target.disabled = true;
+            const saveBtn = document.querySelector(`.profile__review-btn--save-move-score[data-id="${id}"]`) as HTMLButtonElement;
+            saveBtn.classList.remove('profile-change-score--hidden');
+            saveBtn.disabled = false;
+        }
+
+        if (target.classList.contains('profile__review-btn--save-move-score')) {
+            const id = target.dataset.id as string;
+            const score = document.querySelector(`.profile__mark--${id}`) as HTMLElement;
+            const input = document.querySelector(`.profile__mark-change-input--${id}`) as HTMLInputElement;
+            const newScore = +input.value;
+
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+
+            const newWatchedList = newUserInfo.watched.items.map((x) => (x.filmID === id
+                ? { date: `${new Date().getTime()}`, filmID: x.filmID, score: newScore }
+                : x));
+
+            newUserInfo.watched.items = newWatchedList;
+
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+
+            score.innerHTML = `${newScore || '0'}`;
+
+            const changeBtn = document.querySelector(`.profile__review-btn--change-move-score[data-id="${id}"]`) as HTMLButtonElement;
+            changeBtn.disabled = false;
+            target.classList.add('profile-change-score--hidden');
+            target.disabled = true;
+        }
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -760,6 +818,16 @@ export default class UserProfile {
             const files = target.files as FileList;
             await this.firebaseStore.uploadFile(files[0]);
             avatarInput.value = localStorage.getItem('downloadURL') ?? 'https://vjoy.cc/wp-content/uploads/2020/11/1-35.jpg';
+        }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    validationMark(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        // TODO: изменить логику, можно менять только с помощью стрелок вверх\вниз
+        if (target.closest('.profile__mark-change-input')) {
+            target.value = `${Math.max(1, Math.min(10, +target.value))}`;
         }
     }
 }

@@ -81,6 +81,10 @@ export default class App {
             this.userProfile.uploadAvatarEvent(e);
         });
 
+        bodyDOM.addEventListener('input', (e) => {
+            this.userProfile.validationMark(e);
+        });
+
         window.addEventListener('popstate', () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;
