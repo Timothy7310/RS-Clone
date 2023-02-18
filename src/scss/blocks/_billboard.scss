@@ -12,6 +12,9 @@
             line-height: 48px;
             color: var(--color-black);
             margin: 0px;
+            @include media-mobile-520{
+                font-size: 32px;
+            }
         }
         &-icon{
             width: 83px;
@@ -20,10 +23,16 @@
     }
     &__days{
         margin-bottom: 60px;
+        @include media-mobile-520{
+            margin-bottom: 20px;
+        }
         &-btns{
             display: flex;
             align-items: center;
             gap: 10px;
+            @include media-mobile-520{
+                flex-direction: column;
+            }
         }
         &-btn{
             font-weight: 400;
@@ -122,6 +131,12 @@
         grid-template-columns: repeat(4, 1fr);
         column-gap: 20px;
         row-gap: 32px;
+        @include media-desktopsmall{
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include media-mobile-520{
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
     &__item{
         &-link{
@@ -173,6 +188,18 @@
             min-height: 387px;
             max-height: 387px;
             width: 100%;
+            @include media-tablet{
+                min-height: 300px;
+                max-height: 300px;
+            }
+            @include media-tablet-660{
+                min-height: 250px;
+                max-height: 250px;
+            }
+            @include media-mobile{
+                min-height: 200px;
+                max-height: 200px;
+            }
             &-wrap{
                 margin-bottom: 12px;
                 display: block;
