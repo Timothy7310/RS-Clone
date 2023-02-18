@@ -474,7 +474,7 @@ export default class UserProfile {
                                 <a href="#/movie/${item.filmID}">
                                     <h2 class="profile__review-title">${movie.name} (${movie.year})</h2>
                                 </a>
-                                <h3 class="profile__title-english">${movie.alternativeName}</h3>
+                                <h3 class="profile__title-english">${movie.alternativeName || ''}</h3>
                                 <p class="profile__score-timing">
                                     <span class="color-orange">${movie.rating.kp}</span> (${movie.votes.kp}) ${movie.movieLength} мин.
                                 </p>
@@ -622,7 +622,7 @@ export default class UserProfile {
                         <a href="#/movie/${item.filmID}" class="profile__will-watch-card-name-wrap">
                             <h3 class="profile__will-watch-card-name">${movie.name} (${movie.year})</h3>
                         </a>
-                        <span class="profile__will-watch-card-original-name">${movie.alternativeName}</span>
+                        <span class="profile__will-watch-card-original-name">${movie.alternativeName || ''}</span>
                         <div class="profile__will-watch-card-subinfo">
                             <span class="profile__will-watch-card-rate">${movie.rating.kp}</span>
                             <span class="profile__will-watch-card-rate-count">(${movie.votes.kp})</span>
