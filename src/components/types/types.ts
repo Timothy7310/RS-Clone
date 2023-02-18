@@ -179,32 +179,31 @@ type MovieTestType = {
 
 type WatchedType = {
     total: number,
-    items: [
-        {
-            date: string,
-            filmID: string,
-            score: null | number,
-        },
-    ]
+    items:
+    {
+        date: string,
+        filmID: string,
+        score: null | number,
+    }[],
 };
 
 type ReviewsType = {
     total: number,
-    items: [{
+    items: {
         date: string,
         filmID: string,
         score: null | number,
         text: string,
         title: string,
-    }],
+    }[],
 };
 
 type WillWatchType = {
     total: number,
-    items: [{
+    items: {
         date: string,
         filmID: string,
-    }],
+    }[],
 };
 
 type UserType = {
