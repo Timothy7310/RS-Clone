@@ -30,46 +30,45 @@ const movieCard = (movie: TMovie): string => `
     <div class="movies__card-rates">
     <div>
         <span class="movies__card-rates-num rate-num--good">${movie.rating.kp.toFixed(1)}</span>
-        <span class="movies__card-rates-count">${movie.votes.kp}оценок</span>
-    </div>
-        <ul class="movies__card-rates-stars">
+        <span class="movies__card-rates-count">${movie.votes.kp} оценок</span>
+        <ul class="movies__card-rates-stars movies__card-rates-stars--${Math.floor(movie.rating.kp)}">
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
             <li class="movies__card-rates-star">
-                <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
+                <svg class="movies__card-rates-star-icon ">
                     <use href="./assets/img/sprite.svg#star"></use>
                 </svg>
             </li>
@@ -84,10 +83,7 @@ const movieCard = (movie: TMovie): string => `
                 </svg>
             </li>
         </ul>
-        <svg class="movies__card-rates-will-tablet">
-            <use href="./assets/img/sprite.svg#icon_add_watch"></use>
-        </svg>
-        <button class="movies__card-rates-will-watch">
+        <button class="movies__card-rates-will-watch" data-id="${movie.id}">
             <svg class="movies__card-rates-will-watch-icon">
                 <use href="./assets/img/sprite.svg#icon_add_watch"></use>
             </svg>

@@ -438,3 +438,301 @@
     display: block;
     margin: 20px 0px;
 }
+
+.movies__card-rates-stars{
+    &--10{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(8) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(9) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(10) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--9{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(8) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(9) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--8{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(8) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--7{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--6{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--5{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--4{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--3{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--2{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--1{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+}
