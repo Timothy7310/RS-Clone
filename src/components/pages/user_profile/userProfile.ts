@@ -126,7 +126,7 @@ export default class UserProfile {
                                 <svg class="profile__link-icon">
                                     <use href="./assets/img/sprite.svg#movie-logo"></use>
                                 </svg>
-                                <span class="profile__link-text">Моё (${userInfo.willWatch.total})</span>
+                                <span class="profile__link-text profile--will-watch-count">Моё (${userInfo.willWatch.total})</span>
                             </a>
                         </li>
                         <li class="profile__list profile__list--log-out">
@@ -629,7 +629,7 @@ export default class UserProfile {
                             <span class="profile__will-watch-card-time">${movie.movieLength} мин.</span>
                         </div>
                     </div>
-                    <button class="profile__will-watch-card-delete" title="Удалить">
+                    <button class="profile__will-watch-card-delete" data-id="${item.filmID}" title="Удалить">
                         <svg class="profile__will-watch-card-delete-icon">
                             <use href="./assets/img/sprite.svg#icon_close"></use>
                         </svg>
@@ -641,6 +641,9 @@ export default class UserProfile {
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
         }
+
+        const willWatchPageCount = document.querySelector('.profile--will-watch-count') as HTMLElement;
+        willWatchPageCount.textContent = `Моё (${userInfoWillWatch.total})`;
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -706,6 +709,24 @@ export default class UserProfile {
         if (target.closest('.profile--will-watch')) {
             event.preventDefault();
             this.renderWillWatch();
+        }
+
+        if (target.closest('.profile__will-watch-card-delete')) {
+            event.preventDefault();
+            const delButton = target.closest('.profile__will-watch-card-delete') as HTMLButtonElement;
+            const id = delButton.dataset.id as string;
+
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+            const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
+            newUserInfo.willWatch = {
+                items: newWillWatchList,
+                total: newWillWatchList.length,
+            };
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            await this.renderWillWatch();
         }
     }
 
