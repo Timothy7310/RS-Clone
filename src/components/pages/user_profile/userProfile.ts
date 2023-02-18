@@ -31,7 +31,6 @@ export default class UserProfile {
     draw(): HTMLElement {
         this.container.classList.add('user-profile');
         this.container.innerHTML = userProfileTemplate;
-        this.renderPage();
         this.renderLastPage();
         return this.container;
     }
@@ -40,31 +39,66 @@ export default class UserProfile {
         this.page.clear();
     }
 
-    renderLastPage() {
+    async renderLastPage() {
         const page = localStorage.getItem('profilePage');
 
         switch (page) {
             case 'settings':
-                this.renderSettings();
+                await this.renderPage();
+                await this.renderSettings();
                 break;
             case 'watched':
-                this.renderWatched();
+                await this.renderPage();
+                await this.renderWatched();
                 break;
             case 'reviews':
-                this.renderReviews();
+                await this.renderPage();
+                await this.renderReviews();
                 break;
             case 'willWatch':
-                this.renderWillWatch();
+                await this.renderPage();
+                await this.renderWillWatch();
                 break;
             default:
-                this.renderSettings();
+                await this.renderPage();
+                await this.renderSettings();
                 break;
         }
     }
 
     async renderPage() {
         const res = await this.firebaseStore.getCurrentUser();
-        const userInfo = res[0];
+        const userInfo = res[0] as UserType;
+        const moviesTypes = {
+            movie: 0,
+            tvShows: 0,
+            shortMovie: 0,
+        };
+        const moviesList = userInfo.watched.items.map((x) => x.filmID)
+            .map(async (id) => {
+                const repsonse = await this.controllerKP.searchMovie(id, 'id');
+                return repsonse;
+            });
+        await Promise.all(moviesList).then((response) => {
+            response.forEach((item) => {
+                if (item.type === 'movie') {
+                    moviesTypes.movie += 1;
+                }
+                if (item.type === 'tv-series') {
+                    moviesTypes.tvShows += 1;
+                }
+                if (item.type === 'movie' && item.movieLength <= 50) {
+                    moviesTypes.shortMovie += 1;
+                }
+            });
+        });
+
+        const watchedList = userInfo.watched.items;
+        console.log(watchedList.reduce((acc, x) => acc + (x.score ?? 0), 0), watchedList.length);
+
+        const average = (watchedList.reduce((acc, x) => acc + (+(x?.score as number) ?? 0), 0)
+                        / watchedList.length) || 0;
+
         const result = `
             <section class="profile">
                 <div class="container display-flex">
@@ -140,20 +174,20 @@ export default class UserProfile {
                         <h3 class="profile__title-activity">Ваша активность:</h3>
                         <h4 class="profile__category-activity">вы просмотрели:</h4>
                         <p class="profile__item-activity">
-                            фильмы <span class="count-movies count">${userInfo.watched.total}</span>
+                            фильмы <span class="count-movies count">${moviesTypes.movie}</span>
                         </p>
                         <p class="profile__item-activity">
-                            сериалы <span class="count-serials count">15</span>
+                            сериалы <span class="count-serials count">${moviesTypes.tvShows}</span>
                         </p>
                         <p class="profile__item-activity">
-                            короткометражки <span class="count-short-movies count">10</span>
+                            короткометражки <span class="count-short-movies count">${moviesTypes.shortMovie}</span>
                         </p>
                         <h4 class="profile__category-activity">вы написали:</h4>
                         <p class="profile__item-activity">рецензий
                             <span class="count-review count">${userInfo.reviews.total}</span>
                         </p>
                         <h4 class="profile__category-activity">ваша средняя оценка:</h4>
-                        <p class="profile__item-activity count">7.88</p>
+                        <p class="profile__item-activity profile__item-activity--average-score count">${average.toFixed(2)}</p>
                     </div>
                 </div>
             </section>
@@ -214,7 +248,7 @@ export default class UserProfile {
     async renderWatched() {
         const res = await this.firebaseStore.getCurrentUser();
         const userInfoWatched: WatchedType = res[0].watched;
-        console.log(userInfoWatched);
+
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
         const activeClass = 'profile-page--active';
@@ -347,7 +381,6 @@ export default class UserProfile {
                     </div>
                 `;
                 watchedListDOM.prepend(elem);
-                console.log(movie);
             });
 
             const paginations = document.querySelectorAll('.movies__pagination');
@@ -758,6 +791,9 @@ export default class UserProfile {
             };
             await this.firebaseStore.updateUserInfo(newUserInfo);
             await this.renderReviews();
+            const reviewsDOM = document.querySelector('.count-review') as HTMLElement;
+            const reviewsCount = newReviewsList.length;
+            reviewsDOM.textContent = `${reviewsCount}`;
         }
 
         if (target.classList.contains('profile__review-btn--change-move-score')) {
@@ -806,6 +842,11 @@ export default class UserProfile {
             changeBtn.disabled = false;
             target.classList.add('profile-change-score--hidden');
             target.disabled = true;
+
+            const newAvr = (newWatchedList.reduce((acc, x) => acc + (+(x?.score as number) ?? 0), 0)
+            / newWatchedList.length) || 0;
+            const averageDOM = document.querySelector('.profile__item-activity--average-score') as HTMLElement;
+            averageDOM.textContent = `${newAvr}`;
         }
     }
 
