@@ -46,7 +46,6 @@ class ControllerKP {
         return review;
     }
 
-
     async searchReviewCount(value: string, field: string, count: string) {
         const response = await fetch(`${this.reviewURL}&search=${value}&field=${field}&limit=${count}`);
         const review = await response.json();

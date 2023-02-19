@@ -549,6 +549,10 @@ export default class UserProfile {
         const userInfoWillWatch: WillWatchType = res[0].willWatch;
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
+        const testID = userInfoWillWatch.items[1].filmID;
+        const test = await this.controllerKP.searchMovie(testID, 'id');
+        console.log(test);
+
         const activeClass = 'profile-page--active';
         const allNavButtons = document.querySelectorAll('.profile__link-page');
         const willWatchButton = document.querySelector('.profile--will-watch');

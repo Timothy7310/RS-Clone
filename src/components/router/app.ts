@@ -7,6 +7,7 @@ import logInHeader from '../templates/log-in-header';
 import notLogInHeader from '../templates/not-log-in-header';
 import FirebaseAuthUser from '../server/firebaseAuthUser';
 import FirebaseStore from '../server/firebaseStore';
+import MoviesTop from '../pages/movies/movies';
 
 const rootElement = document.querySelector('#content');
 
@@ -23,6 +24,8 @@ export default class App {
 
     firebaseStore;
 
+    moviesTop;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
@@ -32,6 +35,7 @@ export default class App {
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
+        this.moviesTop = new MoviesTop();
     }
 
     start() {
@@ -68,6 +72,7 @@ export default class App {
             this.cinema.cinemaEvent(target);
             this.login.loginEvent(target, e);
             this.userProfile.userProfileEvent(e);
+            this.moviesTop.moviesEvent(e);
         });
 
         bodyDOM.addEventListener('change', (e) => {
