@@ -1,3 +1,5 @@
+import { Top250PageData } from '../templates/movie/typesMovie';
+
 class ControllerKP {
     token;
 
@@ -29,6 +31,18 @@ class ControllerKP {
         return movies;
     }
 
+    async getMoviesTop250(page: number, limit = 10): Promise<Top250PageData | null> {
+        try {
+            const response = await fetch(`${this.movieURL}&field=top250&search=!null&sortField=top250&field=type&search=movie&movies&page=${page}&limit=${limit}&selectFields=id name top250 type`);
+            const movies = await response.json();
+            return movies;
+        } catch (e) {
+            console.log(e);
+            alert('Something wrong with getting top 250');
+            return null;
+        }
+    }
+
     async searchMovie(value: string, field: string) {
         const response = (await fetch(`${this.movieURL}&search=${value}&field=${field}`)).json();
         return response;
@@ -45,7 +59,6 @@ class ControllerKP {
         const review = await response.json();
         return review;
     }
-
 
     async searchReviewCount(value: string, field: string, count: string) {
         const response = await fetch(`${this.reviewURL}&search=${value}&field=${field}&limit=${count}`);
