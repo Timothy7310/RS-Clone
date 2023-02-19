@@ -14,7 +14,7 @@ const movieCard = (movie: TMovie): string => `
             <h3 class="movies__card-name">${movie.name}</h3>
             <div class="movies__card-rate rate--good">${movie.rating.kp.toFixed(1)}</div>
         </a>
-        <span class="movies__card-name-original">${movie.alternativeName}, ${movie.year}</span>
+        <span class="movies__card-name-original">${movie.countries.map((x: { name: string; }) => x.name).slice(0, 2).join(', ')}, ${movie.year}</span>
         <span class="movies__card-genres">${movie.genres.map((x: { name: string; }) => x.name).join(', ')}</span>
         <div class="movies__card-cast">
             <span class="movies__card-cast-text">В главных ролях:</span>
