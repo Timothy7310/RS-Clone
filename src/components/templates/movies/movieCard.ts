@@ -12,6 +12,7 @@ const movieCard = (movie: TMovie): string => `
     <div class="movies__card-text">
         <a href="#/movie/${movie.id}">
             <h3 class="movies__card-name">${movie.name}</h3>
+            <div class="movies__card-rate rate--good">${movie.rating.kp.toFixed(1)}</div>
         </a>
         <span class="movies__card-name-original">${movie.alternativeName}, ${movie.year}</span>
         <span class="movies__card-genres">${movie.genres.map((x: { name: string; }) => x.name).join(', ')}</span>
@@ -27,8 +28,10 @@ const movieCard = (movie: TMovie): string => `
 </div>
 <div class="movies__card-second-info">
     <div class="movies__card-rates">
+    <div>
         <span class="movies__card-rates-num rate-num--good">${movie.rating.kp.toFixed(1)}</span>
         <span class="movies__card-rates-count">${movie.votes.kp}оценок</span>
+    </div>
         <ul class="movies__card-rates-stars">
             <li class="movies__card-rates-star">
                 <svg class="movies__card-rates-star-icon movies__card-rates-star-icon--active">
@@ -81,6 +84,9 @@ const movieCard = (movie: TMovie): string => `
                 </svg>
             </li>
         </ul>
+        <svg class="movies__card-rates-will-tablet">
+            <use href="./assets/img/sprite.svg#icon_add_watch"></use>
+        </svg>
         <button class="movies__card-rates-will-watch">
             <svg class="movies__card-rates-will-watch-icon">
                 <use href="./assets/img/sprite.svg#icon_add_watch"></use>
@@ -90,7 +96,7 @@ const movieCard = (movie: TMovie): string => `
     </div>
     <div class="movies__card-watch">
         <div class="movies__card-watch-block">
-            <span class="movies__card-watch-block-title">Посмотреть в кинотеатре:</span>
+            <span class="movies__card-watch-block-title">Посмотреть в кинотеатре</span>
             <button class="movies__card-watch-block-btn movies__card-watch-block-btn--offline" disabled="">
                 <svg class="movies__card-watch-block-btn-icon">
                     <use href="./assets/img/sprite.svg#icon_tickets"></use>
@@ -99,7 +105,7 @@ const movieCard = (movie: TMovie): string => `
             </button>
         </div>
         <div class="movies__card-watch-block">
-            <span class="movies__card-watch-block-title">Посмотреть online:</span>
+            <span class="movies__card-watch-block-title">Посмотреть online</span>
             <button class="movies__card-watch-block-btn movies__card-watch-block-btn--online">
                 <span class="movies__card-watch-block-btn-text">Посмотреть</span>
             </button>

@@ -20,7 +20,7 @@ function checkTrailer(trailer: TTrailer[]) {
         const youtube = getYoutubeTrailers(trailer);
         return `
         <div class="basic__column_content_trailer">
-            <iframe width="302" height="170" src=${newUrl(youtube[0].url)} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe class="basic__column_content_trailer_size" src=${newUrl(youtube[0].url)} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
         <div class="basic__column_content_title">
             ${youtube[0].name}

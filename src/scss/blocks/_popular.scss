@@ -17,15 +17,25 @@
         align-items: start;
         padding: 40px;
         z-index: 4;
+        @include media-mobile-520{
+            padding: 20px;
+            width: 85%;
+        }
     }
     &__story{
         margin: 0px;
     }
     &__cast{
         margin: 0px;
+        @include media-tablet{
+            display: none;
+        }
     }
     &__directors{
         margin: 0px;
+        @include media-tablet{
+            display: none;
+        }
     }
     &__btn{
         background: var(--main-bg);
@@ -49,6 +59,12 @@
         &:hover{
             transform: scale(1.05);
         }
+        @include media-tablet{
+            padding: 10px 25px;
+        }
+        @include media-mobile{
+            padding: 8px 15px;
+        }
     }
     &__bg{
         position: absolute;
@@ -61,6 +77,9 @@
         &-container{
             position: relative;
             width: 100%;
+            @include media-mobile{
+                display: none;
+            }
         }
         &-back{
             height: 100%;

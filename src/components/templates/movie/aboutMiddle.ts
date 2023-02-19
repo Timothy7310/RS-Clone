@@ -1,14 +1,17 @@
 import GenerateTables from './generateTables';
 import { TMovie } from './typesMovie';
 
-const test = new GenerateTables();
+const informationTable = new GenerateTables();
 
 const aboutMiddle = (movie: TMovie): string => `
 <div class="about__middle">
     <div class="about__middle_movie">
         <h3 class="about__middle_movie_title">О фильме</h3>
         <div class="about__middle_movie_table">
-            ${test.getMovieTable(movie)}
+            ${informationTable.getMovieTable(movie)}
+        </div>
+        <div class="about__middle_movie_alternative">
+            ${informationTable.getAlternativeTable(movie)}
         </div>
     </div>
     <div class="about__middle_actors">
@@ -21,9 +24,9 @@ const aboutMiddle = (movie: TMovie): string => `
                     </svg>
                 </h4>
                 <ul class="about__middle_actors_roles_main_content">
-                    ${test.getActors(movie.persons)}
+                    ${informationTable.getActors(movie.persons)}
                 </ul>
-                <a href="#" class="about__middle_actors_roles_main_count">${test.getCountActors(movie.persons)} актеров</a>
+                <a href="#" class="about__middle_actors_roles_main_count">${informationTable.getCountActors(movie.persons)} актеров</a>
             </div>
             <div class="about__middle_actors_roles_main">
                 <h4 class="about__middle_actors_roles_main_title">
@@ -33,9 +36,9 @@ const aboutMiddle = (movie: TMovie): string => `
                     </svg>
                 </h4>
                 <ul class="about__middle_actors_roles_main_content">
-                    ${test.getVoiceActors(movie.persons)}
+                    ${informationTable.getVoiceActors(movie.persons)}
                 </ul>
-                <a href="#" class="about__middle_actors_roles_main_count">${test.getCountVoiceActors(movie.persons)} актеров</a>
+                <a href="#" class="about__middle_actors_roles_main_count">${informationTable.getCountVoiceActors(movie.persons)} актеров</a>
             </div>
         </div>
     </div>

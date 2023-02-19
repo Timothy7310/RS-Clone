@@ -80,6 +80,9 @@
                 }
             }
         }
+        @include media-tablet-850{
+            display: none;
+        }
     }
     &__slide{
         display: flex;

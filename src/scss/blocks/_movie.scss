@@ -1,4 +1,11 @@
 .delimiter{
     flex: 0 0 30px;
     width: 30px;
+    @include media-desktop{
+        flex: 0 0 20px;
+        width: 20px;
+    }
+    @include media-mobile-520{
+        display: none;
+    }
 }

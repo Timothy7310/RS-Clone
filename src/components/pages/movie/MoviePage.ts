@@ -1,5 +1,7 @@
 import Page from '../Page';
+import Actors from './section/actors';
 import Basic from './section/basic';
+import Creators from './section/creators';
 import Description from './section/description';
 import Facts from './section/facts';
 import Prequels from './section/prequels';
@@ -30,6 +32,10 @@ export default class Movie {
 
     id?: string;
 
+    actors: Actors;
+
+    creators: Creators;
+
     constructor(path?: string, id?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -41,11 +47,15 @@ export default class Movie {
         this.facts = new Facts();
         this.reviews = new Reviews();
         this.id = id;
+        this.actors = new Actors();
+        this.creators = new Creators();
     }
 
     draw(): HTMLElement {
         if (this.id !== undefined) {
             this.basic.draw(this.container, this.id);
+            this.actors.draw(this.container, this.id);
+            this.creators.draw(this.container, this.id);
             this.prequels.draw(this.container, this.id);
             this.description.draw(this.container, this.id);
             this.rating.draw(this.container, this.id);
