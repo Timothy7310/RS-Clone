@@ -149,6 +149,36 @@ type MovieType = {
     lists: []
 };
 
+type WatchedType = {
+    total: number,
+    items: [
+        {
+            date: string,
+            filmID: string,
+            score: null | number,
+        },
+    ]
+};
+
+type ReviewsType = {
+    total: number,
+    items: [{
+        date: string,
+        filmID: string,
+        score: null | number,
+        text: string,
+        title: string,
+    }],
+};
+
+type WillWatchType = {
+    total: number,
+    items: [{
+        date: string,
+        filmID: string,
+    }],
+};
+
 type UserType = {
     avatar: string,
     country: string,
@@ -158,20 +188,21 @@ type UserType = {
     lastName: string,
     nickname: string,
     id: string,
-    reviews: {
-        total: number,
-        items: [{
-            date: string,
-            filmID: string,
-            score: null | number,
-            text: string,
-            title: string,
-        }],
-    },
-    watched: number,
-    willWatch: number,
+    city: string,
+    reviews: ReviewsType,
+    watched: WatchedType,
+    willWatch: WillWatchType,
 };
 
 export {
-    Countries, Genres, Premieres, BoxOffice, FeesType, MovieType, UserType,
+    Countries,
+    Genres,
+    Premieres,
+    BoxOffice,
+    FeesType,
+    MovieType,
+    UserType,
+    WatchedType,
+    ReviewsType,
+    WillWatchType,
 };

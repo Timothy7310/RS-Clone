@@ -8,7 +8,8 @@ const userBlank: UserType = {
     firstName: '',
     lastName: '',
     nickname: '',
-    id: '',
+    city: '',
+    id: localStorage.getItem('userID') || '',
     reviews: {
         total: 0,
         items: [{
@@ -19,8 +20,25 @@ const userBlank: UserType = {
             title: '',
         }],
     },
-    watched: 0,
-    willWatch: 0,
+    watched: {
+        total: 0,
+        items: [
+            {
+                date: '',
+                filmID: '',
+                score: null,
+            },
+        ],
+    },
+    willWatch: {
+        total: 0,
+        items: [
+            {
+                date: '',
+                filmID: '',
+            },
+        ],
+    },
 };
 
 export default userBlank;

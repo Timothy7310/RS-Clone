@@ -43,6 +43,9 @@
         display: inline-flex;
         gap: 5px;
         align-items: center;
+        &--hidden{
+            display: none;
+        }
         &--top{
             margin-bottom: 30px;
         }
@@ -426,4 +429,12 @@
             grid-template-columns: 1fr 0fr;
         }
     }
+}
+
+.profile__score-list-warning-text{
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: bold;
+    display: block;
+    margin: 20px 0px;
 }

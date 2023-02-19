@@ -3,8 +3,9 @@ import Main from '../pages/main/Main';
 import Movie from '../pages/movie/MoviePage';
 import MoviesPage from '../pages/movies/MoviesPage';
 import Page from '../pages/Page';
-import UserProfile from '../pages/user_profile/user_profile';
+import UserProfile from '../pages/user_profile/userProfile';
 import Seances from '../pages/session/Seances';
+import Login from '../pages/login/Login';
 
 export interface IPath {
     path: string;
@@ -20,6 +21,7 @@ export const enum PagePaths {
     cinemaSeancesPage = '#/cinema/seances',
     ticketsPage = 'cinema/tickets',
     userProfilePage = '#/profile',
+    loginPage = '#/login',
 }
 
 export const Paths = [
@@ -50,5 +52,9 @@ export const Paths = [
     {
         path: PagePaths.cinemaSeancesPage,
         getPage: (path?: string) => new Seances(path),
+    },
+    {
+        path: PagePaths.loginPage,
+        getPage: (path?: string) => new Login(path),
     },
 ];
