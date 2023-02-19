@@ -143,7 +143,7 @@ export default class Main {
                 result += `
                 <li class="cash__card-item">
                         <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
-                            <img src="${movie.poster.previewUrl}" alt="" class="cash__card-item-poster">
+                            <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
                         </a>
                     <div class="cash__card-item-info">
                             <div class="cash__card-item-info-head">

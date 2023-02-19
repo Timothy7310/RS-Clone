@@ -12,6 +12,8 @@ import {
 } from '../../templates/movies/movies';
 // import ticketsTemplate from '../../templates/tickets';
 import Component from '../Component';
+import FirebaseStore from '../../server/firebaseStore';
+import { UserType } from '../../types/types';
 
 export default class MoviesTop {
     component: Component;
@@ -20,10 +22,13 @@ export default class MoviesTop {
 
     controller: ControllerKP;
 
+    firebaseStore;
+
     constructor() {
         this.component = new Component('section', 'movies');
         this.container = this.component.draw();
         this.controller = new ControllerKP();
+        this.firebaseStore = new FirebaseStore();
     }
 
     draw(parentContainer: HTMLElement): void {

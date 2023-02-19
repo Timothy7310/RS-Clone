@@ -304,7 +304,7 @@
                 background: rgba(#000000, 0.05);
                 cursor: pointer;
                 color: var(--color-black);
-                transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+                transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
                 &-icon{
                     width: 20px;
                     height: 20px;
@@ -312,10 +312,23 @@
                     transition: fill 0.3s ease-in-out;
                 }
                 &:hover{
+                    color: var(--color-accent);
+                    // background-color: var(--color-accent);
+                    & .movies__card-rates-will-watch-icon{
+                        fill: var(--color-accent);
+                    }
+                }
+                &--active{
                     color: var(--color-white);
-                    background: var(--color-accent);
+                    background-color: var(--color-accent);
                     & .movies__card-rates-will-watch-icon{
                         fill: var(--color-white);
+                    }
+                    &:hover{
+                        color: var(--color-white);
+                        & .movies__card-rates-will-watch-icon{
+                            fill: var(--color-white);
+                        }
                     }
                 }
                 @include media-tablet-850{
