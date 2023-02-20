@@ -121,10 +121,10 @@ export default class MoviesTop {
         return button;
     }
 
-    drawPage(movies: TMovie[], pageData: Top250PageData) {
+    drawPage(movies: TMovie[], pageData: Top250PageData, id: number) {
         this.clearContainer();
 
-        const mainHeader = this.mainHeader();
+        const mainHeader = this.mainHeader(id);
         const paginationHeaderNumbers = this.createPagination(pageData);
         const paginationFooterNumbers = this.createPagination(pageData);
         const header = generateHeader(pageData.total);
@@ -138,15 +138,17 @@ export default class MoviesTop {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    mainHeader() {
+    mainHeader(id: number) {
         return `                
         <div class="movies__head">
         <h2 class="movies__title">
             Фильмы
         </h2>
-        <button class="movies__random">
-            Показать случайный фильм
-        </button>
+        <a href=#/movie/${id} id="random">
+            <button class="movies__random">
+                Показать случайный фильм
+            </button>
+        </a>
     </div>`;
     }
 
@@ -172,9 +174,16 @@ export default class MoviesTop {
 
     async changePage(page = 1): Promise<void> {
         const pageData = await this.controller.getMoviesTop250(page);
+        const id = await this.getRandomeId();
         if (pageData) {
             const movies = await this.getMoviesFromPageData(pageData.docs);
-            this.drawPage(movies, pageData);
+            this.drawPage(movies, pageData, id);
         }
+    }
+
+    async getRandomeId() {
+        const randomMovie = await this.controller.getRandom();
+        const randomMovieId = randomMovie.id;
+        return randomMovieId;
     }
 }
