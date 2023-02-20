@@ -18,6 +18,7 @@ export default class MoviesPage {
 
     draw(): HTMLElement {
         this.movies.draw(this.container);
+        this.movies.changePage(1);
         return this.container;
     }
 

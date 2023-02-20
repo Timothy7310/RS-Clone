@@ -1,123 +1,72 @@
 import { TMovie } from '../movie/typesMovie';
 import movieCard from './movieCard';
 
-const moviesTemplates = (movie: TMovie[]): string => `
-    <section class="movies">
-        <div class="container">
-            <div class="movies__wrap">
-                <div class="movies__head">
-                    <h2 class="movies__title">
-                        Фильмы
-                    </h2>
-                    <button class="movies__random">
-                        Показать случайный фильм
-                    </button>
-                </div>
-                <span class="movies__count">Найдено (250)</span>
-                <div class="movies__pagination movies__pagination--top">
-                    <button class="movies__pagination-btn movies__pagination-btn--first" disabled="">
-                        <div class="movies__pagination-btn-icon-wrap">
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                        </div>
-                    </button>
-                    <button class="movies__pagination-btn movies__pagination-btn--prev" disabled="">
-                        <svg class="movies__pagination-btn-icon">
-                            <use href="./assets/img/sprite.svg#icon_back"></use>
-                        </svg>
-                    </button>
-                    <ul class="movies__pagination-list">
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn movies__pagination-btn--active">1</button>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn">2</button>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn">3</button>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <span class="movies__pagination-item-dots">...</span>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn">10</button>
-                        </li>
-                    </ul>
-                    <button class="movies__pagination-btn movies__pagination-btn--next">
-                        <svg class="movies__pagination-btn-icon">
-                            <use href="./assets/img/sprite.svg#icon_back"></use>
-                        </svg>
-                    </button>
-                    <button class="movies__pagination-btn movies__pagination-btn--last">
-                        <div class="movies__pagination-btn-icon-wrap">
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                        </div>
-                    </button>
-                </div>
-                <ul class="movies__list">
-                    ${movie.map((item: TMovie) => movieCard(item)).join('')}
-                </ul>
-                <div class="movies__pagination movies__pagination--bottom">
-                    <button class="movies__pagination-btn movies__pagination-btn--first" disabled="">
-                        <div class="movies__pagination-btn-icon-wrap">
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                        </div>
-                    </button>
-                    <button class="movies__pagination-btn movies__pagination-btn--prev" disabled="">
-                        <svg class="movies__pagination-btn-icon">
-                            <use href="./assets/img/sprite.svg#icon_back"></use>
-                        </svg>
-                    </button>
-                    <ul class="movies__pagination-list">
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn movies__pagination-btn--active">1</button>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn">2</button>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn">3</button>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <span class="movies__pagination-item-dots">...</span>
-                        </li>
-                        <li class="movies__pagination-item">
-                            <button class="movies__pagination-btn">10</button>
-                        </li>
-                    </ul>
-                    <button class="movies__pagination-btn movies__pagination-btn--next">
-                        <svg class="movies__pagination-btn-icon">
-                            <use href="./assets/img/sprite.svg#icon_back"></use>
-                        </svg>
-                    </button>
-                    <button class="movies__pagination-btn movies__pagination-btn--last">
-                        <div class="movies__pagination-btn-icon-wrap">
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                            <svg class="movies__pagination-btn-icon">
-                                <use href="./assets/img/sprite.svg#icon_back"></use>
-                            </svg>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+export function generateHeader(count: number): HTMLSpanElement {
+    const span = document.createElement('span');
+    span.classList.add('movies__count');
+    span.textContent = `Найдено (${count})`;
+    return span;
+}
+
+export function generateBody(movies: TMovie[]) {
+    const list = document.createElement('ul');
+    list.insertAdjacentHTML(
+        'afterbegin',
+        movies.map((item: TMovie) => movieCard(item)).join(''),
+    );
+    list.classList.add('movies__list');
+
+    return list;
+}
+
+export function prepareLine(page: number, total: number): number[] {
+    const set = new Set([page - 1, page, page + 1].filter((x) => x > 0 && x <= total));
+    set.add(1);
+    set.add(total);
+    if (page === 1) {
+        set.add(3);
+    } else if (page === total) {
+        set.add(page - 2);
+    }
+
+    return Array.from(set).sort((a, b) => a - b).reduce((acc: number[], x: number) => {
+        if (acc.length && x !== acc[acc.length - 1] + 1) {
+            acc.push(0);
+        }
+        acc.push(x);
+        return acc;
+    }, []);
+}
+
+export function getDotsItem(): HTMLSpanElement {
+    const span = document.createElement('span');
+    span.classList.add('movies__pagination-item-dots');
+    span.textContent = '...';
+    return span;
+}
+
+export const PREV_PAGE = `
+    <svg class="movies__pagination-btn-icon">
+        <use href="./assets/img/sprite.svg#icon_back"></use>
+    </svg>
 `;
 
-export default moviesTemplates;
+export const FIRST_PAGE = `
+    <div class="movies__pagination-btn-icon-wrap">
+        ${PREV_PAGE}
+        ${PREV_PAGE}
+    </div>
+`;
+
+export const NEXT_PAGE = `
+    <svg class="movies__pagination-btn-icon">
+        <use href="./assets/img/sprite.svg#icon_back"></use>
+    </svg>
+`;
+
+export const LAST_PAGE = `
+    <div class="movies__pagination-btn-icon-wrap">
+        ${NEXT_PAGE}
+        ${NEXT_PAGE}
+    </div>
+`;
