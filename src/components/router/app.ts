@@ -38,7 +38,6 @@ export default class App {
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
-
     }
 
     start() {

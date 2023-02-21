@@ -28,6 +28,47 @@ type BoxOffice = {
     name: string,
     symbol: string
 };
+
+type TrailersType = {
+    _id: string,
+    url: string,
+    name: string,
+    site: string,
+    size: number,
+    type: string
+};
+
+type ProductionCompaniesType = {
+    name: string,
+    url: string,
+    previewUrl: string
+};
+
+type SpokenLanguagesType = {
+    name: string,
+    nameEn: string
+};
+
+type FactsType = {
+    value: string
+};
+
+type GenresType = {
+    name: string
+};
+
+type CountriesType = {
+    name: string
+};
+
+type PersonsType = {
+    id: number,
+    name: string,
+    enName: string,
+    photo: string,
+    enProfession: string
+};
+
 // TODO: разбить на несколько типов
 type MovieType = {
     kinopoiskId: number;
@@ -60,16 +101,7 @@ type MovieType = {
         imdb: number
     },
     videos: {
-        trailers: [
-            {
-                _id: string,
-                url: string,
-                name: string,
-                site: string,
-                size: number,
-                type: string
-            },
-        ],
+        trailers: TrailersType[],
         teasers: []
     },
     budget: {
@@ -108,45 +140,41 @@ type MovieType = {
     },
     status: string,
     movieLength: number,
-    productionCompanies: [
-        {
-            name: string,
-            url: string,
-            previewUrl: string
-        },
-    ],
-    spokenLanguages: [
-        {
-            name: string,
-            nameEn: string
-        },
-    ],
-    facts: [
-        {
-            value: string
-        },
-    ],
-    genres: [
-        {
-            name: string
-        },
-    ],
-    countries: [
-        {
-            name: string
-        },
-    ],
+    productionCompanies: ProductionCompaniesType[],
+    spokenLanguages: SpokenLanguagesType[],
+    facts: FactsType[],
+    genres: GenresType[],
+    countries: CountriesType[],
     seasonsInfo: [],
-    persons: [
-        {
-            id: number,
-            name: string,
-            enName: string,
-            photo: string,
-            enProfession: string
-        },
-    ],
+    persons: PersonsType[],
     lists: []
+};
+
+type ImageType = {
+    height: null | number,
+    id: string,
+    language: null,
+    movieId: 426,
+    previewUrl: string,
+    type: string,
+    url: string,
+    width: null | number,
+};
+
+type ImagesType = {
+    docs: ImageType[],
+    limit: 10,
+    page: 1,
+    pages: 16,
+    total: 155,
+};
+
+type MovieTestType = {
+    docs: MovieType[],
+    limit: number,
+    page: number,
+    pages: number,
+    total: number,
 };
 
 type WatchedType = {
@@ -205,4 +233,6 @@ export {
     WatchedType,
     ReviewsType,
     WillWatchType,
+    MovieTestType,
+    ImagesType,
 };

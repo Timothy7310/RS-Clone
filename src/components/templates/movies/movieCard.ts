@@ -7,7 +7,7 @@ const movieCard = (movie: TMovie): string => `
 <li class="movies__card">
 <div class="movies__card-first-info">
     <a href="#/movie/${movie.id}">
-        <img class="movies__card-poster" src=${movie.poster.previewUrl} alt="">
+        <img class="movies__card-poster" src=${movie.poster?.previewUrl || movie.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'} alt="">
     </a>
     <div class="movies__card-text">
         <a href="#/movie/${movie.id}">
