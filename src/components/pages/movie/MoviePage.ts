@@ -6,6 +6,7 @@ import Prequels from './section/prequels';
 import Rating from './section/raiting';
 import Reviews from './section/reviews';
 import Trailers from './section/trailers';
+import UserProfile from '../user_profile/userProfile';
 
 export default class Movie {
     page: Page;
@@ -30,6 +31,8 @@ export default class Movie {
 
     id?: string;
 
+    userProfile;
+
     constructor(path?: string, id?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -41,6 +44,7 @@ export default class Movie {
         this.facts = new Facts();
         this.reviews = new Reviews();
         this.id = id;
+        this.userProfile = new UserProfile();
     }
 
     draw(): HTMLElement {

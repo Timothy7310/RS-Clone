@@ -876,4 +876,35 @@ export default class UserProfile {
         const userInfoWillWatch: WillWatchType = res[0].willWatch;
         return userInfoWillWatch.items.map((x) => x.filmID);
     }
+
+    async saveWillWatch(target: HTMLButtonElement, targetClass: string, activeClass: string) {
+        const btn = target.closest(targetClass) as HTMLButtonElement;
+        const id = btn.dataset.id as string;
+
+        btn.disabled = true;
+        btn.classList.toggle(activeClass);
+        const response = await this.firebaseStore.getCurrentUser();
+        const userInfo = response[0];
+        const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+
+        const userWillWatchList = await this.getWillWatchList();
+        if (userWillWatchList.includes(id)) {
+            const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
+            newUserInfo.willWatch.items = newWillWatchList;
+            newUserInfo.willWatch.total = newWillWatchList.length;
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            btn.disabled = false;
+            return;
+        }
+
+        const newWillWatchFilm = {
+            date: `${new Date().getTime()}`,
+            filmID: id,
+        };
+        newUserInfo.willWatch.items.push(newWillWatchFilm);
+        newUserInfo.willWatch.total = newUserInfo.willWatch.items.length;
+
+        await this.firebaseStore.updateUserInfo(newUserInfo);
+        btn.disabled = false;
+    }
 }

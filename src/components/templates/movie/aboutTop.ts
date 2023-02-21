@@ -1,4 +1,8 @@
 import { TMovie } from './typesMovie';
+import UserProfile from '../../pages/user_profile/userProfile';
+
+const userProfile = new UserProfile();
+const userWillWatchList = await userProfile.getWillWatchList();
 
 const aboutTop = (movie: TMovie): string => ` 
 <div class="about__top">
@@ -7,7 +11,7 @@ const aboutTop = (movie: TMovie): string => `
             <h1 class="about__top_name_titles_title">${movie.name}</h1>
             <div class="about__top_name_titles_alternative">${movie.alternativeName ?? ''}</div>
         </div>
-        <button class="movies__card-rates-will-watch">
+        <button class="movies__card-rates-will-watch ${userWillWatchList.includes(`${movie.id}`) ? 'movies__card-rates-will-watch--active' : ''}"" data-id="${movie.id}">
             <svg class="movies__card-rates-will-watch-icon">
                 <use href="./assets/img/sprite.svg#icon_add_watch"></use>
             </svg>

@@ -3,7 +3,6 @@ import { TMovie } from '../../templates/movie/typesMovie';
 import moviesTemplates from '../../templates/movies/movies';
 import Component from '../Component';
 import FirebaseStore from '../../server/firebaseStore';
-import { UserType } from '../../types/types';
 import UserProfile from '../user_profile/userProfile';
 
 export default class MoviesTop {
@@ -39,34 +38,7 @@ export default class MoviesTop {
         const target = event.target as HTMLButtonElement;
 
         if (target.closest('.movies__card-rates-will-watch')) {
-            const btn = target.closest('.movies__card-rates-will-watch') as HTMLButtonElement;
-            const id = btn.dataset.id as string;
-            btn.disabled = true;
-            btn.classList.toggle('movies__card-rates-will-watch--active');
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
-            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
-
-            const userWillWatchList = await this.userProfile.getWillWatchList();
-            if (userWillWatchList.includes(id)) {
-                console.log(newUserInfo.willWatch);
-                const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
-                newUserInfo.willWatch.items = newWillWatchList;
-                newUserInfo.willWatch.total = newWillWatchList.length;
-                await this.firebaseStore.updateUserInfo(newUserInfo);
-                btn.disabled = false;
-                return;
-            }
-
-            const newWillWatchFilm = {
-                date: `${new Date().getTime()}`,
-                filmID: id,
-            };
-            newUserInfo.willWatch.items.push(newWillWatchFilm);
-            newUserInfo.willWatch.total = newUserInfo.willWatch.items.length;
-
-            await this.firebaseStore.updateUserInfo(newUserInfo);
-            btn.disabled = false;
+            this.userProfile.saveWillWatch(target, '.movies__card-rates-will-watch', 'movies__card-rates-will-watch--active');
         }
     }
 }

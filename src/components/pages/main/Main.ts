@@ -7,6 +7,7 @@ import Tickets from './sections/Tickets';
 import { Premieres, MovieType } from '../../types/types';
 import ControllerUnofficialKP from '../../controller/ControllerUnofficialKP';
 import ControllerKP from '../../controller/controllerKP';
+import UserProfile from '../user_profile/userProfile';
 
 export default class Main {
     page: Page;
@@ -27,6 +28,8 @@ export default class Main {
 
     controllerKP;
 
+    userProfile;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -36,6 +39,7 @@ export default class Main {
         this.cash = new Cash();
         this.controllerUnofficialKP = new ControllerUnofficialKP();
         this.controllerKP = new ControllerKP();
+        this.userProfile = new UserProfile();
     }
 
     draw(): HTMLElement {
@@ -78,6 +82,7 @@ export default class Main {
     }
 
     async renderSoonInCinema(count: number) {
+        const userWillWatchList = await this.userProfile.getWillWatchList();
         const movies = await (await this.controllerUnofficialKP.getPremieres())
             .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
@@ -101,7 +106,7 @@ export default class Main {
                         <span class="soon-cinema__item-date-day">${day}</span>
                         <span class="soon-cinema__item-date-mounth">${month}</span>
                     </div>
-                    <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                    <button class="soon-cinema__item-marker ${userWillWatchList.includes(`${movie.kinopoiskId}`) ? 'soon-cinema__item-marker--active' : ''}" aria-label="Добавить в список" data-id="${movie.kinopoiskId}">
                         <svg class="soon-cinema__item-marker-icon">
                             <use href="./assets/img/sprite.svg#icon_add_watch"></use>
                         </svg>
@@ -157,5 +162,13 @@ export default class Main {
             });
             listDOM.innerHTML = result;
         });
+    }
+
+    mainPageEvent(event: Event) {
+        const target = event.target as HTMLButtonElement;
+
+        if (target.closest('.soon-cinema__item-marker')) {
+            this.userProfile.saveWillWatch(target, '.soon-cinema__item-marker', 'soon-cinema__item-marker--active');
+        }
     }
 }
