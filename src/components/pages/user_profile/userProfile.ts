@@ -94,7 +94,6 @@ export default class UserProfile {
         });
 
         const watchedList = userInfo.watched.items;
-        console.log(watchedList.reduce((acc, x) => acc + (x.score ?? 0), 0), watchedList.length);
 
         const average = (watchedList.reduce((acc, x) => acc + (+(x?.score as number) ?? 0), 0)
                         / watchedList.length) || 0;
@@ -549,10 +548,6 @@ export default class UserProfile {
         const userInfoWillWatch: WillWatchType = res[0].willWatch;
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
-        const testID = userInfoWillWatch.items[1].filmID;
-        const test = await this.controllerKP.searchMovie(testID, 'id');
-        console.log(test);
-
         const activeClass = 'profile-page--active';
         const allNavButtons = document.querySelectorAll('.profile__link-page');
         const willWatchButton = document.querySelector('.profile--will-watch');
@@ -874,5 +869,11 @@ export default class UserProfile {
         if (target.closest('.profile__mark-change-input')) {
             target.value = `${Math.max(1, Math.min(10, +target.value))}`;
         }
+    }
+
+    async getWillWatchList() {
+        const res = await this.firebaseStore.getCurrentUser();
+        const userInfoWillWatch: WillWatchType = res[0].willWatch;
+        return userInfoWillWatch.items.map((x) => x.filmID);
     }
 }
