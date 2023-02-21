@@ -1,5 +1,9 @@
 import GenerateTables from '../movie/generateTables';
 import { TMovie } from '../movie/typesMovie';
+import UserProfile from '../../pages/user_profile/userProfile';
+
+const userProfile = new UserProfile();
+const userWillWatchList = await userProfile.getWillWatchList();
 
 const persons = new GenerateTables();
 
@@ -81,7 +85,7 @@ const movieCard = (movie: TMovie): string => `
                 </svg>
             </li>
         </ul>
-        <button class="movies__card-rates-will-watch" data-id="${movie.id}">
+        <button class="movies__card-rates-will-watch ${userWillWatchList.includes(`${movie.id}`) ? 'movies__card-rates-will-watch--active' : ''}" data-id="${movie.id}">
             <svg class="movies__card-rates-will-watch-icon">
                 <use href="./assets/img/sprite.svg#icon_add_watch"></use>
             </svg>
