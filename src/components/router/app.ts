@@ -41,6 +41,7 @@ export default class App {
     start() {
         this.drawContent();
         this.initEvent();
+        this.swapHeader();
     }
 
     drawContent() {
@@ -83,7 +84,7 @@ export default class App {
             this.userProfile.validationMark(e);
         });
 
-        window.addEventListener('popstate', () => {
+        window.addEventListener('popstate', async () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;
             if (isAuth && location.includes('#/login')) {
@@ -93,11 +94,7 @@ export default class App {
             if (!isAuth && location.includes('#/profile')) {
                 window.location.href = '#/404';
             }
-            this.swapHeader();
-        });
-
-        window.addEventListener('load', async () => {
-            this.swapHeader();
+            await this.swapHeader();
         });
     }
 }
