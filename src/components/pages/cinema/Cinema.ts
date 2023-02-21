@@ -135,7 +135,6 @@ export default class Cinema {
             dateArr.push(d.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric' }));
         }
         dateArr = dateArr.map((x) => x.split(', '));
-        console.log(dateArr);
         dateArr.forEach((day) => {
             result += Cinema.calendarDay(day[0], day[1]);
         });

@@ -2,6 +2,63 @@ const notLogInHeader = `
 <h1 class="visually-hidden">RS-Clone Кинопоиск</h1>
 <div class="container">
     <div class="header__wrap">
+
+        <div class="burger__background">
+            <div class="burger__menu">
+                <nav class="burger__menu_navigation">
+                    <svg class="burger__logo-icon">
+                        <use href="./assets/img/sprite.svg#logo"></use>
+                    </svg>
+                    <ul class="burger__menu_navigation_list">
+                        <li class="burger__menu_navigation_list_link">
+                            <a href="#/main" class="burger__menu_navigation_list_link_burger">
+                                <svg class="burger__menu_navigation_list_link_burger-icon">
+                                    <use href="./assets/img/sprite.svg#icon_main"></use>
+                                </svg>
+                                <span class="header__link-text">Главная</span>
+                            </a>
+                        </li>
+                        <li class="burger__menu_navigation_list_link">
+                            <a href="#/movies" class="burger__menu_navigation_list_link_burger">
+                                <svg class="burger__menu_navigation_list_link_burger-icon">
+                                    <use href="./assets/img/sprite.svg#icon_movies"></use>
+                                </svg>
+                                <span class="header__link-text">Фильмы</span>
+                            </a>
+                        </li>
+                        <li class="burger__menu_navigation_list_link">
+                            <a href="#/cinema" class="burger__menu_navigation_list_link_burger">
+                                <svg class="burger__menu_navigation_list_link_burger-icon">
+                                    <use href="./assets/img/sprite.svg#icon_tickets"></use>
+                                </svg>
+                                <span class="header__link-text">Билеты&nbsp;в&nbsp;кино</span>
+                            </a>
+                        </li>
+                        <li class="burger__menu_navigation_list_link_ham">
+                            <a href="#/search" class="burger__menu_navigation_list_link_burger">
+                                <svg class="burger__menu_navigation_list_link_burger-icon">
+                                    <use href="./assets/img/sprite.svg#icon_search"></use>
+                                </svg>
+                                <span class="header__link-text">Поиск</span>
+                            </a>
+                        </li>
+                        <li class="burger__menu_navigation_list_link_ham">
+                            <a href="#/game" class="burger__menu_navigation_list_link_burger">
+                                <svg class="burger__menu_navigation_list_link_burger-icon">
+                                    <use href="./assets/img/sprite.svg#game_logo"></use>
+                                </svg>
+                                <span class="header__link-text">Специальная игра</span>
+                            </a>
+                        </li>
+                        <li class="burger__menu_navigation_list_link_mob">
+                            <a href="#/login" class="burger__menu_navigation_list_link_mob_text">Вход</a>
+                        </li>
+                    </ul>
+                </nav>
+                <span class="close_burger"></span>
+            </div>
+        </div>
+
         <a href="#/main" class="header__logo" aria-label="Главная страница">
             <svg class="header__logo-icon">
                 <use href="assets/img/sprite.svg#logo"></use>
@@ -45,7 +102,7 @@ const notLogInHeader = `
                 </svg>
             </button>
         </form>
-
+        <button class="header__quizz-btn">Игра</button>
         <a href="#/login" class="header__enter-btn" id="log-in">Войти</a>
     </div>
 </div>
