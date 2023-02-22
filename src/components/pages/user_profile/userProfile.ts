@@ -873,7 +873,7 @@ export default class UserProfile {
 
     async getWillWatchList() {
         const res = await this.firebaseStore.getCurrentUser();
-        const userInfoWillWatch: WillWatchType = res[0].willWatch;
+        const userInfoWillWatch: WillWatchType = res[0]?.willWatch ?? { items: [] };
         return userInfoWillWatch.items.map((x) => x.filmID);
     }
 }

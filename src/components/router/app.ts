@@ -48,6 +48,7 @@ export default class App {
         this.drawContent();
         this.initEvent();
         this.burger.listen();
+        this.swapHeader();
     }
 
     drawContent() {
