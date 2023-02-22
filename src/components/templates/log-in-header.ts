@@ -108,14 +108,43 @@ const logInHeader = `
             </ul>
         </nav>
 
-        <form action="" class="header__search-form">
-            <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
-            <button type="submit" class="header__search-btn" aria-label="Найти">
-                <svg class="header__search-btn-icon">
-                    <use href="assets/img/sprite.svg#icon_search"></use>
-                </svg>
-            </button>
-        </form>
+        <div class="header__search-form-wrap">
+            <form action="" class="header__search-form">
+                <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
+                <button type="submit" class="header__search-btn" aria-label="Найти">
+                    <svg class="header__search-btn-icon">
+                        <use href="./assets/img/sprite.svg#icon_search"></use>
+                    </svg>
+                </button>
+            </form>
+            <div class="header__search-results header__search-results--hidden">
+                <span class="header__search-results-text">Результаты поиска:</span>
+                <article class="header__search-result">
+                    <a href="" class="header__search-result-link"></a>
+                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8b9cc726-2309-492a-a099-3163f8ef4693/40x60" class="header__search-result-poster" alt="">
+                    <div class="header__search-result-text-wrap">
+                        <h4 class="header__search-result-name">Фандорин. Азазель</h4>
+                        <div class="header__search-result-info">
+                            <span class="header__search-result-rate rate-num--good">7.1</span>
+                            <span class="header__search-result-type">сериал</span>
+                            <span class="header__search-result-year">2022</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="header__search-result">
+                    <a href="" class="header__search-result-link"></a>
+                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8b9cc726-2309-492a-a099-3163f8ef4693/40x60" class="header__search-result-poster" alt="">
+                    <div class="header__search-result-text-wrap">
+                        <h4 class="header__search-result-name">Фандорин. Азазель</h4>
+                        <div class="header__search-result-info">
+                            <span class="header__search-result-rate rate-num--good">7.1</span>
+                            <span class="header__search-result-type">сериал</span>
+                            <span class="header__search-result-year">2022</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
         <button class="header__quizz-btn">Игра</button>
         <a href="#/profile" class="header__profile-btn" id="profile" title="Личный кабинет">
             <img src="" alt="" class="header__profile-avatar">

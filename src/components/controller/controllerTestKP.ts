@@ -45,6 +45,12 @@ class ControllerTestKP {
 
         return movie;
     }
+
+    async searchMovie(name: string, page = 1, total = 10) {
+        const response = await fetch(`${this.movieURL}&page=${page}&total:${total}&name=${name}`);
+        const movies = await response.json();
+        return movies;
+    }
 }
 
 export default ControllerTestKP;

@@ -8,6 +8,7 @@ import logInHeader from '../templates/log-in-header';
 import notLogInHeader from '../templates/not-log-in-header';
 import FirebaseAuthUser from '../server/firebaseAuthUser';
 import FirebaseStore from '../server/firebaseStore';
+import Search from '../utils/search';
 
 const rootElement = document.querySelector('#content');
 
@@ -26,6 +27,8 @@ export default class App {
 
     firebaseStore;
 
+    search;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
@@ -38,6 +41,7 @@ export default class App {
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
+        this.search = new Search();
     }
 
     start() {
@@ -79,6 +83,10 @@ export default class App {
 
         bodyDOM.addEventListener('change', (e) => {
             this.userProfile.uploadAvatarEvent(e);
+        });
+
+        bodyDOM.addEventListener('input', (e) => {
+            this.search.searchEvent(e);
         });
 
         window.addEventListener('popstate', () => {
