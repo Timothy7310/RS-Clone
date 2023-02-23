@@ -64,48 +64,68 @@ class ControllerUnofficialKP {
             default:
                 console.log('error with month');
         }
-        const response = await fetch(`${this.rootURL}/${this.premieresURL}?year=${year}&month=${monthStr}`, {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': this.apiKey,
-                'Content-Type': 'application/json',
-            },
-        });
-        const movies = await response.json();
-        return movies.items;
+        try {
+            const response = await fetch(`${this.rootURL}/${this.premieresURL}?year=${year}&month=${monthStr}`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.apiKey,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const movies = await response.json();
+            return movies.items;
+        } catch (error) {
+            console.log(`Пока что нельзя получить премьеры из API. ${error}`);
+            return null;
+        }
     }
 
     async getPremiereIDs() {
-        const ids: number[] = [];
-        const movies = await this.getPremieres();
-        movies.forEach((item: Premieres) => {
-            ids.push(item.kinopoiskId);
-        });
-        return ids;
+        try {
+            const ids: number[] = [];
+            const movies = await this.getPremieres();
+            movies.forEach((item: Premieres) => {
+                ids.push(item.kinopoiskId);
+            });
+            return ids;
+        } catch (error) {
+            console.log(`Пока что нельзя получить id премьер из API. ${error}`);
+            return null;
+        }
     }
 
     async getMovieByID(id: number) {
-        const response = await fetch(`${this.rootURL}/${this.moviesURL}/${id}`, {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': this.apiKey,
-                'Content-Type': 'application/json',
-            },
-        });
-        const movie = await response.json();
-        return movie;
+        try {
+            const response = await fetch(`${this.rootURL}/${this.moviesURL}/${id}`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.apiKey,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const movie = await response.json();
+            return movie;
+        } catch (error) {
+            console.log(`Пока что нельзя получить фильм из API. ${error}`);
+            return null;
+        }
     }
 
     async getFees(id: number) {
-        const response = await fetch(`${this.rootURL}/films/${id}/box_office`, {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5',
-                'Content-Type': 'application/json',
-            },
-        });
-        const fees = await response.json();
-        return fees.items;
+        try {
+            const response = await fetch(`${this.rootURL}/films/${id}/box_office`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.apiKey,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const fees = await response.json();
+            return fees.items;
+        } catch (error) {
+            console.log(`Пока что нельзя получить сборы по странам из API. ${error}`);
+            return null;
+        }
     }
 
     async getBoxOffice(type: FeesType) {
