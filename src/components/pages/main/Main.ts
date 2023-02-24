@@ -78,8 +78,10 @@ export default class Main {
     }
 
     async renderSoonInCinema(count: number) {
-        const movies = await (await this.controllerUnofficialKP.getPremieres())
-            .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
+        const premiers = await this.controllerUnofficialKP.getPremieres();
+        const movies = premiers.filter((movie: Premieres) => new Date(movie.premiereRu).getTime()).slice(0, count);
+        // Почему-то не работает, видимо нет обновленой инфо о релизах в апишке
+        // const movies = premiers.filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
         movies.forEach((movie: Premieres) => {
@@ -114,49 +116,50 @@ export default class Main {
 
     async renderBoxOffice(type: 'world' | 'russia' | 'usa') {
         const boxIDs = await this.controllerUnofficialKP.getPremiereIDs();
-
-        const box: Promise<MovieType>[] = boxIDs.map(async (id) => {
-            const res = await this.controllerKP.searchMovie(`${id}`, 'id');
-            const movie = res;
-            return movie;
-        });
-
-        Promise.all(box).then((res) => {
-            res.sort((x, y) => {
-                const prev = x.fees?.[type]?.value;
-                const next = y.fees?.[type]?.value;
-                if ((prev ?? 0) > (next ?? 0)) {
-                    return -1;
-                }
-                if ((prev ?? 0) < (next ?? 0)) {
-                    return 1;
-                }
-                return 0;
+        if (boxIDs) {
+            const box: Promise<MovieType>[] = boxIDs.map(async (id) => {
+                const res = await this.controllerKP.searchMovie(`${id}`, 'id');
+                const movie = res;
+                return movie;
             });
 
-            const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
-            let result = '';
-            res.slice(0, 5).forEach((movie) => {
-                const value = movie.fees?.[type]?.value ?? 0;
-                const currency = movie.fees?.[type]?.currency ?? '$';
+            Promise.all(box).then((res) => {
+                res.sort((x, y) => {
+                    const prev = x.fees?.[type]?.value;
+                    const next = y.fees?.[type]?.value;
+                    if ((prev ?? 0) > (next ?? 0)) {
+                        return -1;
+                    }
+                    if ((prev ?? 0) < (next ?? 0)) {
+                        return 1;
+                    }
+                    return 0;
+                });
 
-                result += `
-                <li class="cash__card-item">
-                        <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
-                            <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
-                        </a>
-                    <div class="cash__card-item-info">
-                            <div class="cash__card-item-info-head">
-                                <a href="#/cinema/seances/${movie.id}" class="cash__card-item-name-wrap">
-                                    <span class="cash__card-item-name">${movie.name}</span>
-                                </a>
-                                <span class="cash__card-item-total">${(value / 1000000).toFixed(2)} млн ${currency}</span>
-                            </div>
-                    </div>
-                </li>
-                `;
+                const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
+                let result = '';
+                res.slice(0, 5).forEach((movie) => {
+                    const value = movie.fees?.[type]?.value ?? 0;
+                    const currency = movie.fees?.[type]?.currency ?? '$';
+
+                    result += `
+                    <li class="cash__card-item">
+                            <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
+                                <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
+                            </a>
+                        <div class="cash__card-item-info">
+                                <div class="cash__card-item-info-head">
+                                    <a href="#/cinema/seances/${movie.id}" class="cash__card-item-name-wrap">
+                                        <span class="cash__card-item-name">${movie.name}</span>
+                                    </a>
+                                    <span class="cash__card-item-total">${(value / 1000000).toFixed(2)} млн ${currency}</span>
+                                </div>
+                        </div>
+                    </li>
+                    `;
+                });
+                listDOM.innerHTML = result ?? '';
             });
-            listDOM.innerHTML = result;
-        });
+        }
     }
 }
