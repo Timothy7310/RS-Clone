@@ -1,6 +1,8 @@
 import { Top250PageData } from '../templates/movie/typesMovie';
 
 class ControllerKP {
+    tokenNum;
+
     token;
 
     baseURL;
@@ -16,7 +18,8 @@ class ControllerKP {
     seasonURL;
 
     constructor() {
-        this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
+        this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.personURL = `${this.baseURL}/person${this.token}`;
@@ -89,17 +92,21 @@ class ControllerKP {
         return seasons;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async getRandom() {
-        const response = await fetch('https://test-api.kinopoisk.dev/movie/random', {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': 'QFCANVB-YJK4011-KXBRXVA-652J551',
-                accept: 'application/json',
-            },
-        });
-        const randomMovie = await response.json();
-        return randomMovie;
+        try {
+            const response = await fetch('https://api.kinopoisk.dev/v1/movie/random', {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.tokenNum,
+                    accept: 'application/json',
+                },
+            });
+            const randomMovie = await response.json();
+            return randomMovie;
+        } catch (err) {
+            console.log(`Не получается добыть рандомный фильм из API. ${err}`);
+            return null;
+        }
     }
 }
 
