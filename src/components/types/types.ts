@@ -221,6 +221,12 @@ type UserType = {
     willWatch: WillWatchType,
 };
 
+type MoviesUserType = {
+    movie: number;
+    tvShows: number;
+    shortMovie: number;
+};
+
 export {
     Countries,
     Genres,
@@ -234,4 +240,5 @@ export {
     WillWatchType,
     MovieTestType,
     ImagesType,
+    MoviesUserType,
 };
