@@ -187,6 +187,22 @@ export default class MoviesTop {
         if (pageData) {
             const movies = await this.getMoviesFromPageData(pageData.docs);
             this.drawPage(movies, pageData, id);
+        }
+    }
+
+    async getRandomeId() {
+        const randomMovie = await this.controller.getRandom();
+        const randomMovieId = randomMovie.id;
+        return randomMovieId;
+    }
+
+    async moviesEvent(event: Event) {
+        const target = event.target as HTMLButtonElement;
+
+        // if (target.closest('.movies__card-rates-will-watch')) {
+        //     this.userProfile.saveWillWatch(target, '.movies__card-rates-will-watch', 'movies__card-rates-will-watch--active');
+        // }
+
         if (target.closest('.movies__card-rates-will-watch')) {
             const btn = target.closest('.movies__card-rates-will-watch') as HTMLButtonElement;
             const id = btn.dataset.id as string;
@@ -217,11 +233,5 @@ export default class MoviesTop {
             await this.firebaseStore.updateUserInfo(newUserInfo);
             btn.disabled = false;
         }
-    }
-
-    async getRandomeId() {
-        const randomMovie = await this.controller.getRandom();
-        const randomMovieId = randomMovie.id;
-        return randomMovieId;
     }
 }
