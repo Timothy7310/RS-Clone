@@ -62,10 +62,12 @@ export default class App {
 
         if (isAuth) {
             const user = await this.firebaseStore.getCurrentUser();
-            const src = user[0].avatar;
-            header.innerHTML = logInHeader;
-            const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
-            headerAvatar.src = src;
+            if (user) {
+                const src = user.avatar;
+                header.innerHTML = logInHeader;
+                const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
+                headerAvatar.src = src;
+            }
         } else {
             header.innerHTML = notLogInHeader;
         }
