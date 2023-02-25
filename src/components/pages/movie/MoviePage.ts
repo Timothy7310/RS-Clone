@@ -6,10 +6,8 @@ import Prequels from './section/prequels';
 import Rating from './section/raiting';
 import Reviews from './section/reviews';
 import Trailers from './section/trailers';
-import UserProfile from '../user_profile/userProfile';
 import FirebaseStore from '../../server/firebaseStore';
 import { UserType } from '../../types/types';
-import reviewFormTemplates from '../../templates/review-form';
 
 export default class Movie {
     page: Page;
@@ -34,8 +32,6 @@ export default class Movie {
 
     id?: string;
 
-    userProfile;
-
     firebaseStore;
 
     constructor(path?: string, id?: string) {
@@ -49,7 +45,6 @@ export default class Movie {
         this.facts = new Facts();
         this.reviews = new Reviews();
         this.id = id;
-        this.userProfile = new UserProfile();
         this.firebaseStore = new FirebaseStore();
     }
 
@@ -162,14 +157,6 @@ export default class Movie {
             const form = document.querySelector('.review-form-wrap') as HTMLElement;
             form.classList.add('review-form--hidden');
         }
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    renderReviewForm() {
-        const elem = document.createElement('div');
-        elem.innerHTML = reviewFormTemplates;
-        elem.classList.add('review-form');
-        document.querySelector('body')?.append(elem);
     }
 
     // eslint-disable-next-line class-methods-use-this
