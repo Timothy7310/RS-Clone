@@ -15,6 +15,7 @@ import Component from '../Component';
 import FirebaseStore from '../../server/firebaseStore';
 import { UserType } from '../../types/types';
 import UserProfile from '../user_profile/userProfile';
+import CardGenerator from '../../templates/movies/movieCard';
 
 export default class MoviesTop {
     component: Component;
@@ -43,7 +44,7 @@ export default class MoviesTop {
     generatePageButton(page: number, isActive = false): HTMLLIElement {
         const li = document.createElement('li');
         li.classList.add('movies__pagination-item');
-        if (page !== 0) {
+        if (page) {
             const button = document.createElement('button');
             button.classList.add('movies__pagination-btn');
             if (isActive) {
@@ -130,14 +131,14 @@ export default class MoviesTop {
         return button;
     }
 
-    drawPage(movies: TMovie[], pageData: Top250PageData, id: number) {
+    drawPage(movies: TMovie[], pageData: Top250PageData, id: number, generator: CardGenerator) {
         this.clearContainer();
 
         const mainHeader = this.mainHeader(id);
         const paginationHeaderNumbers = this.createPagination(pageData);
         const paginationFooterNumbers = this.createPagination(pageData);
         const header = generateHeader(pageData.total);
-        const body = generateBody(movies);
+        const body = generateBody(movies, generator);
 
         this.container.insertAdjacentHTML('afterbegin', mainHeader);
         this.container.append(header);
@@ -172,7 +173,7 @@ export default class MoviesTop {
     async getMoviesFromPageData(docs: Top250FilmItem[]): Promise<TMovie[]> {
         try {
             const movies = await Promise.all(
-                docs.map((doc) => this.controller.searchMovie(doc.id.toString(), 'id')),
+                docs.map((doc) => this.controller.getMovieForId(`${doc.id}`)),
             );
             return movies;
         } catch (e) {
@@ -182,11 +183,13 @@ export default class MoviesTop {
     }
 
     async changePage(page = 1): Promise<void> {
-        const pageData = await this.controller.getMoviesTop250(page);
+        const pageData = await this.controller.getTop250(page);
         const id = await this.getRandomeId();
         if (pageData) {
             const movies = await this.getMoviesFromPageData(pageData.docs);
-            this.drawPage(movies, pageData, id);
+            const generator = new CardGenerator();
+            await generator.reloadWatchList();
+            this.drawPage(movies, pageData, id, generator);
         }
     }
 
@@ -198,40 +201,39 @@ export default class MoviesTop {
 
     async moviesEvent(event: Event) {
         const target = event.target as HTMLButtonElement;
-
-        // if (target.closest('.movies__card-rates-will-watch')) {
-        //     this.userProfile.saveWillWatch(target, '.movies__card-rates-will-watch', 'movies__card-rates-will-watch--active');
-        // }
-
         if (target.closest('.movies__card-rates-will-watch')) {
-            const btn = target.closest('.movies__card-rates-will-watch') as HTMLButtonElement;
-            const id = btn.dataset.id as string;
-            btn.disabled = true;
-            btn.classList.toggle('movies__card-rates-will-watch--active');
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
-            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+            await this.toggleWatchFilmState(target);
+        }
+    }
 
-            const userWillWatchList = await this.userProfile.getWillWatchList();
-            if (userWillWatchList.includes(id)) {
-                console.log(newUserInfo.willWatch);
-                const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
-                newUserInfo.willWatch.items = newWillWatchList;
-                newUserInfo.willWatch.total = newWillWatchList.length;
-                await this.firebaseStore.updateUserInfo(newUserInfo);
-                btn.disabled = false;
-                return;
-            }
-
+    async toggleWatchFilmState(target: HTMLElement) {
+        const filmButton = target.closest('.movies__card-rates-will-watch') as HTMLButtonElement;
+        const id = filmButton.dataset.id as string;
+        filmButton.disabled = true;
+        filmButton.classList.toggle('movies__card-rates-will-watch--active');
+        const userInfo = await this.firebaseStore.getCurrentUser(true);
+        const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+        const userWillWatchLisIds = await this.userProfile.getWillWatchList();
+        if (userWillWatchLisIds.includes(id)) {
+            const newWillWatchList = newUserInfo.willWatch.items
+                .filter((x) => x.date && x.filmID && x.filmID !== id);
+            newUserInfo.willWatch.items = newWillWatchList;
+            newUserInfo.willWatch.total = newWillWatchList.length;
+        } else {
             const newWillWatchFilm = {
                 date: `${new Date().getTime()}`,
                 filmID: id,
             };
+            newUserInfo.willWatch.items = newUserInfo.willWatch.items
+                .filter((x) => x.date && x.filmID);
             newUserInfo.willWatch.items.push(newWillWatchFilm);
             newUserInfo.willWatch.total = newUserInfo.willWatch.items.length;
-
-            await this.firebaseStore.updateUserInfo(newUserInfo);
-            btn.disabled = false;
         }
+        try {
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+        } catch (e) {
+            console.log(e);
+        }
+        filmButton.disabled = false;
     }
 }
