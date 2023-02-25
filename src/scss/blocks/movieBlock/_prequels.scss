@@ -43,6 +43,21 @@
                 line-height: 16px;
                 color: var(--color-secondary);
             }
+            @include media-tablet-850{
+                &:last-child{
+                    display: none;
+                }
+            }
+            @include media-tablet{
+                &:nth-last-child(-n+2){
+                    display: none;
+                }
+            }
+            @include media-mobile-520{
+                &:nth-last-child(-n+3){
+                    display: none;
+                }
+            }
         }
     }
 }

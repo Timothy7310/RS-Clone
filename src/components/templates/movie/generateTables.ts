@@ -54,6 +54,18 @@ export default class GenerateTables {
         return result.join('');
     }
 
+    getAlternativeTable(movie: TMovie) {
+        const tableData = {
+            [TableTitle.year]: movie.year,
+            [TableTitle.countries]: movie.countries.map((x: { name: string; }) => x.name).join(', '),
+            [TableTitle.genres]: movie.genres.map((x: { name: string; }) => x.name).join(', '),
+            [TableTitle.budget]: this.checkBudget(movie),
+            [TableTitle.movieLength]: `${movie.movieLength} мин`,
+        };
+        const result = Object.entries(tableData).map(([title, value]) => tableLine(title, value ?? ''));
+        return result.join('');
+    }
+
     getActors(persons: TPersons[]): string {
         const actors = this.helper.getPersons(persons, 'actor', 10);
         const result = (actors).map((actor: string) => mainActors(actor));

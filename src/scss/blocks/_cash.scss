@@ -6,6 +6,12 @@
         grid-template-columns: repeat(3, 1fr);
         column-gap: 45px;
         margin-top: 25px;
+        @include media-tablet{
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include media-mobile-520{
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
     &__title{
         margin: 0px;
@@ -105,6 +111,16 @@
                 font-weight: 400;
                 font-size: 13px;
                 line-height: 16px;
+            }
+        }
+        &:last-child{
+            @include media-tablet{
+                display: none;
+            }
+        }
+        &:first-child{
+            @include media-mobile-520{
+                display: none;
             }
         }
     }

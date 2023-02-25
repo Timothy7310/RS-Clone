@@ -15,6 +15,7 @@
         display: flex;
         flex-direction: column;
         max-width: 410px;
+        margin-right: 16px;
         &_title{
             font-family: 'Tahoma';
             font-style: normal;
@@ -22,6 +23,15 @@
             font-size: 50px;
             line-height: 103%;
             color: var(--color-white);
+            @include media-tablet-980{
+                font-size: 40px;
+            }
+            @include media-tablet{
+                font-size: 36px;
+            }
+            @include media-mobile{
+                font-size: 30px;
+            }
         }
         &_message{
             font-family: 'Tahoma';
@@ -31,5 +41,21 @@
             line-height: 127%;
             color: rgba(255, 255, 255, 0.5);
         }
+    }
+    &__videoContentError{
+        width: 500px;
+        @include media-tablet-980{
+            width: 400px;
+        }
+        @include media-tablet{
+            width: 340px;
+        }
+        @include media-mobile{
+            width: 300px;
+        }
+    }
+    @include media-tablet-660{
+        flex-direction: column;
+        justify-content: space-evenly;
     }
 }

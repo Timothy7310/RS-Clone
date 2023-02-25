@@ -144,6 +144,7 @@ export default class Main {
             res.slice(0, 5).forEach((movie) => {
                 const value = movie.fees?.[type]?.value ?? 0;
                 const currency = movie.fees?.[type]?.currency ?? '$';
+
                 result += `
                 <li class="cash__card-item">
                         <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">

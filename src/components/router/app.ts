@@ -1,5 +1,6 @@
 import Router, { IRouter } from './Router';
 import Cinema from '../pages/cinema/Cinema';
+import Burger from '../utils/burger';
 import Login from '../pages/login/Login';
 import UserProfile from '../pages/user_profile/userProfile';
 
@@ -17,6 +18,8 @@ export default class App {
     router!: IRouter;
 
     cinema;
+
+    burger;
 
     login;
 
@@ -37,6 +40,9 @@ export default class App {
             this.router = new Router(rootElement);
         }
         this.cinema = new Cinema();
+
+        this.burger = new Burger();
+
         this.login = new Login();
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
@@ -50,6 +56,8 @@ export default class App {
         this.drawContent();
         this.initEvent();
         this.swapHeader();
+        this.burger.listen();
+
     }
 
     drawContent() {

@@ -195,3 +195,19 @@ export type TReviews = {
     page: number,
     pages: number,
 };
+
+export type Top250FilmItem = {
+    _id: string,
+    id: number,
+    type: string, // TODO: create enum
+    name: string,
+    top250: number
+};
+
+export type Top250PageData = {
+    docs: Top250FilmItem[],
+    total: number,
+    limit: number,
+    page: number,
+    pages: number
+};

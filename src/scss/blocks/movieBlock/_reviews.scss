@@ -30,24 +30,50 @@
         box-sizing: border-box;
         margin-right: -10px;
         margin-left: -10px;
+        @include media-tablet{
+            flex-direction: column-reverse;
+        }
         &_items{
             flex: 0 0 800px;
             width: 800px;
             display: block;
             padding-right: 9px;
             padding-left: 9px;
+            @include media-desktopsmall{
+                flex: 0 0 600px;
+                width: 600px;
+            }
+            @include media-tablet{
+                flex: none;
+                width: auto;
+            } 
             &_item{
                 &_positive{
                     background-color: var(--rate-bg-good);
                     margin-bottom: 20px;
+                    @include media-tablet-660{
+                        &:nth-last-child(2n+1){
+                            display: none;
+                        }
+                    }
                 }
                 &_negative{
                     background-color: var(--rate-bg-bad);
                     margin-bottom: 20px;
+                    @include media-tablet-660{
+                        &:nth-last-child(2n+1){
+                            display: none;
+                        }
+                    }
                 }
                 &_neutral{
                     background-color: var(--rate-bg-neutral);
                     margin-bottom: 20px;
+                    @include media-tablet-660{
+                        &:nth-last-child(2n+1){
+                            display: none;
+                        }
+                    }
                 }
                 &_head{
                     display: flex;
@@ -132,7 +158,7 @@
                             }
                         }
                     }
-                } 
+                }
             }
         }
         &_statistic{
@@ -141,10 +167,25 @@
             display: block;
             padding-right: 9px;
             padding-left: 9px;
+            @include media-desktopsmall{
+                flex: 0 0 160px;
+                width: 160px;
+            }
+            @include media-tablet{
+                flex: none;
+                width: auto;
+            }
             &_nav{
                 position: sticky;
                 top: 60px;
                 padding-top: 17px;
+                @include media-tablet{
+                    display: flex;
+                    justify-content: space-between;
+                }
+                @include media-mobile-520{
+                    flex-direction: column;
+                }
                 &_total{
                         padding-left: 7px;
                         border-left: 2px solid #f50;

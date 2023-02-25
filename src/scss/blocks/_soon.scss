@@ -134,6 +134,9 @@
                         fill: var(--color-accent);
                     }
                 }
+                @include media-mobile{
+                    display: none;
+                }
             }
         }
     }
