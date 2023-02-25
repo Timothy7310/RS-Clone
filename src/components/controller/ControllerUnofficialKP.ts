@@ -21,9 +21,9 @@ class ControllerUnofficialKP {
         this.boxOffice = [];
     }
 
-    async getPremieres() {
-        const year = new Date().getFullYear();
-        const month = new Date().getMonth();
+    async getPremieres(date: Date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
         let monthStr;
         switch (month) {
             case 0:
@@ -78,7 +78,7 @@ class ControllerUnofficialKP {
 
     async getPremiereIDs() {
         const ids: number[] = [];
-        const movies = await this.getPremieres();
+        const movies = await this.getPremieres(new Date());
         movies.forEach((item: Premieres) => {
             ids.push(item.kinopoiskId);
         });
@@ -111,7 +111,7 @@ class ControllerUnofficialKP {
 
     async getBoxOffice(type: FeesType) {
         const boxOffice: BoxOffice[][] = [];
-        const movies = await this.getPremieres();
+        const movies = await this.getPremieres(new Date());
         movies.forEach(async (movie: Premieres, index: number) => {
             if (index < 5) {
                 const fees = await this.getFees(movie.kinopoiskId);
