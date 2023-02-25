@@ -75,8 +75,7 @@ export default class UserProfile {
     }
 
     async renderPage() {
-        const res = await this.firebaseStore.getCurrentUser();
-        const userInfo = res[0] as UserType;
+        const userInfo = await this.firebaseStore.getCurrentUser(true);
         const moviesTypes = {
             movie: 0,
             tvShows: 0,
@@ -84,7 +83,7 @@ export default class UserProfile {
         };
         const moviesList = userInfo.watched.items.map((x) => x.filmID)
             .map(async (id) => {
-                const response = await this.controllerKP.searchMovie(id, 'id');
+                const response = await this.controllerKP.getMovieForId(id);
                 return response;
             });
         await Promise.all(moviesList).then((response) => {
@@ -112,8 +111,7 @@ export default class UserProfile {
     }
 
     async renderSettings() {
-        const res = await this.firebaseStore.getCurrentUser();
-        const userInfo = res[0];
+        const userInfo = await this.firebaseStore.getCurrentUser();
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
         const activeClass = 'profile-page--active';
@@ -130,7 +128,7 @@ export default class UserProfile {
 
     async renderWatched() {
         const res = await this.firebaseStore.getCurrentUser();
-        const userInfoWatched: WatchedType = res[0].watched;
+        const userInfoWatched: WatchedType = res.watched;
 
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
@@ -151,7 +149,7 @@ export default class UserProfile {
             // TODO: ограничить массив, иначе будет вывод сразу всех 100 фильмов
 
             userInfoWatched.items.forEach(async (item) => {
-                const movie = await this.controllerKP.searchMovie(`${item.filmID}`, 'id');
+                const movie = await this.controllerKP.getMovieForId(`${item.filmID}`);
                 const elem = document.createElement('article');
                 elem.classList.add('profile__score');
                 elem.innerHTML = profileScoreTemplate(movie, item);
@@ -168,7 +166,7 @@ export default class UserProfile {
 
     async renderReviews() {
         const res = await this.firebaseStore.getCurrentUser();
-        const userInfoReviews: ReviewsType = res[0].reviews;
+        const userInfoReviews: ReviewsType = res.reviews;
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
         const activeClass = 'profile-page--active';
@@ -188,7 +186,7 @@ export default class UserProfile {
             // TODO: ограничить массив, иначе будет вывод сразу всех 100 фильмов
 
             userInfoReviews.items.forEach(async (item) => {
-                const movie = await this.controllerKP.searchMovie(`${item.filmID}`, 'id');
+                const movie = await this.controllerKP.getMovieForId(`${item.filmID}`);
 
                 const elem = document.createElement('article');
                 elem.classList.add('profile__user-review');
@@ -209,7 +207,7 @@ export default class UserProfile {
 
     async renderWillWatch() {
         const res = await this.firebaseStore.getCurrentUser();
-        const userInfoWillWatch: WillWatchType = res[0].willWatch;
+        const userInfoWillWatch: WillWatchType = res.willWatch;
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
         const activeClass = 'profile-page--active';
@@ -228,7 +226,7 @@ export default class UserProfile {
             // TODO: ограничить массив, иначе будет вывод сразу всех 100 фильмов
 
             userInfoWillWatch.items.forEach(async (item) => {
-                const movie = await this.controllerKP.searchMovie(`${item.filmID}`, 'id');
+                const movie = await this.controllerKP.getMovieForId(`${item.filmID}`);
 
                 const elem = document.createElement('article');
                 elem.classList.add('profile__will-watch-card');
@@ -251,8 +249,7 @@ export default class UserProfile {
     async userProfileEvent(event: Event) {
         const target = event.target as HTMLButtonElement;
         if (target.closest('.profile-settings__save')) {
-            const res = await this.firebaseStore.getCurrentUser();
-            const userObj = res[0] as UserType;
+            const userObj = await this.firebaseStore.getCurrentUser();
 
             const inputs = Array.from(document.querySelectorAll('.profile-input')) as HTMLInputElement[];
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -317,8 +314,7 @@ export default class UserProfile {
             const delButton = target.closest('.profile__will-watch-card-delete') as HTMLButtonElement;
             const id = delButton.dataset.id as string;
 
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
+            const userInfo = await this.firebaseStore.getCurrentUser();
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
             const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
@@ -335,8 +331,7 @@ export default class UserProfile {
             const delButton = target.closest('.profile__review-btn--delete') as HTMLButtonElement;
             const id = delButton.dataset.id as string;
 
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
+            const userInfo = await this.firebaseStore.getCurrentUser();
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
             const newReviewsList = newUserInfo.reviews.items.filter((x) => x.filmID !== id);
@@ -379,8 +374,7 @@ export default class UserProfile {
             const input = document.querySelector(`.profile__mark-change-input--${id}`) as HTMLInputElement;
             const newScore = +input.value;
 
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
+            const userInfo = await this.firebaseStore.getCurrentUser();
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
 
             const newWatchedList = newUserInfo.watched.items.map((x) => (x.filmID === id
@@ -427,10 +421,13 @@ export default class UserProfile {
         }
     }
 
-    async getWillWatchList() {
-        const res = await this.firebaseStore.getCurrentUser();
-        const userInfoWillWatch: WillWatchType = res[0]?.willWatch ?? { items: [] };
-        return userInfoWillWatch.items.map((x) => x.filmID);
+    async getWillWatchList(isForce = false) {
+        const res = await this.firebaseStore.getCurrentUser(isForce);
+        const userInfoWillWatch: WillWatchType = res?.willWatch ?? { items: [] };
+
+        return userInfoWillWatch.items
+            .filter((item) => item.date && item.filmID)
+            .map((item) => item.filmID);
     }
 
     async saveWillWatch(target: HTMLButtonElement, targetClass: string, activeClass: string) {
@@ -439,8 +436,7 @@ export default class UserProfile {
 
         btn.disabled = true;
         btn.classList.toggle(activeClass);
-        const response = await this.firebaseStore.getCurrentUser();
-        const userInfo = response[0];
+        const userInfo = await this.firebaseStore.getCurrentUser();
         const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
 
         const userWillWatchList = await this.getWillWatchList();
