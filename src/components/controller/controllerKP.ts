@@ -20,7 +20,7 @@ class ControllerKP {
     constructor() {
         this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
         this.token = `?token=${this.tokenNum}`;
-        this.baseURL = 'https://api.kinopoisk.dev';
+        this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.personURL = `${this.baseURL}/person${this.token}`;
         this.reviewURL = `${this.baseURL}/review${this.token}`;
@@ -50,8 +50,7 @@ class ControllerKP {
             const movies = await response.json();
             return movies;
         } catch (e) {
-            console.log(e);
-            alert('Something wrong with getting top 250');
+            console.log(`Something wrong with getting top 250 ${e}`);
             return null;
         }
     }
@@ -105,6 +104,40 @@ class ControllerKP {
             return randomMovie;
         } catch (err) {
             console.log(`Не получается добыть рандомный фильм из API. ${err}`);
+            return null;
+        }
+    }
+
+    async getMovieForId(id: string) {
+        try {
+            const response = await fetch(`${this.baseURL}/movie/${id}`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.tokenNum,
+                    accept: 'application/json',
+                },
+            });
+            const randomMovie = await response.json();
+            return randomMovie;
+        } catch (err) {
+            console.log(`Не получается найти фильм по id. ${err}`);
+            return null;
+        }
+    }
+
+    async getTop250(page: number, limit = 10) {
+        try {
+            const response = await fetch(`${this.baseURL}/movie?selectFields=id&selectFields=name&selectFields=rating.kp&sortField=rating.kp&sortType=-1&page=${page}&limit=${limit}&top250=%21null`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.tokenNum,
+                    accept: 'application/json',
+                },
+            });
+            const randomMovie = await response.json();
+            return randomMovie;
+        } catch (err) {
+            console.log(`Не получается найти топ 250. ${err}`);
             return null;
         }
     }

@@ -1,4 +1,10 @@
-import { Premieres, BoxOffice, FeesType } from '../types/types';
+import {
+    Premieres,
+    BoxOffice,
+    FeesType,
+    MovieType,
+} from '../types/types';
+import ControllerKP from './controllerKP';
 
 class ControllerUnofficialKP {
     rootURL;
@@ -11,13 +17,16 @@ class ControllerUnofficialKP {
 
     boxOffice: BoxOffice[];
 
+    controllerKP: ControllerKP;
+
     constructor() {
         this.rootURL = 'https://kinopoiskapiunofficial.tech/api/v2.2';
-        // this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
-        this.apiKey = '1081c1fd-9b5b-43b4-905b-878e960e39ca'; // еще один ключ, на всякий случай
+        this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
+        // this.apiKey = '1081c1fd-9b5b-43b4-905b-878e960e39ca'; // еще один ключ, на всякий случай
         this.premieresURL = 'films/premieres';
         this.moviesURL = 'films';
         this.boxOffice = [];
+        this.controllerKP = new ControllerKP();
     }
 
     async getPremieres() {
@@ -75,7 +84,7 @@ class ControllerUnofficialKP {
             const movies = await response.json();
             return movies.items;
         } catch (error) {
-            console.log(`Пока что нельзя получить премьеры из API. ${error}`);
+            console.error(`Пока что нельзя получить премьеры из API. ${error}`);
             return null;
         }
     }
@@ -94,6 +103,20 @@ class ControllerUnofficialKP {
         }
     }
 
+    async getAllPremiers() {
+        const ids = await this.getPremiereIDs();
+        if (ids) {
+            const box: Promise<MovieType>[] = ids.map(async (id) => {
+                const res = await this.controllerKP.getMovieForId(`${id}`);
+                const movie = res;
+                return movie;
+            });
+            const result = await Promise.all(box);
+            return result;
+        }
+        return [];
+    }
+
     async getMovieByID(id: number) {
         try {
             const response = await fetch(`${this.rootURL}/${this.moviesURL}/${id}`, {
@@ -106,7 +129,7 @@ class ControllerUnofficialKP {
             const movie = await response.json();
             return movie;
         } catch (error) {
-            console.log(`Пока что нельзя получить фильм из API. ${error}`);
+            console.error(`Пока что нельзя получить фильм из API. ${error}`);
             return null;
         }
     }
@@ -123,7 +146,7 @@ class ControllerUnofficialKP {
             const fees = await response.json();
             return fees.items;
         } catch (error) {
-            console.log(`Пока что нельзя получить сборы по странам из API. ${error}`);
+            console.error(`Пока что нельзя получить сборы по странам из API. ${error}`);
             return null;
         }
     }
