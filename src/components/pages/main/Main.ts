@@ -39,17 +39,22 @@ export default class Main {
     }
 
     draw(): HTMLElement {
+        this.drawPage();
+        return this.container;
+    }
+
+    async drawPage() {
+        const movieTypes = await this.controllerUnofficialKP.getAllPremiers();
         this.container.appendChild(this.popular.draw());
         this.container.appendChild(this.tickets.draw());
         this.container.appendChild(this.soon.draw());
         this.container.appendChild(this.cash.draw());
         this.renderPremiereSlider();
         this.renderSoonInCinema(5);
-        this.renderBoxOffice('russia');
-        this.renderBoxOffice('world');
-        this.renderBoxOffice('usa');
+        this.renderBoxOffice('russia', movieTypes);
+        this.renderBoxOffice('world', movieTypes);
+        this.renderBoxOffice('usa', movieTypes);
         this.container.classList.add('main');
-        return this.container;
     }
 
     clear(): void {
@@ -114,52 +119,42 @@ export default class Main {
         listDOM.innerHTML = result;
     }
 
-    async renderBoxOffice(type: 'world' | 'russia' | 'usa') {
-        const boxIDs = await this.controllerUnofficialKP.getPremiereIDs();
-        if (boxIDs) {
-            const box: Promise<MovieType>[] = boxIDs.map(async (id) => {
-                const res = await this.controllerKP.searchMovie(`${id}`, 'id');
-                const movie = res;
-                return movie;
-            });
+    // eslint-disable-next-line class-methods-use-this
+    renderBoxOffice(type: 'world' | 'russia' | 'usa', movieTypes: MovieType[]) {
+        movieTypes.sort((x, y) => {
+            const prev = x.fees?.[type]?.value;
+            const next = y.fees?.[type]?.value;
+            if ((prev ?? 0) > (next ?? 0)) {
+                return -1;
+            }
+            if ((prev ?? 0) < (next ?? 0)) {
+                return 1;
+            }
+            return 0;
+        });
 
-            Promise.all(box).then((res) => {
-                res.sort((x, y) => {
-                    const prev = x.fees?.[type]?.value;
-                    const next = y.fees?.[type]?.value;
-                    if ((prev ?? 0) > (next ?? 0)) {
-                        return -1;
-                    }
-                    if ((prev ?? 0) < (next ?? 0)) {
-                        return 1;
-                    }
-                    return 0;
-                });
+        const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
+        let result = '';
+        movieTypes.slice(0, 5).forEach((movie) => {
+            const value = movie.fees?.[type]?.value ?? 0;
+            const currency = movie.fees?.[type]?.currency ?? '$';
 
-                const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
-                let result = '';
-                res.slice(0, 5).forEach((movie) => {
-                    const value = movie.fees?.[type]?.value ?? 0;
-                    const currency = movie.fees?.[type]?.currency ?? '$';
-
-                    result += `
-                    <li class="cash__card-item">
-                            <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
-                                <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
+            result += `
+            <li class="cash__card-item">
+                    <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
+                        <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
+                    </a>
+                <div class="cash__card-item-info">
+                        <div class="cash__card-item-info-head">
+                            <a href="#/cinema/seances/${movie.id}" class="cash__card-item-name-wrap">
+                                <span class="cash__card-item-name">${movie.name}</span>
                             </a>
-                        <div class="cash__card-item-info">
-                                <div class="cash__card-item-info-head">
-                                    <a href="#/cinema/seances/${movie.id}" class="cash__card-item-name-wrap">
-                                        <span class="cash__card-item-name">${movie.name}</span>
-                                    </a>
-                                    <span class="cash__card-item-total">${(value / 1000000).toFixed(2)} млн ${currency}</span>
-                                </div>
+                            <span class="cash__card-item-total">${(value / 1000000).toFixed(2)} млн ${currency}</span>
                         </div>
-                    </li>
-                    `;
-                });
-                listDOM.innerHTML = result ?? '';
-            });
-        }
+                </div>
+            </li>
+            `;
+        });
+        listDOM.innerHTML = result ?? '';
     }
 }
