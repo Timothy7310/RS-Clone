@@ -83,7 +83,27 @@ export default class Movie {
             const userInfo = response[0];
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
-            const newWatchedList = newUserInfo.watched.items;
+            let newWatchedList = newUserInfo.watched.items;
+            if (newWatchedList.map((x) => x.filmID).includes(id)) {
+                newWatchedList = newWatchedList.map((x) => {
+                    if (x.filmID === id) {
+                        return {
+                            date: x.date,
+                            filmID: x.filmID,
+                            score: +score,
+                        };
+                    }
+                    return x;
+                });
+
+                newUserInfo.watched = {
+                    items: newWatchedList,
+                    total: newWatchedList.length,
+                };
+                await this.firebaseStore.updateUserInfo(newUserInfo);
+                return;
+            }
+
             const newWatchedFilm = {
                 date: `${new Date().getTime()}`,
                 filmID: id,
