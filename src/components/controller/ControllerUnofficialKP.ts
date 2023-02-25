@@ -13,16 +13,16 @@ class ControllerUnofficialKP {
 
     constructor() {
         this.rootURL = 'https://kinopoiskapiunofficial.tech/api/v2.2';
-        // this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
-        this.apiKey = '1081c1fd-9b5b-43b4-905b-878e960e39ca'; // еще один ключ, на всякий случай
+        this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
+        // this.apiKey = '1081c1fd-9b5b-43b4-905b-878e960e39ca'; // еще один ключ, на всякий случай
         this.premieresURL = 'films/premieres';
         this.moviesURL = 'films';
         this.boxOffice = [];
     }
 
-    async getPremieres() {
-        const year = new Date().getFullYear();
-        const month = new Date().getMonth();
+    async getPremieres(date: Date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
         let monthStr;
         switch (month) {
             case 0:
@@ -77,7 +77,7 @@ class ControllerUnofficialKP {
 
     async getPremiereIDs() {
         const ids: number[] = [];
-        const movies = await this.getPremieres();
+        const movies = await this.getPremieres(new Date());
         movies.forEach((item: Premieres) => {
             ids.push(item.kinopoiskId);
         });
@@ -110,7 +110,7 @@ class ControllerUnofficialKP {
 
     async getBoxOffice(type: FeesType) {
         const boxOffice: BoxOffice[][] = [];
-        const movies = await this.getPremieres();
+        const movies = await this.getPremieres(new Date());
         movies.forEach(async (movie: Premieres, index: number) => {
             if (index < 5) {
                 const fees = await this.getFees(movie.kinopoiskId);

@@ -58,7 +58,7 @@ export default class Main {
 
     async renderPremiereSlider() {
         let result = '';
-        const movies = await (await this.controllerUnofficialKP.getPremieres());
+        const movies = await (await this.controllerUnofficialKP.getPremieres(new Date()));
         const listDOM = document.querySelector('.tickets__slider') as HTMLElement;
         // TODO: add rating logic to .tickets__slide-rate
         movies.forEach(async (movie: Premieres) => {
@@ -78,7 +78,9 @@ export default class Main {
     }
 
     async renderSoonInCinema(count: number) {
-        const movies = await (await this.controllerUnofficialKP.getPremieres())
+        const date = new Date();
+        const nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
+        const movies = await (await this.controllerUnofficialKP.getPremieres(nextweek))
             .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
