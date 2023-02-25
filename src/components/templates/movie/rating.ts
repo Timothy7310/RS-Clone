@@ -36,9 +36,22 @@ const rating = (movie: TMovie): string => `
         </div>
     </div>
 </div>
-<button class="raiting__score_button">
+<button class="raiting__score_button" ${localStorage.getItem('isLogIn') === 'true' ? '' : 'disabled=""'} data-id="${movie.id}">
     <span class="raiting__score_button_text">Написать рецензию</span>
 </button>
+<div class="review-form-wrap review-form--hidden">
+    <form class="review-form">
+        <select placeholder="Тип рецензии" class="review-form__select" required="">
+            <option>Положительна</option>
+            <option>Отрицательная</option>
+            <option>Нейтральная</option>
+        </select>
+        <input placeholder="Заголовок" type="text" class="review-form__input" required="">
+        <textarea placeholder="Текст" class="review-form__textarea" required=""></textarea>
+
+        <button type="submit" class="review-form__submit" data-id="${movie.id}">Опубликовать рецензию</button>
+    </form>
+</div>
 </div>
 `;
 

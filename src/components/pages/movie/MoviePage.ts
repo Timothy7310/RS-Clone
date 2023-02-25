@@ -9,6 +9,7 @@ import Trailers from './section/trailers';
 import UserProfile from '../user_profile/userProfile';
 import FirebaseStore from '../../server/firebaseStore';
 import { UserType } from '../../types/types';
+import reviewFormTemplates from '../../templates/review-form';
 
 export default class Movie {
     page: Page;
@@ -97,5 +98,79 @@ export default class Movie {
             };
             await this.firebaseStore.updateUserInfo(newUserInfo);
         }
+
+        if (target.closest('.raiting__score_button')) {
+            const form = document.querySelector('.review-form-wrap') as HTMLElement;
+            form.classList.remove('review-form--hidden');
+        }
+
+        if (target.closest('.review-form__submit')) {
+            const btn = target.closest('.review-form__submit') as HTMLButtonElement;
+            e.preventDefault();
+            const select = document.querySelector('.review-form__select') as HTMLSelectElement;
+            const title = document.querySelector('.review-form__input') as HTMLInputElement;
+            const text = document.querySelector('.review-form__textarea') as HTMLTextAreaElement;
+            const id = target.dataset.id as string;
+
+            if (this.validateReviewForm(title, text).includes(false)) {
+                return;
+            }
+            btn.disabled = true;
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+            const newReviewsList = newUserInfo.reviews.items;
+
+            const newReview = {
+                date: `${new Date().getTime()}`,
+                filmID: id,
+                text: text.value,
+                title: title.value,
+                type: select.value,
+            };
+
+            newReviewsList.push(newReview);
+            newUserInfo.reviews = {
+                items: newReviewsList,
+                total: newReviewsList.length,
+            };
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            btn.disabled = false;
+            title.value = '';
+            text.value = '';
+            const form = document.querySelector('.review-form-wrap') as HTMLElement;
+            form.classList.add('review-form--hidden');
+        }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    renderReviewForm() {
+        const elem = document.createElement('div');
+        elem.innerHTML = reviewFormTemplates;
+        elem.classList.add('review-form');
+        document.querySelector('body')?.append(elem);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    validateReviewForm(title: HTMLInputElement, text: HTMLTextAreaElement) {
+        const checker = [];
+        if (title.value.replace(/\s{2,}/g, ' ').trim().length < 4) {
+            title.classList.add('review-form__input-warning');
+            checker.push(false);
+        } else {
+            title.classList.remove('review-form__input-warning');
+            checker.push(true);
+        }
+
+        if (text.value.replace(/\s{2,}/g, ' ').trim().length < 20) {
+            text.classList.add('review-form__input-warning');
+            checker.push(false);
+        } else {
+            text.classList.remove('review-form__input-warning');
+            checker.push(true);
+        }
+
+        return checker;
     }
 }

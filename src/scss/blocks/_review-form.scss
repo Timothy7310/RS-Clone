@@ -1,0 +1,11 @@
+.review-form{
+    display: flex;
+    flex-direction: column;
+    &--hidden{
+        display: none;
+    }
+    &-wrap{
+        padding: 45px;
+        background: tomato;
+    }
+}
