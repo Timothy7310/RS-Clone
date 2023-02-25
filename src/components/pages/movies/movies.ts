@@ -12,6 +12,8 @@ import {
 } from '../../templates/movies/movies';
 // import ticketsTemplate from '../../templates/tickets';
 import Component from '../Component';
+import FirebaseStore from '../../server/firebaseStore';
+import UserProfile from '../user_profile/userProfile';
 
 export default class MoviesTop {
     component: Component;
@@ -20,15 +22,31 @@ export default class MoviesTop {
 
     controller: ControllerKP;
 
+    firebaseStore;
+
+    userProfile;
+
     constructor() {
         this.component = new Component('section', 'movies');
         this.container = this.component.draw();
         this.controller = new ControllerKP();
+        this.firebaseStore = new FirebaseStore();
+        this.userProfile = new UserProfile();
     }
 
     draw(parentContainer: HTMLElement): void {
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('movie', 'container');
+    }
+
+
+    // eslint-disable-next-line class-methods-use-this
+    async moviesEvent(event: Event) {
+        const target = event.target as HTMLButtonElement;
+
+        if (target.closest('.movies__card-rates-will-watch')) {
+            this.userProfile.saveWillWatch(target, '.movies__card-rates-will-watch', 'movies__card-rates-will-watch--active');
+        }
     }
 
     generatePageButton(page: number, isActive = false): HTMLLIElement {

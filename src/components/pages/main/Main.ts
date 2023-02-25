@@ -7,6 +7,7 @@ import Tickets from './sections/Tickets';
 import { Premieres, MovieType } from '../../types/types';
 import ControllerUnofficialKP from '../../controller/ControllerUnofficialKP';
 import ControllerKP from '../../controller/controllerKP';
+import UserProfile from '../user_profile/userProfile';
 
 export default class Main {
     page: Page;
@@ -27,6 +28,8 @@ export default class Main {
 
     controllerKP;
 
+    userProfile;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -36,6 +39,7 @@ export default class Main {
         this.cash = new Cash();
         this.controllerUnofficialKP = new ControllerUnofficialKP();
         this.controllerKP = new ControllerKP();
+        this.userProfile = new UserProfile();
     }
 
     draw(): HTMLElement {
@@ -78,6 +82,7 @@ export default class Main {
     }
 
     async renderSoonInCinema(count: number) {
+        const userWillWatchList = await this.userProfile.getWillWatchList();
         const date = new Date();
         const nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
         const movies = await (await this.controllerUnofficialKP.getPremieres(nextweek))
@@ -103,7 +108,7 @@ export default class Main {
                         <span class="soon-cinema__item-date-day">${day}</span>
                         <span class="soon-cinema__item-date-mounth">${month}</span>
                     </div>
-                    <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                    <button class="soon-cinema__item-marker ${userWillWatchList.includes(`${movie.kinopoiskId}`) ? 'soon-cinema__item-marker--active' : ''}" aria-label="Добавить в список" data-id="${movie.kinopoiskId}">
                         <svg class="soon-cinema__item-marker-icon">
                             <use href="./assets/img/sprite.svg#icon_add_watch"></use>
                         </svg>
@@ -145,7 +150,7 @@ export default class Main {
                 result += `
                 <li class="cash__card-item">
                         <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
-                            <img src="${movie.poster.previewUrl}" alt="" class="cash__card-item-poster">
+                            <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
                         </a>
                     <div class="cash__card-item-info">
                             <div class="cash__card-item-info-head">
@@ -160,5 +165,13 @@ export default class Main {
             });
             listDOM.innerHTML = result;
         });
+    }
+
+    mainPageEvent(event: Event) {
+        const target = event.target as HTMLButtonElement;
+
+        if (target.closest('.soon-cinema__item-marker')) {
+            this.userProfile.saveWillWatch(target, '.soon-cinema__item-marker', 'soon-cinema__item-marker--active');
+        }
     }
 }

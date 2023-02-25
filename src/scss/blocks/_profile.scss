@@ -344,14 +344,33 @@
   }
 
   &__score-your-mark {
-    margin: 0 0 10px 0;
+    margin: 0;
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
   }
 
+  &__score-btn-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   &__mark {
     font-size: 16px;
+    &-change-input{
+      font-size: 16px;
+      font-weight: bold;
+      border: 1px solid var(--color-accent);
+      width: 27px;
+      -moz-appearance: textfield;
+      &::-webkit-outer-spin-button{
+        -webkit-appearance: none;
+      }
+      &::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+      }
+    }
   }
 
   &__movies-info-wrap {
@@ -614,3 +633,6 @@
 
 
 
+.profile-change-score--hidden{
+  display: none;
+}

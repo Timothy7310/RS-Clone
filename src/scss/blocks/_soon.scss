@@ -124,6 +124,11 @@
                     fill: var(--color-secondary);
                     transition: fill 0.2s ease-in-out;
                 }
+                &--active{
+                    & .soon-cinema__item-marker-icon{
+                        fill: var(--color-accent);
+                    }
+                }
                 &:hover{
                     & .soon-cinema__item-marker-icon{
                         fill: var(--color-accent);

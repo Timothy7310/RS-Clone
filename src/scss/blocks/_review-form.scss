@@ -1,0 +1,76 @@
+.review-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &--hidden{
+        display: none;
+    }
+    &-wrap{
+        padding: 20px;
+        margin-top: 40px;
+        border: 1px solid var(--color-secondary);
+        border-radius: 10px;
+        width: 100%;
+        max-width: 620px;
+    }
+    &__submit{
+        align-self: center;
+    }
+    &__textarea{
+        padding: 13px 16px 13px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        resize: none;
+        caret-color: var(--color-accent);
+        color: var(--color-black);
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(0,0,0,.05);
+        height: 240px;
+    }
+    &__input{
+        overflow: hidden;
+        height: 44px;
+        padding: 13px 16px 13px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        caret-color: var(--color-accent);
+        color: var(--color-black);
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(0,0,0,.05);
+        &-warning{
+            border: 1px solid red;
+        }
+    }
+    &__select{
+        padding: 13px 16px 13px 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(0,0,0,.05);
+        height: 44px;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+        color: var(--color-black);
+    }
+    &__submit{
+        height: 52px;
+        padding: 15px 26px 15px 22px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        cursor: pointer;
+        text-align: center;
+        color: var(--color-white);
+        border: none;
+        border-radius: 100px;
+        outline: none;
+        background: var(--main-bg);
+        &:hover{
+            background: var(--main-hover-bg)
+        }
+    }
+}

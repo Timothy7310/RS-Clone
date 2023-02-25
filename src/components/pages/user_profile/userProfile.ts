@@ -31,7 +31,6 @@ export default class UserProfile {
     draw(): HTMLElement {
         this.container.classList.add('user-profile');
         this.container.innerHTML = userProfileTemplate;
-        this.renderPage();
         this.renderLastPage();
         return this.container;
     }
@@ -40,31 +39,65 @@ export default class UserProfile {
         this.page.clear();
     }
 
-    renderLastPage() {
+    async renderLastPage() {
         const page = localStorage.getItem('profilePage');
 
         switch (page) {
             case 'settings':
-                this.renderSettings();
+                await this.renderPage();
+                await this.renderSettings();
                 break;
             case 'watched':
-                this.renderWatched();
+                await this.renderPage();
+                await this.renderWatched();
                 break;
             case 'reviews':
-                this.renderReviews();
+                await this.renderPage();
+                await this.renderReviews();
                 break;
             case 'willWatch':
-                this.renderWillWatch();
+                await this.renderPage();
+                await this.renderWillWatch();
                 break;
             default:
-                this.renderSettings();
+                await this.renderPage();
+                await this.renderSettings();
                 break;
         }
     }
 
     async renderPage() {
         const res = await this.firebaseStore.getCurrentUser();
-        const userInfo = res[0];
+        const userInfo = res[0] as UserType;
+        const moviesTypes = {
+            movie: 0,
+            tvShows: 0,
+            shortMovie: 0,
+        };
+        const moviesList = userInfo.watched.items.map((x) => x.filmID)
+            .map(async (id) => {
+                const repsonse = await this.controllerKP.searchMovie(id, 'id');
+                return repsonse;
+            });
+        await Promise.all(moviesList).then((response) => {
+            response.forEach((item) => {
+                if (item.type === 'movie') {
+                    moviesTypes.movie += 1;
+                }
+                if (item.type === 'tv-series') {
+                    moviesTypes.tvShows += 1;
+                }
+                if (item.type === 'movie' && item.movieLength <= 50) {
+                    moviesTypes.shortMovie += 1;
+                }
+            });
+        });
+
+        const watchedList = userInfo.watched.items;
+
+        const average = (watchedList.reduce((acc, x) => acc + (+(x?.score as number) ?? 0), 0)
+                        / watchedList.length) || 0;
+
         const result = `
             <section class="profile">
                 <div class="container display-flex">
@@ -118,7 +151,7 @@ export default class UserProfile {
                                 <svg class="profile__link-icon">
                                     <use href="./assets/img/sprite.svg#review-logo"></use>
                                 </svg>
-                                <span class="profile__link-text">Рецензии (${userInfo.reviews.total})</span>
+                                <span class="profile__link-text profile--reviews-count">Рецензии (${userInfo.reviews.total})</span>
                             </a>
                         </li>
                         <li class="profile__list">
@@ -126,7 +159,7 @@ export default class UserProfile {
                                 <svg class="profile__link-icon">
                                     <use href="./assets/img/sprite.svg#movie-logo"></use>
                                 </svg>
-                                <span class="profile__link-text">Моё (${userInfo.willWatch.total})</span>
+                                <span class="profile__link-text profile--will-watch-count">Моё (${userInfo.willWatch.total})</span>
                             </a>
                         </li>
                         <li class="profile__list profile__list--log-out">
@@ -140,20 +173,20 @@ export default class UserProfile {
                         <h3 class="profile__title-activity">Ваша активность:</h3>
                         <h4 class="profile__category-activity">вы просмотрели:</h4>
                         <p class="profile__item-activity">
-                            фильмы <span class="count-movies count">${userInfo.watched.total}</span>
+                            фильмы <span class="count-movies count">${moviesTypes.movie}</span>
                         </p>
                         <p class="profile__item-activity">
-                            сериалы <span class="count-serials count">15</span>
+                            сериалы <span class="count-serials count">${moviesTypes.tvShows}</span>
                         </p>
                         <p class="profile__item-activity">
-                            короткометражки <span class="count-short-movies count">10</span>
+                            короткометражки <span class="count-short-movies count">${moviesTypes.shortMovie}</span>
                         </p>
                         <h4 class="profile__category-activity">вы написали:</h4>
                         <p class="profile__item-activity">рецензий
                             <span class="count-review count">${userInfo.reviews.total}</span>
                         </p>
                         <h4 class="profile__category-activity">ваша средняя оценка:</h4>
-                        <p class="profile__item-activity count">7.88</p>
+                        <p class="profile__item-activity profile__item-activity--average-score count">${average.toFixed(2)}</p>
                     </div>
                 </div>
             </section>
@@ -214,7 +247,7 @@ export default class UserProfile {
     async renderWatched() {
         const res = await this.firebaseStore.getCurrentUser();
         const userInfoWatched: WatchedType = res[0].watched;
-        console.log(userInfoWatched);
+
         const entryPoint = document.querySelector('.profile__content') as HTMLElement;
 
         const activeClass = 'profile-page--active';
@@ -337,20 +370,23 @@ export default class UserProfile {
                                 </p>
                             </div>
                         </div>
-                        <div class="profile__score-btn-wrap">
+                        <div class="profile__score-btn-wrap profile__score-btn-wrap--${item.filmID}">
                             <p class="profile__score-your-mark">
-                                Ваша оценка: <span class="profile__mark">${item.score}</span>
+                                Ваша оценка: <span class="profile__mark profile__mark--${item.filmID}">${item.score}</span>
                             </p>
-                            <button class="profile__review-btn">Изменить</button>
+                            <button class="profile__review-btn profile-change-score profile__review-btn--change-move-score" data-id="${item.filmID}">Изменить</button>
+                            <button class="profile__review-btn profile-change-score profile-change-score--hidden profile__review-btn--save-move-score" data-id="${item.filmID}">Сохранить</button>
                         </div>
                     </div>
                 `;
                 watchedListDOM.prepend(elem);
-                console.log(movie);
             });
 
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
         }
     }
 
@@ -474,15 +510,15 @@ export default class UserProfile {
                                 <a href="#/movie/${item.filmID}">
                                     <h2 class="profile__review-title">${movie.name} (${movie.year})</h2>
                                 </a>
-                                <h3 class="profile__title-english">${movie.alternativeName}</h3>
+                                <h3 class="profile__title-english">${movie.alternativeName || ''}</h3>
                                 <p class="profile__score-timing">
                                     <span class="color-orange">${movie.rating.kp}</span> (${movie.votes.kp}) ${movie.movieLength} мин.
                                 </p>
                             </div>
                         </div>
                         <div class="profile__review-btn-wrap">
-                            <button class="profile__review-btn">Изменить</button>
-                            <button class="profile__review-btn">Удалить</button>
+                            <button class="profile__review-btn profile__review-btn--change">Изменить</button>
+                            <button class="profile__review-btn profile__review-btn--delete" data-id="${item.filmID}">Удалить</button>
                         </div>
                     </div>
                     <div class="profile__review-text-wrap">
@@ -498,7 +534,13 @@ export default class UserProfile {
 
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
         }
+
+        const reviewsPageCount = document.querySelector('.profile--reviews-count') as HTMLElement;
+        reviewsPageCount.textContent = `Рецензии (${userInfoReviews.total})`;
     }
 
     async renderWillWatch() {
@@ -622,14 +664,14 @@ export default class UserProfile {
                         <a href="#/movie/${item.filmID}" class="profile__will-watch-card-name-wrap">
                             <h3 class="profile__will-watch-card-name">${movie.name} (${movie.year})</h3>
                         </a>
-                        <span class="profile__will-watch-card-original-name">${movie.alternativeName}</span>
+                        <span class="profile__will-watch-card-original-name">${movie.alternativeName || ''}</span>
                         <div class="profile__will-watch-card-subinfo">
                             <span class="profile__will-watch-card-rate">${movie.rating.kp}</span>
                             <span class="profile__will-watch-card-rate-count">(${movie.votes.kp})</span>
                             <span class="profile__will-watch-card-time">${movie.movieLength} мин.</span>
                         </div>
                     </div>
-                    <button class="profile__will-watch-card-delete" title="Удалить">
+                    <button class="profile__will-watch-card-delete" data-id="${item.filmID}" title="Удалить">
                         <svg class="profile__will-watch-card-delete-icon">
                             <use href="./assets/img/sprite.svg#icon_close"></use>
                         </svg>
@@ -640,7 +682,13 @@ export default class UserProfile {
 
             const paginations = document.querySelectorAll('.movies__pagination');
             paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
         }
+
+        const willWatchPageCount = document.querySelector('.profile--will-watch-count') as HTMLElement;
+        willWatchPageCount.textContent = `Моё (${userInfoWillWatch.total})`;
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -707,6 +755,98 @@ export default class UserProfile {
             event.preventDefault();
             this.renderWillWatch();
         }
+
+        if (target.closest('.profile__will-watch-card-delete')) {
+            event.preventDefault();
+            const delButton = target.closest('.profile__will-watch-card-delete') as HTMLButtonElement;
+            const id = delButton.dataset.id as string;
+
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+            const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
+            newUserInfo.willWatch = {
+                items: newWillWatchList,
+                total: newWillWatchList.length,
+            };
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            await this.renderWillWatch();
+        }
+
+        if (target.closest('.profile__review-btn--delete')) {
+            event.preventDefault();
+            const delButton = target.closest('.profile__review-btn--delete') as HTMLButtonElement;
+            const id = delButton.dataset.id as string;
+
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+            const newReviewsList = newUserInfo.reviews.items.filter((x) => x.filmID !== id);
+            newUserInfo.reviews = {
+                items: newReviewsList,
+                total: newReviewsList.length,
+            };
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            await this.renderReviews();
+            const reviewsDOM = document.querySelector('.count-review') as HTMLElement;
+            const reviewsCount = newReviewsList.length;
+            reviewsDOM.textContent = `${reviewsCount}`;
+        }
+
+        if (target.classList.contains('profile__review-btn--change-move-score')) {
+            const id = target.dataset.id as string;
+            const score = document.querySelector(`.profile__mark--${id}`) as HTMLElement;
+
+            const prevScore = score.textContent ?? '0';
+
+            const inputElem = document.createElement('input');
+            inputElem.type = 'number';
+            inputElem.max = '10';
+            inputElem.min = '1';
+            inputElem.classList.add('profile__mark-change-input', `profile__mark-change-input--${id}`);
+            inputElem.value = prevScore;
+
+            score.innerHTML = '';
+            score.append(inputElem);
+
+            target.disabled = true;
+            const saveBtn = document.querySelector(`.profile__review-btn--save-move-score[data-id="${id}"]`) as HTMLButtonElement;
+            saveBtn.classList.remove('profile-change-score--hidden');
+            saveBtn.disabled = false;
+        }
+
+        if (target.classList.contains('profile__review-btn--save-move-score')) {
+            const id = target.dataset.id as string;
+            const score = document.querySelector(`.profile__mark--${id}`) as HTMLElement;
+            const input = document.querySelector(`.profile__mark-change-input--${id}`) as HTMLInputElement;
+            const newScore = +input.value;
+
+            const response = await this.firebaseStore.getCurrentUser();
+            const userInfo = response[0];
+            const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+
+            const newWatchedList = newUserInfo.watched.items.map((x) => (x.filmID === id
+                ? { date: `${new Date().getTime()}`, filmID: x.filmID, score: newScore }
+                : x));
+
+            newUserInfo.watched.items = newWatchedList;
+
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+
+            score.innerHTML = `${newScore || '0'}`;
+
+            const changeBtn = document.querySelector(`.profile__review-btn--change-move-score[data-id="${id}"]`) as HTMLButtonElement;
+            changeBtn.disabled = false;
+            target.classList.add('profile-change-score--hidden');
+            target.disabled = true;
+
+            const newAvr = (newWatchedList.reduce((acc, x) => acc + (+(x?.score as number) ?? 0), 0)
+            / newWatchedList.length) || 0;
+            const averageDOM = document.querySelector('.profile__item-activity--average-score') as HTMLElement;
+            averageDOM.textContent = `${newAvr}`;
+        }
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -719,5 +859,52 @@ export default class UserProfile {
             await this.firebaseStore.uploadFile(files[0]);
             avatarInput.value = localStorage.getItem('downloadURL') ?? 'https://vjoy.cc/wp-content/uploads/2020/11/1-35.jpg';
         }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    validationMark(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        // TODO: изменить логику, можно менять только с помощью стрелок вверх\вниз
+        if (target.closest('.profile__mark-change-input')) {
+            target.value = `${Math.max(1, Math.min(10, +target.value))}`;
+        }
+    }
+
+    async getWillWatchList() {
+        const res = await this.firebaseStore.getCurrentUser();
+        const userInfoWillWatch: WillWatchType = res[0].willWatch;
+        return userInfoWillWatch.items.map((x) => x.filmID);
+    }
+
+    async saveWillWatch(target: HTMLButtonElement, targetClass: string, activeClass: string) {
+        const btn = target.closest(targetClass) as HTMLButtonElement;
+        const id = btn.dataset.id as string;
+
+        btn.disabled = true;
+        btn.classList.toggle(activeClass);
+        const response = await this.firebaseStore.getCurrentUser();
+        const userInfo = response[0];
+        const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
+
+        const userWillWatchList = await this.getWillWatchList();
+        if (userWillWatchList.includes(id)) {
+            const newWillWatchList = newUserInfo.willWatch.items.filter((x) => x.filmID !== id);
+            newUserInfo.willWatch.items = newWillWatchList;
+            newUserInfo.willWatch.total = newWillWatchList.length;
+            await this.firebaseStore.updateUserInfo(newUserInfo);
+            btn.disabled = false;
+            return;
+        }
+
+        const newWillWatchFilm = {
+            date: `${new Date().getTime()}`,
+            filmID: id,
+        };
+        newUserInfo.willWatch.items.push(newWillWatchFilm);
+        newUserInfo.willWatch.total = newUserInfo.willWatch.items.length;
+
+        await this.firebaseStore.updateUserInfo(newUserInfo);
+        btn.disabled = false;
     }
 }
