@@ -15,18 +15,25 @@ import { UserType } from '../types/types';
 class FirebaseStore {
     firebaseAuthUser;
 
+    user: UserType | null;
+
     constructor() {
         this.firebaseAuthUser = new FirebaseAuthUser();
+        this.user = null;
     }
 
     createUser = async (email: string, password: string) => {
         await this.firebaseAuthUser.registerUser(email, password);
-        const id = localStorage.getItem('userID') as string;
+        const id = localStorage.getItem('userID') ?? '';
         userBlank.email = email;
         userBlank.password = password;
         userBlank.id = id;
-        await setDoc(doc(db, 'users', id), userBlank);
-        this.firebaseAuthUser.logInUser(email, password);
+        try {
+            await setDoc(doc(db, 'users', id), userBlank);
+            this.firebaseAuthUser.logInUser(email, password);
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     // eslint-disable-next-line class-methods-use-this
@@ -40,11 +47,13 @@ class FirebaseStore {
     };
 
     // eslint-disable-next-line class-methods-use-this
-    getCurrentUser = async () => {
+    getCurrentUser = async (isForce = false) => {
         const id = localStorage.getItem('userID') as string;
-        const users = await this.readUsers();
-        const res = users.filter((x) => x.id === id);
-        return res;
+        if (isForce || this.user?.id !== id) {
+            const users = await this.readUsers();
+            this.user = (users.filter((x) => x.id === id) ?? []).pop() as UserType;
+        }
+        return this.user;
     };
 
     // eslint-disable-next-line class-methods-use-this
@@ -57,6 +66,7 @@ class FirebaseStore {
     // eslint-disable-next-line class-methods-use-this
     updateUserInfo = async (userObj: UserType) => {
         const id = localStorage.getItem('userID') as string;
+        this.user = userObj;
         await setDoc(doc(db, 'users', id), userObj);
     };
 
