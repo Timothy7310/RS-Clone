@@ -119,30 +119,9 @@ const logInHeader = `
             </form>
             <div class="header__search-results header__search-results--hidden">
                 <span class="header__search-results-text">Результаты поиска:</span>
-                <article class="header__search-result">
-                    <a href="" class="header__search-result-link"></a>
-                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8b9cc726-2309-492a-a099-3163f8ef4693/40x60" class="header__search-result-poster" alt="">
-                    <div class="header__search-result-text-wrap">
-                        <h4 class="header__search-result-name">Фандорин. Азазель</h4>
-                        <div class="header__search-result-info">
-                            <span class="header__search-result-rate rate-num--good">7.1</span>
-                            <span class="header__search-result-type">сериал</span>
-                            <span class="header__search-result-year">2022</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="header__search-result">
-                    <a href="" class="header__search-result-link"></a>
-                    <img src="//avatars.mds.yandex.net/get-kinopoisk-image/6201401/8b9cc726-2309-492a-a099-3163f8ef4693/40x60" class="header__search-result-poster" alt="">
-                    <div class="header__search-result-text-wrap">
-                        <h4 class="header__search-result-name">Фандорин. Азазель</h4>
-                        <div class="header__search-result-info">
-                            <span class="header__search-result-rate rate-num--good">7.1</span>
-                            <span class="header__search-result-type">сериал</span>
-                            <span class="header__search-result-year">2022</span>
-                        </div>
-                    </div>
-                </article>
+                <div class="header__search-results-wrap">
+                    <span class="header__search-results-not-found">Ничего не найдено</span>
+                </div>
             </div>
         </div>
         <button class="header__quizz-btn">Игра</button>

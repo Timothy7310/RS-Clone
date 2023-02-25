@@ -79,6 +79,7 @@ type MovieType = {
     },
     type: string,
     name: string,
+    alternativeName: string,
     description: string,
     slogan: string,
     year: number,

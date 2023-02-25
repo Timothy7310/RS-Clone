@@ -18,8 +18,8 @@ class ControllerTestKP {
     randomMovieURL;
 
     constructor() {
-        this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
-        this.baseURL = 'https://test-api.kinopoisk.dev';
+        this.token = '?token=XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5';
+        this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.randomMovieURL = `${this.baseURL}/movie/random${this.token}`;
         this.personURL = `${this.baseURL}/person${this.token}`;
