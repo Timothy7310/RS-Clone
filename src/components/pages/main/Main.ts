@@ -58,11 +58,11 @@ export default class Main {
         this.container.appendChild(this.tickets.draw());
         this.container.appendChild(this.soon.draw());
         this.container.appendChild(this.cash.draw());
-        // await this.renderPremiereSlider();
-        // await this.renderSoonInCinema(5);
-        // await this.renderBoxOffice('russia');
-        // await this.renderBoxOffice('world');
-        // await this.renderBoxOffice('usa');
+        await this.renderPremiereSlider();
+        await this.renderSoonInCinema(5);
+        await this.renderBoxOffice('russia');
+        await this.renderBoxOffice('world');
+        await this.renderBoxOffice('usa');
         this.container.classList.add('main');
     }
 
@@ -78,7 +78,7 @@ export default class Main {
         movies.forEach(async (movie: Premieres) => {
             result += `
                 <li class="tickets__slide">
-                    <a href="#/cinema/seances/${movie.kinopoiskId}" class="tickets__slide-link">
+                    <a href="#/seances/${movie.kinopoiskId}" class="tickets__slide-link">
                         <div class="tickets__slide-img-wrap">
                           <img class="tickets__slide-img" src="${movie.posterUrlPreview}" alt="">
                         </div>
@@ -106,11 +106,11 @@ export default class Main {
             const month = new Date(movie.premiereRu).toLocaleDateString('ru-RU', { month: 'long' });
             result += `
                 <li class="soon-cinema__item">
-                    <a href="#/cinema/seances/${movie.kinopoiskId}">
+                    <a href="#/seances/${movie.kinopoiskId}">
                         <img class="soon-cinema__item-poster" src="${movie.posterUrlPreview}" alt="">
                     </a>
                     <div class="soon-cinema__item-name-container">
-                        <a href="#/cinema/seances/${movie.kinopoiskId}">
+                        <a href="#/seances/${movie.kinopoiskId}">
                             <span class="soon-cinema__item-name">${movie.nameRu}</span>
                         </a>
                         <span class="soon-cinema__item-name-original">${movie.nameEn ?? ''}</span>
@@ -143,12 +143,12 @@ export default class Main {
 
             result += `
             <li class="cash__card-item">
-                    <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
+                    <a href="#/seances/${movie.id}" class="cash__card-item-poster-wrap">
                         <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
                     </a>
                 <div class="cash__card-item-info">
                         <div class="cash__card-item-info-head">
-                            <a href="#/cinema/seances/${movie.id}" class="cash__card-item-name-wrap">
+                            <a href="#/seances/${movie.id}" class="cash__card-item-name-wrap">
                                 <span class="cash__card-item-name">${movie.name}</span>
                             </a>
                             <span class="cash__card-item-total">${(value / 1000000).toFixed(2)} млн ${currency}</span>

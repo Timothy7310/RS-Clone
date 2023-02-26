@@ -39,10 +39,9 @@ export default class Cinema {
                 return acc;
             }, []).join(', ');
             const time = movie.duration;
-            // TODO: добавить рейтинг в .billboard__item-rate
             result += `
                 <li class="billboard__item">
-                    <a href="#/cinema/seances/${movie.kinopoiskId}" class="billboard__item-link">
+                    <a href="#/seances/${movie.kinopoiskId}" class="billboard__item-link">
                         <div class="billboard__item-tickets">
                             <svg class="billboard__item-tickets-icon">
                                 <use href="./assets/img/sprite.svg#icon_tickets"></use>
@@ -62,7 +61,7 @@ export default class Cinema {
             `;
         });
         listDOM.innerHTML = result;
-        await this.renderCalendar();
+        await this.renderCalendar('.billboard__days-calendar');
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -124,8 +123,8 @@ export default class Cinema {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    renderCalendar(days = 7) {
-        const listDOM = document.querySelector('.billboard__days-calendar') as HTMLElement;
+    renderCalendar(parentClass: string, days = 7) {
+        const listDOM = document.querySelector(parentClass) as HTMLElement;
         let result = '';
         const date = new Date();
         let dateArr = [];
