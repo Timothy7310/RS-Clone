@@ -46,6 +46,11 @@ class ControllerTestKP {
         return movie;
     }
 
+    async searchMovie(name: string, page = 1, total = 10) {
+        const response = await fetch(`${this.movieURL}&page=${page}&total:${total}&name=${name}`);
+        const movies = await response.json();
+        return movies;
+    }
     async getMoviesBoxOffice(id: number[], country: string, limit = 5) {
         const response = await fetch(`${this.movieURL}&selectFields=id%20name%20fees%20poster&sortField=fees.${country}.value&sortType=-1&page=1&limit=${limit}&${id.map((x) => `id=${x}`).join('&')}`);
         const movies = await response.json();

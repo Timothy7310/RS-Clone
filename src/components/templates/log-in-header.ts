@@ -108,14 +108,22 @@ const logInHeader = `
             </ul>
         </nav>
 
-        <form action="" class="header__search-form">
-            <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
-            <button type="submit" class="header__search-btn" aria-label="Найти">
-                <svg class="header__search-btn-icon">
-                    <use href="assets/img/sprite.svg#icon_search"></use>
-                </svg>
-            </button>
-        </form>
+        <div class="header__search-form-wrap">
+            <form action="" class="header__search-form">
+                <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
+                <button type="submit" class="header__search-btn" aria-label="Найти">
+                    <svg class="header__search-btn-icon">
+                        <use href="./assets/img/sprite.svg#icon_search"></use>
+                    </svg>
+                </button>
+            </form>
+            <div class="header__search-results header__search-results--hidden">
+                <span class="header__search-results-text">Результаты поиска:</span>
+                <div class="header__search-results-wrap">
+                    <span class="header__search-results-not-found">Ничего не найдено</span>
+                </div>
+            </div>
+        </div>
         <button class="header__quizz-btn">Игра</button>
         <a href="#/profile" class="header__profile-btn" id="profile" title="Личный кабинет">
             <img src="" alt="" class="header__profile-avatar">
