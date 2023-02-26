@@ -216,7 +216,7 @@ export default class MoviesTop {
         const userWillWatchLisIds = await this.userProfile.getWillWatchList();
         if (userWillWatchLisIds.includes(id)) {
             const newWillWatchList = newUserInfo.willWatch.items
-                .filter((x) => x.date && x.filmID && x.filmID !== id);
+                .filter((x) => x.filmID !== id);
             newUserInfo.willWatch.items = newWillWatchList;
             newUserInfo.willWatch.total = newWillWatchList.length;
         } else {

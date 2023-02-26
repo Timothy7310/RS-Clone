@@ -4,9 +4,10 @@ import Cash from './sections/Cash';
 import Popular from './sections/Popular';
 import Soon from './sections/soon';
 import Tickets from './sections/Tickets';
-import { Premieres, MovieType } from '../../types/types';
+import { Premieres, CountryBoxOfficeType } from '../../types/types';
 import ControllerUnofficialKP from '../../controller/ControllerUnofficialKP';
 import ControllerKP from '../../controller/controllerKP';
+import ControllerTestKP from '../../controller/controllerTestKP';
 
 export default class Main {
     page: Page;
@@ -27,6 +28,8 @@ export default class Main {
 
     controllerKP;
 
+    controllerTestKP;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -36,6 +39,7 @@ export default class Main {
         this.cash = new Cash();
         this.controllerUnofficialKP = new ControllerUnofficialKP();
         this.controllerKP = new ControllerKP();
+        this.controllerTestKP = new ControllerTestKP();
     }
 
     draw(): HTMLElement {
@@ -44,16 +48,15 @@ export default class Main {
     }
 
     async drawPage() {
-        const movieTypes = await this.controllerUnofficialKP.getAllPremiers();
         this.container.appendChild(this.popular.draw());
         this.container.appendChild(this.tickets.draw());
         this.container.appendChild(this.soon.draw());
         this.container.appendChild(this.cash.draw());
-        this.renderPremiereSlider();
-        this.renderSoonInCinema(5);
-        this.renderBoxOffice('russia', movieTypes);
-        this.renderBoxOffice('world', movieTypes);
-        this.renderBoxOffice('usa', movieTypes);
+        await this.renderPremiereSlider();
+        await this.renderSoonInCinema(5);
+        await this.renderBoxOffice('russia');
+        await this.renderBoxOffice('world');
+        await this.renderBoxOffice('usa');
         this.container.classList.add('main');
     }
 
@@ -120,22 +123,13 @@ export default class Main {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    renderBoxOffice(type: 'world' | 'russia' | 'usa', movieTypes: MovieType[]) {
-        movieTypes.sort((x, y) => {
-            const prev = x.fees?.[type]?.value;
-            const next = y.fees?.[type]?.value;
-            if ((prev ?? 0) > (next ?? 0)) {
-                return -1;
-            }
-            if ((prev ?? 0) < (next ?? 0)) {
-                return 1;
-            }
-            return 0;
-        });
-
+    async renderBoxOffice(type: 'world' | 'russia' | 'usa') {
         const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
         let result = '';
-        movieTypes.slice(0, 5).forEach((movie) => {
+        const ids = await this.controllerUnofficialKP.getPremiereIDs() as number[];
+        const movies: CountryBoxOfficeType = await this.controllerTestKP.getMoviesBoxOffice(ids, type, 5);
+
+        movies.docs.forEach((movie) => {
             const value = movie.fees?.[type]?.value ?? 0;
             const currency = movie.fees?.[type]?.currency ?? '$';
 

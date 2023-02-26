@@ -227,6 +227,37 @@ type MoviesUserType = {
     shortMovie: number;
 };
 
+type CountryBoxOfficeDocs = {
+    fees: {
+        russia: {
+            value: number,
+            currency: string,
+        },
+        usa: {
+            value: number,
+            currency: string,
+        },
+        world: {
+            value: number,
+            currency: string,
+        }
+    },
+    id: number,
+    name: string,
+    poster: {
+        previewUrl: string,
+        url: string
+    }
+};
+
+type CountryBoxOfficeType = {
+    docs: CountryBoxOfficeDocs[],
+    limit: number,
+    page: number,
+    pages: number,
+    total: number,
+};
+
 export {
     Countries,
     Genres,
@@ -241,4 +272,5 @@ export {
     MovieTestType,
     ImagesType,
     MoviesUserType,
+    CountryBoxOfficeType,
 };

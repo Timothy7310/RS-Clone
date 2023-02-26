@@ -1,10 +1,9 @@
 import {
     Premieres,
     BoxOffice,
-    FeesType,
-    MovieType,
 } from '../types/types';
 import ControllerKP from './controllerKP';
+import ControllerTestKP from './controllerTestKP';
 
 class ControllerUnofficialKP {
     rootURL;
@@ -19,14 +18,18 @@ class ControllerUnofficialKP {
 
     controllerKP: ControllerKP;
 
+    controllerTestKP;
+
     constructor() {
         this.rootURL = 'https://kinopoiskapiunofficial.tech/api/v2.2';
-        this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
+        // this.apiKey = '1257d22f-c214-4d2a-bb6a-99ea6c1c66d5';
         // this.apiKey = '1081c1fd-9b5b-43b4-905b-878e960e39ca'; // еще один ключ, на всякий случай
+        this.apiKey = '1f879599-1d62-4279-a23a-fcdfe3f664d6'; // еще один ключ, на всякий случай
         this.premieresURL = 'films/premieres';
         this.moviesURL = 'films';
         this.boxOffice = [];
         this.controllerKP = new ControllerKP();
+        this.controllerTestKP = new ControllerTestKP();
     }
 
     async getPremieres() {
@@ -103,20 +106,6 @@ class ControllerUnofficialKP {
         }
     }
 
-    async getAllPremiers() {
-        const ids = await this.getPremiereIDs();
-        if (ids) {
-            const box: Promise<MovieType>[] = ids.map(async (id) => {
-                const res = await this.controllerKP.getMovieForId(`${id}`);
-                const movie = res;
-                return movie;
-            });
-            const result = await Promise.all(box);
-            return result;
-        }
-        return [];
-    }
-
     async getMovieByID(id: number) {
         try {
             const response = await fetch(`${this.rootURL}/${this.moviesURL}/${id}`, {
@@ -149,24 +138,6 @@ class ControllerUnofficialKP {
             console.error(`Пока что нельзя получить сборы по странам из API. ${error}`);
             return null;
         }
-    }
-
-    async getBoxOffice(type: FeesType) {
-        const boxOffice: BoxOffice[][] = [];
-        const movies = await this.getPremieres();
-        movies.forEach(async (movie: Premieres, index: number) => {
-            if (index < 5) {
-                const fees = await this.getFees(movie.kinopoiskId);
-                console.log(fees);
-
-                boxOffice.push(fees);
-            }
-        });
-        console.log(type);
-
-        console.log(boxOffice.flat());
-
-        return boxOffice;
     }
 }
 

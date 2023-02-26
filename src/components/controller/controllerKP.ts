@@ -141,6 +141,14 @@ class ControllerKP {
             return null;
         }
     }
+
+    async getMoviesByIDs(id: number[]) {
+        const response = await fetch(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
+        const movies = await response.json();
+        console.log(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
+
+        return movies;
+    }
 }
 
 export default ControllerKP;
