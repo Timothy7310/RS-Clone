@@ -58,11 +58,11 @@ export default class Main {
         this.container.appendChild(this.tickets.draw());
         this.container.appendChild(this.soon.draw());
         this.container.appendChild(this.cash.draw());
-        await this.renderPremiereSlider();
-        await this.renderSoonInCinema(5);
-        await this.renderBoxOffice('russia');
-        await this.renderBoxOffice('world');
-        await this.renderBoxOffice('usa');
+        // await this.renderPremiereSlider();
+        // await this.renderSoonInCinema(5);
+        // await this.renderBoxOffice('russia');
+        // await this.renderBoxOffice('world');
+        // await this.renderBoxOffice('usa');
         this.container.classList.add('main');
     }
 

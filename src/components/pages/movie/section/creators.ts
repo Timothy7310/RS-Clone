@@ -19,7 +19,6 @@ export default class Creators {
     async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
         const movie = await this.controller.getMovieForId(idNumber);
         const creatorAll = this.getPersons(movie.persons);
-        console.log(creatorAll);
 
         this.container.insertAdjacentHTML('afterbegin', creators(creatorAll));
         parentContainer.appendChild(this.container);

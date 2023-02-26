@@ -18,8 +18,9 @@ class ControllerKP {
     seasonURL;
 
     constructor() {
-        this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        // this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
         // this.tokenNum = 'XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
+        this.tokenNum = 'YJJQ1XT-DNJMT7J-PTA5KZF-WWP9ANR'; // еще один
         this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
@@ -146,8 +147,6 @@ class ControllerKP {
     async getMoviesByIDs(id: number[]) {
         const response = await fetch(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
         const movies = await response.json();
-        console.log(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
-
         return movies;
     }
 }

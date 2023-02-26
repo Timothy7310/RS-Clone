@@ -17,6 +17,7 @@ import FirebaseStore from '../../server/firebaseStore';
 import { UserType } from '../../types/types';
 import UserProfile from '../user_profile/userProfile';
 import CardGenerator from '../../templates/movies/movieCard';
+import ControllerTestKP from '../../controller/controllerTestKP';
 
 export default class MoviesTop {
     component: Component;
@@ -29,12 +30,15 @@ export default class MoviesTop {
 
     userProfile;
 
+    controllerTestKP;
+
     constructor() {
         this.component = new Component('section', 'movies');
         this.container = this.component.draw();
         this.controller = new ControllerKP();
         this.firebaseStore = new FirebaseStore();
         this.userProfile = new UserProfile();
+        this.controllerTestKP = new ControllerTestKP();
     }
 
     draw(parentContainer: HTMLElement): void {
@@ -197,7 +201,7 @@ export default class MoviesTop {
     }
 
     async changePage(page = 1): Promise<void> {
-        const pageData = await this.controller.getTop250(page);
+        const pageData = await this.controllerTestKP.getMovies(page);
         const id = await this.getRandomeId();
         if (pageData) {
             const movies = await this.getMoviesFromPageData(pageData.docs);

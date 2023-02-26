@@ -113,6 +113,10 @@ export default class App {
             this.userProfile.validationMark(e);
         });
 
+        bodyDOM.addEventListener('submit', (e) => {
+            this.search.renderSearchPage(e);
+        });
+
         window.addEventListener('popstate', async () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;
