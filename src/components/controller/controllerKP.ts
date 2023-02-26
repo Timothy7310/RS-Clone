@@ -19,6 +19,7 @@ class ControllerKP {
 
     constructor() {
         this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        // this.tokenNum = 'XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
         this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;

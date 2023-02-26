@@ -99,7 +99,7 @@ export default class Main {
             .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
-        console.log(await (await this.controllerUnofficialKP.getPremieres()));
+
         movies.forEach((movie: Premieres) => {
             // TODO: добавить склонения февраль -> февраля
             const day = new Date(movie.premiereRu).toLocaleDateString('ru-RU', { day: 'numeric' });

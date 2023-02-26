@@ -19,6 +19,7 @@ class ControllerTestKP {
 
     constructor() {
         this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
+        // this.token = '?token=XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.randomMovieURL = `${this.baseURL}/movie/random${this.token}`;
@@ -51,6 +52,7 @@ class ControllerTestKP {
         const movies = await response.json();
         return movies;
     }
+
     async getMoviesBoxOffice(id: number[], country: string, limit = 5) {
         const response = await fetch(`${this.movieURL}&selectFields=id%20name%20fees%20poster&sortField=fees.${country}.value&sortType=-1&page=1&limit=${limit}&${id.map((x) => `id=${x}`).join('&')}`);
         const movies = await response.json();

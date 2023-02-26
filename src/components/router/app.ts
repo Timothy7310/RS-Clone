@@ -36,7 +36,6 @@ export default class App {
 
     firebaseStore;
 
-
     search;
 
     moviesTop;
@@ -45,26 +44,20 @@ export default class App {
 
     movie;
 
-
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
         }
         this.cinema = new Cinema();
-
         this.burger = new Burger();
-
         this.login = new Login();
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
-
         this.search = new Search();
-
         this.moviesTop = new MoviesTop();
         this.main = new Main();
         this.movie = new Movie();
-
     }
 
     start() {
@@ -116,18 +109,11 @@ export default class App {
         });
 
         bodyDOM.addEventListener('input', (e) => {
-
             this.search.searchEvent(e);
-        });
-
-        window.addEventListener('popstate', () => {
-
             this.userProfile.validationMark(e);
         });
 
-
         window.addEventListener('popstate', async () => {
-
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;
             if (isAuth && location.includes('#/login')) {
