@@ -1,5 +1,5 @@
 import { TMovie } from '../movie/typesMovie';
-import movieCard from './movieCard';
+import CardGenerator from './movieCard';
 
 export function generateHeader(count: number): HTMLSpanElement {
     const span = document.createElement('span');
@@ -8,11 +8,11 @@ export function generateHeader(count: number): HTMLSpanElement {
     return span;
 }
 
-export function generateBody(movies: TMovie[]) {
+export function generateBody(movies: TMovie[], generator: CardGenerator) {
     const list = document.createElement('ul');
     list.insertAdjacentHTML(
         'afterbegin',
-        movies.map((item: TMovie) => movieCard(item)).join(''),
+        movies.map((item: TMovie) => generator.movieCard(item)).join(''),
     );
     list.classList.add('movies__list');
 

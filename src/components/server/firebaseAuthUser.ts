@@ -8,57 +8,67 @@ import {
     deleteUser,
 } from 'firebase/auth';
 
+enum ErrorCodes {
+    AlreadyExist = 'auth/email-already-in-use',
+    WeekPassword = 'auth/weak-password',
+    InvalidEmail = 'auth/invalid-email',
+    WrongPassword = 'auth/wrong-password',
+}
+
 export default class FirebaseAuthUser {
     auth;
+
+    #errorContainer: HTMLElement | null = null;
 
     constructor() {
         this.auth = getAuth();
     }
 
+    get errorContainer(): HTMLElement {
+        if (!this.#errorContainer) {
+            this.#errorContainer = document.querySelector('.error-message') as HTMLElement;
+        }
+        return this.#errorContainer;
+    }
+
     registerUser = async (email: string, password: string) => {
-        const res = await createUserWithEmailAndPassword(this.auth, email, password)
+        await createUserWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
-                const errorContainer = document.querySelector('.error-message') as HTMLElement;
                 localStorage.setItem('userID', userCredential.user.uid);
-                errorContainer.textContent = '';
-                errorContainer.classList.remove('error-message--active');
+                this.clearErrorMessage();
                 this.logInUser(email, password);
-                // return userCredential;
             })
             .catch((error) => {
-                const errorContainer = document.querySelector('.error-message') as HTMLElement;
-                if (error.message === 'Firebase: Error (auth/invalid-email).') {
-                    errorContainer.textContent = 'Неправильный E-mail';
-                    errorContainer.classList.add('error-message--active');
+                if (error.code === ErrorCodes.InvalidEmail) {
+                    this.showErrorMessage('Неправильный E-mail');
+                    return;
                 }
-                if (error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
-                    errorContainer.textContent = 'Пароль должен состоять минимум из 6 символов';
-                    errorContainer.classList.add('error-message--active');
+                if (error.code === ErrorCodes.WeekPassword) {
+                    this.showErrorMessage('Пароль должен состоять минимум из 6 символов');
+                    return;
                 }
-                if (error.message === 'FirebaseError: Firebase: Error (auth/email-already-in-use).') {
-                    errorContainer.textContent = '';
-                    errorContainer.classList.remove('error-message--active');
+                if (error.code === ErrorCodes.AlreadyExist) {
+                    this.clearErrorMessage();
                     this.logInUser(email, password);
+                    return;
                 }
+                this.showErrorMessage('Неизвестная ошибка');
             });
-        return res;
     };
 
     logInUser = async (email: string, password: string): Promise<void> => {
         await signInWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
-                const errorContainer = document.querySelector('.error-message') as HTMLElement;
-                errorContainer.textContent = '';
-                errorContainer.classList.remove('error-message--active');
+                this.clearErrorMessage();
                 console.log(userCredential);
                 localStorage.setItem('isLogIn', 'true');
+                localStorage.setItem('userID', userCredential.user.uid);
+
                 window.location.href = '#/profile';
             })
             .catch((error) => {
-                const errorContainer = document.querySelector('.error-message') as HTMLElement;
-                if (error.message === 'Firebase: Error (auth/wrong-password).') {
-                    errorContainer.textContent = 'Неправильный пароль';
-                    errorContainer.classList.add('error-message--active');
+                if (error.code === ErrorCodes.WrongPassword) {
+                    this.showErrorMessage('Неправильный пароль');
                 }
             });
     };
@@ -127,4 +137,18 @@ export default class FirebaseAuthUser {
         });
         return localStorage.getItem('isLogIn') === 'true';
     };
+
+    showErrorMessage(message: string): void {
+        if (this.errorContainer) {
+            this.errorContainer.textContent = message;
+            this.errorContainer.classList.add('error-message--active');
+        }
+    }
+
+    clearErrorMessage(): void {
+        if (this.errorContainer) {
+            this.errorContainer.textContent = '';
+            this.errorContainer.classList.remove('error-message--active');
+        }
+    }
 }

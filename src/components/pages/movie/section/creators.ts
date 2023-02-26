@@ -17,7 +17,7 @@ export default class Creators {
     }
 
     async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
-        const movie = await this.controller.searchMovie(idNumber, 'id');
+        const movie = await this.controller.getMovieForId(idNumber);
         const creatorAll = this.getPersons(movie.persons);
         console.log(creatorAll);
 

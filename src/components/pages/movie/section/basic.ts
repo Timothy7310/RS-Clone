@@ -17,7 +17,7 @@ export default class Basic {
     }
 
     async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
-        const movie = await this.controller.searchMovie(idNumber, 'id');
+        const movie = await this.controller.getMovieForId(idNumber);
 
         this.container.insertAdjacentHTML('afterbegin', basicColumn(movie));
         this.container.insertAdjacentHTML('beforeend', about(movie));

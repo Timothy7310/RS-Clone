@@ -12,6 +12,7 @@ import MoviesTop from '../pages/movies/movies';
 import Main from '../pages/main/Main';
 import Movie from '../pages/movie/MoviePage';
 
+
 const rootElement = document.querySelector('#content');
 
 export default class App {
@@ -57,7 +58,7 @@ export default class App {
         this.initEvent();
         this.swapHeader();
         this.burger.listen();
-
+        this.swapHeader();
     }
 
     drawContent() {
@@ -71,10 +72,12 @@ export default class App {
 
         if (isAuth) {
             const user = await this.firebaseStore.getCurrentUser();
-            const src = user[0].avatar;
-            header.innerHTML = logInHeader;
-            const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
-            headerAvatar.src = src;
+            if (user) {
+                const src = user.avatar;
+                header.innerHTML = logInHeader;
+                const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
+                headerAvatar.src = src;
+            }
         } else {
             header.innerHTML = notLogInHeader;
         }
@@ -101,6 +104,7 @@ export default class App {
         bodyDOM.addEventListener('input', (e) => {
             this.userProfile.validationMark(e);
         });
+
 
         window.addEventListener('popstate', async () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';
