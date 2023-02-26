@@ -2,15 +2,10 @@ import GenerateTables from '../movie/generateTables';
 import { TMovie } from '../movie/typesMovie';
 import UserProfile from '../../pages/user_profile/userProfile';
 
-const userProfile = new UserProfile();
-const userWillWatchList = await userProfile.getWillWatchList();
-
-
 export default class CardGenerator {
     userProfile: UserProfile;
 
     persons: GenerateTables;
-
 
     watchIds: string[];
 

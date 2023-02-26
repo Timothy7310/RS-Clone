@@ -2,22 +2,51 @@
 // import debounce from './test';
 import ControllerTestKP from '../controller/controllerTestKP';
 import { MovieTestType } from '../types/types';
+import MoviesTop from '../pages/movies/movies';
+import CardGenerator from '../templates/movies/movieCard';
 
 class Search {
     controllerTestKP;
 
+    moviesTop;
+
     constructor() {
         this.controllerTestKP = new ControllerTestKP();
+        this.moviesTop = new MoviesTop();
     }
 
     async searchEvent(event: Event) {
         const target = event.target as HTMLInputElement;
         if (target.closest('.header__search-input')) {
+            const btn = document.querySelector('.header__search-btn') as HTMLButtonElement;
             const { value } = target;
+            btn.disabled = true;
             const res = await this.controllerTestKP.searchMovie(value);
             const searchResultsDOM = document.querySelector('.header__search-results') as HTMLElement;
             searchResultsDOM.classList.remove('header__search-results--hidden');
-            this.renderSearchList(res);
+            await this.renderSearchList(res);
+            btn.disabled = false;
+        }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    async renderSearchPage(event: Event) {
+        const target = event.target as HTMLFormElement;
+
+        if (target.closest('.header__search-form')) {
+            event.preventDefault();
+            const input = document.querySelector('.header__search-input') as HTMLInputElement;
+            window.location.href = '#/movies';
+
+            const pageData = await this.controllerTestKP.searchMovie(input.value);
+            const id = await this.moviesTop.getRandomeId();
+
+            if (pageData) {
+                const movies = await this.moviesTop.getMoviesFromPageData(pageData.docs);
+                const generator = new CardGenerator();
+                await generator.reloadWatchList();
+                this.moviesTop.drawPage(movies, pageData, id, generator);
+            }
         }
     }
 
