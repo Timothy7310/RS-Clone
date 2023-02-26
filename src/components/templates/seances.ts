@@ -53,7 +53,6 @@ const seancesTemplates = (movie: TMovie) => {
                         <div class="seances__movie-rates">
                             <span class="seances__movie-rate">${movie.rating.kp.toFixed(1)}</span>
                             <span class="seances__movie-rate-count">${movie.votes.kp} оценок</span>
-                            <button class="seances__movie-review-btn">Оценить фильм</button>
                             <span class="seances__movie-reviews">Рецензий: ${movie.votes.filmCritics}</span>
                         </div>
                     </div>

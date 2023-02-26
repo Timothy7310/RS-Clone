@@ -166,5 +166,30 @@ export default class Seances {
             }
             priceContainer.innerHTML = `${this.price} BYN`;
         }
+
+        if (target.closest('.modal-ticket__content-buy-btn')) {
+            if (this.price === 0) {
+                return;
+            }
+            const modalContent = document.querySelector('.modal-ticket__content-bottom') as HTMLElement;
+            const selectPlace = document.querySelectorAll('.modal-ticket__spot--active');
+            let places = '';
+            const nameElem = document.querySelector('.modal-ticket__content-name') as HTMLElement;
+            const name = nameElem.textContent;
+            const dateElem = document.querySelector('.modal-ticket__content-date-date') as HTMLElement;
+            const date = dateElem.textContent;
+            const timeElem = document.querySelector('.modal-ticket__content-date-time') as HTMLElement;
+            const time = timeElem.textContent;
+            const totalPrice = `${this.price} BYN`;
+            selectPlace.forEach((x) => {
+                places += `${x.getAttribute('aria-label')}, `;
+            });
+
+            modalContent.innerHTML = `
+                <span>Спасибо за покупку!</span>
+                <p>Выши места: ${places}</p>
+                <p>Сумма покупки: ${totalPrice}</p>
+            `;
+        }
     }
 }

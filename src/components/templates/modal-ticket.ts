@@ -11,10 +11,11 @@ const modalTicketTemplates = (time: string, date: string, name: string) => `
                 ${name}
             </span>
             <span class="modal-ticket__content-date">
-                ${date}. ${time} Кинотеатр RSSchool Cinema
+                <span class="modal-ticket__content-date-date">${date}</span>. <span class="modal-ticket__content-date-time">${time}</span> Кинотеатр RSSchool Cinema
             </span>
             <div class="modal-ticket__content-splitter"></div>
-            <div class="modal-ticket__content-prices">
+            <div class="modal-ticket__content-bottom">
+                <div class="modal-ticket__content-prices">
                 <div class="modal-ticket__content-price-wrap">
                     <div class="modal-ticket__content-price-color modal-ticket__content-price-color--low-cost"></div>
                     <span class="modal-ticket__content-price-num">10 BYN</span>
@@ -31,11 +32,11 @@ const modalTicketTemplates = (time: string, date: string, name: string) => `
                     <div class="modal-ticket__content-price-color modal-ticket__content-price-color--disable"></div>
                     <span class="modal-ticket__content-price-num">Занято</span>
                 </div>
-            </div>
-            <svg class="modal-ticket__content-monitor">
+                </div>
+                <svg class="modal-ticket__content-monitor">
                 <use href="./assets/img/sprite.svg#monitor"></use>
-            </svg>
-            <div class="modal-ticket__content-hall-wrap">
+                </svg>
+                <div class="modal-ticket__content-hall-wrap">
                 <ol class="modal-ticket__content-hall-rows modal-ticket__content-hall-rows--left">
                     <li class="modal-ticket__content-hall-row">1</li>
                     <li class="modal-ticket__content-hall-row">2</li>
@@ -715,13 +716,14 @@ const modalTicketTemplates = (time: string, date: string, name: string) => `
                     <li class="modal-ticket__content-hall-row">8</li>
                     <li class="modal-ticket__content-hall-row">9</li>
                 </ol>
-            </div>
-            <div class="modal-ticket__content-buy">
+                </div>
+                <div class="modal-ticket__content-buy">
                 <div class="modal-ticket__content-buy-total">
                     <span class="modal-ticket__content-buy-total-text">Итог:</span>
                     <span class="modal-ticket__content-buy-total-num">0 BYN</span>
                 </div>
                 <button class="modal-ticket__content-buy-btn">Купить</button>
+                </div>
             </div>
         </div>
     </div>
