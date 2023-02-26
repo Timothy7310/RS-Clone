@@ -192,7 +192,8 @@ type ReviewsType = {
     items: {
         date: string,
         filmID: string,
-        score: null | number,
+        score?: null | number,
+        type: string,
         text: string,
         title: string,
     }[],

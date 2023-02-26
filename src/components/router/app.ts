@@ -9,6 +9,9 @@ import notLogInHeader from '../templates/not-log-in-header';
 import FirebaseAuthUser from '../server/firebaseAuthUser';
 import FirebaseStore from '../server/firebaseStore';
 import MoviesTop from '../pages/movies/movies';
+import Main from '../pages/main/Main';
+import Movie from '../pages/movie/MoviePage';
+
 
 const rootElement = document.querySelector('#content');
 
@@ -29,6 +32,10 @@ export default class App {
 
     moviesTop;
 
+    main;
+
+    movie;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
@@ -42,11 +49,14 @@ export default class App {
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
         this.moviesTop = new MoviesTop();
+        this.main = new Main();
+        this.movie = new Movie();
     }
 
     start() {
         this.drawContent();
         this.initEvent();
+        this.swapHeader();
         this.burger.listen();
         this.swapHeader();
     }
@@ -83,6 +93,8 @@ export default class App {
             this.login.loginEvent(target, e);
             this.userProfile.userProfileEvent(e);
             this.moviesTop.moviesEvent(e);
+            this.main.mainPageEvent(e);
+            this.movie.moviePageEvents(e);
         });
 
         bodyDOM.addEventListener('change', (e) => {
@@ -93,7 +105,8 @@ export default class App {
             this.userProfile.validationMark(e);
         });
 
-        window.addEventListener('popstate', () => {
+
+        window.addEventListener('popstate', async () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;
             if (isAuth && location.includes('#/login')) {
@@ -103,11 +116,7 @@ export default class App {
             if (!isAuth && location.includes('#/profile')) {
                 window.location.href = '#/404';
             }
-            this.swapHeader();
-        });
-
-        window.addEventListener('load', async () => {
-            this.swapHeader();
+            await this.swapHeader();
         });
     }
 }

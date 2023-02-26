@@ -76,6 +76,7 @@ export default class UserProfile {
 
     async renderPage() {
         const userInfo = await this.firebaseStore.getCurrentUser(true);
+
         const moviesTypes = {
             movie: 0,
             tvShows: 0,
@@ -331,6 +332,7 @@ export default class UserProfile {
             const delButton = target.closest('.profile__review-btn--delete') as HTMLButtonElement;
             const id = delButton.dataset.id as string;
 
+
             const userInfo = await this.firebaseStore.getCurrentUser();
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
@@ -375,6 +377,7 @@ export default class UserProfile {
             const newScore = +input.value;
 
             const userInfo = await this.firebaseStore.getCurrentUser();
+
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
 
             const newWatchedList = newUserInfo.watched.items.map((x) => (x.filmID === id
@@ -436,7 +439,9 @@ export default class UserProfile {
 
         btn.disabled = true;
         btn.classList.toggle(activeClass);
+
         const userInfo = await this.firebaseStore.getCurrentUser();
+
         const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
 
         const userWillWatchList = await this.getWillWatchList();

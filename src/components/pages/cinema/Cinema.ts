@@ -30,7 +30,7 @@ export default class Cinema {
     }
 
     async renderMovies() {
-        const movies = await this.controllerUnofficialKP.getPremieres();
+        const movies = await this.controllerUnofficialKP.getPremieres(new Date());
         const listDOM = document.querySelector('.billboard__list') as HTMLElement;
         let result = '';
         movies.forEach(async (movie: Premieres) => {

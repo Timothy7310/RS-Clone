@@ -8,6 +8,7 @@ import { Premieres, CountryBoxOfficeType } from '../../types/types';
 import ControllerUnofficialKP from '../../controller/ControllerUnofficialKP';
 import ControllerKP from '../../controller/controllerKP';
 import ControllerTestKP from '../../controller/controllerTestKP';
+import UserProfile from '../user_profile/userProfile';
 
 export default class Main {
     page: Page;
@@ -30,6 +31,8 @@ export default class Main {
 
     controllerTestKP;
 
+    userProfile;
+
     constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
@@ -39,7 +42,11 @@ export default class Main {
         this.cash = new Cash();
         this.controllerUnofficialKP = new ControllerUnofficialKP();
         this.controllerKP = new ControllerKP();
+
         this.controllerTestKP = new ControllerTestKP();
+
+        this.userProfile = new UserProfile();
+
     }
 
     draw(): HTMLElement {
@@ -66,7 +73,7 @@ export default class Main {
 
     async renderPremiereSlider() {
         let result = '';
-        const movies = await (await this.controllerUnofficialKP.getPremieres());
+        const movies = await (await this.controllerUnofficialKP.getPremieres(new Date()));
         const listDOM = document.querySelector('.tickets__slider') as HTMLElement;
         // TODO: add rating logic to .tickets__slide-rate
         movies.forEach(async (movie: Premieres) => {
@@ -86,10 +93,11 @@ export default class Main {
     }
 
     async renderSoonInCinema(count: number) {
-        const premiers = await this.controllerUnofficialKP.getPremieres();
-        const movies = premiers.filter((movie: Premieres) => new Date(movie.premiereRu).getTime()).slice(0, count);
-        // Почему-то не работает, видимо нет обновленой инфо о релизах в апишке
-        // const movies = premiers.filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
+        const userWillWatchList = await this.userProfile.getWillWatchList();
+        const date = new Date();
+        const nextweek = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
+        const movies = await (await this.controllerUnofficialKP.getPremieres(nextweek))
+            .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
         movies.forEach((movie: Premieres) => {
@@ -111,7 +119,7 @@ export default class Main {
                         <span class="soon-cinema__item-date-day">${day}</span>
                         <span class="soon-cinema__item-date-mounth">${month}</span>
                     </div>
-                    <button class="soon-cinema__item-marker" aria-label="Добавить в список">
+                    <button class="soon-cinema__item-marker ${userWillWatchList.includes(`${movie.kinopoiskId}`) ? 'soon-cinema__item-marker--active' : ''}" aria-label="Добавить в список" data-id="${movie.kinopoiskId}">
                         <svg class="soon-cinema__item-marker-icon">
                             <use href="./assets/img/sprite.svg#icon_add_watch"></use>
                         </svg>
@@ -150,5 +158,13 @@ export default class Main {
             `;
         });
         listDOM.innerHTML = result ?? '';
+    }
+
+    mainPageEvent(event: Event) {
+        const target = event.target as HTMLButtonElement;
+
+        if (target.closest('.soon-cinema__item-marker')) {
+            this.userProfile.saveWillWatch(target, '.soon-cinema__item-marker', 'soon-cinema__item-marker--active');
+        }
     }
 }
