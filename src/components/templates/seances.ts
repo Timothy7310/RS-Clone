@@ -9,6 +9,8 @@ const seancesTemplates = (movie: TMovie) => {
         return acc;
     }, []).join(', ');
 
+    const d = new Date();
+
     const trailers = movie?.videos?.trailers.filter((x) => x.site === 'youtube');
 
     const template = `
@@ -20,9 +22,9 @@ const seancesTemplates = (movie: TMovie) => {
                     </svg>
                     <div class="seances__days">
                         <div class="seances__days-btns">
-                            <button class="seances__days-btn" id="seances-today">Сегодня</button>
-                            <button class="seances__days-btn" id="seances-tomorrow">Завтра</button>
-                            <button class="seances__days-btn seances__days-btn-choose" id="seances-choose">
+                            <button class="seances__days-btn" id="seances-today" data-date="${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}">Сегодня</button>
+                            <button class="seances__days-btn" id="seances-tomorrow" data-date="${new Date(d.getTime() + 1 * 86400000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}">Завтра</button>
+                            <button class="seances__days-btn seances__days-btn-choose" id="seances-choose" data-date="${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}">
                                 <span class="seances__days-btn-choose-text">Выбрать день</span>
                                 <svg class="seances__days-btn-choose-icon">
                                     <use href="./assets/img/sprite.svg#icon_back"></use>

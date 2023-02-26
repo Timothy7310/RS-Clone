@@ -2,6 +2,7 @@ import Page from '../Page';
 import seancesTemplates from '../../templates/seances';
 import ControllerKP from '../../controller/controllerKP';
 import Cinema from '../cinema/Cinema';
+import modalTicketTemplates from '../../templates/modal-ticket';
 
 export default class Seances {
     page: Page;
@@ -16,12 +17,15 @@ export default class Seances {
 
     cinema;
 
+    price;
+
     constructor(path?: string, id?: string) {
         this.page = new Page(path);
         this.id = id;
         this.controllerKP = new ControllerKP();
         this.cinema = new Cinema();
         this.container = this.page.draw();
+        this.price = 0;
     }
 
     draw(): HTMLElement {
@@ -95,6 +99,72 @@ export default class Seances {
             calendarBtns.forEach((btn) => btn.classList.remove(calendarBtnActiveClass));
             const day = target.closest('.seances__days-calendar-btn') as HTMLElement;
             day.classList.add(calendarBtnActiveClass);
+        }
+
+        if (target.closest('.seances__item-time-option-btn')) {
+            const body = document.querySelector('body') as HTMLElement;
+            const btn = target.closest('.seances__item-time-option-btn') as HTMLButtonElement;
+
+            const modal = document.createElement('div');
+            const dateBtn = document.querySelector('.billboard__days-calendar-btn--active') as HTMLElement ?? document.querySelector('.seances__days-btn--active') as HTMLElement ?? document.querySelector('#seances-today') as HTMLElement;
+            const date = dateBtn.dataset.date as string;
+            const time = btn.textContent as string;
+            const nameElem = document.querySelector('.seances__movie-name') as HTMLElement;
+            const name = nameElem.textContent as string;
+
+            modal.innerHTML = modalTicketTemplates(time, date, name);
+            modal.classList.add('modal-ticket-wrap');
+            body.classList.add('lock');
+            body.append(modal);
+        }
+
+        if (target.closest('.modal-ticket__close')) {
+            const body = document.querySelector('body') as HTMLElement;
+            const modal = document.querySelector('.modal-ticket-wrap') as HTMLElement;
+
+            modal.remove();
+            body.classList.remove('lock');
+        }
+
+        if (target.closest('.modal-ticket__spot-sofa-warp')) {
+            const priceContainer = document.querySelector('.modal-ticket__content-buy-total-num') as HTMLElement;
+            const btnWrap = target.closest('.modal-ticket__spot-sofa-warp') as HTMLElement;
+            console.log(btnWrap.children);
+
+            Array.from(btnWrap.children).forEach((x) => x.classList.toggle('modal-ticket__spot--active'));
+            btnWrap.classList.toggle('modal-ticket__spot-sofa-warp--active');
+
+            if (btnWrap.classList.contains('modal-ticket__spot-sofa-warp--active')) {
+                this.price += 36;
+                priceContainer.innerHTML = `${this.price} BYN`;
+                return;
+            }
+            console.log(this.price);
+
+            this.price -= 36;
+            priceContainer.innerHTML = `${this.price} BYN`;
+            return;
+        }
+
+        if (target.closest('.modal-ticket__spot')) {
+            const priceContainer = document.querySelector('.modal-ticket__content-buy-total-num') as HTMLElement;
+            const btn = target.closest('.modal-ticket__spot') as HTMLButtonElement;
+            btn.classList.toggle('modal-ticket__spot--active');
+            if (btn.classList.contains('modal-ticket__spot--active')) {
+                if (btn.classList.contains('modal-ticket__spot--low-cost')) {
+                    this.price += 10;
+                } else if (btn.classList.contains('modal-ticket__spot--common')) {
+                    this.price += 15;
+                }
+                priceContainer.innerHTML = `${this.price} BYN`;
+                return;
+            }
+            if (btn.classList.contains('modal-ticket__spot--low-cost')) {
+                this.price -= 10;
+            } else if (btn.classList.contains('modal-ticket__spot--common')) {
+                this.price -= 15;
+            }
+            priceContainer.innerHTML = `${this.price} BYN`;
         }
     }
 }
