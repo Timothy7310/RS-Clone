@@ -22,6 +22,10 @@ const userBlank: UserType = {
         total: 0,
         items: [],
     },
+    tickets: {
+        total: 0,
+        items: [],
+    },
 };
 
 export default userBlank;

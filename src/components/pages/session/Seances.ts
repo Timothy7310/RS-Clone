@@ -3,6 +3,7 @@ import seancesTemplates from '../../templates/seances';
 import ControllerKP from '../../controller/controllerKP';
 import Cinema from '../cinema/Cinema';
 import modalTicketTemplates from '../../templates/modal-ticket';
+import FirebaseStore from '../../server/firebaseStore';
 
 export default class Seances {
     page: Page;
@@ -19,11 +20,14 @@ export default class Seances {
 
     price;
 
+    firebaseStore;
+
     constructor(path?: string, id?: string) {
         this.page = new Page(path);
         this.id = id;
         this.controllerKP = new ControllerKP();
         this.cinema = new Cinema();
+        this.firebaseStore = new FirebaseStore();
         this.container = this.page.draw();
         this.price = 0;
     }
@@ -62,8 +66,7 @@ export default class Seances {
         calendar.classList.remove(calendarActiveClass);
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    seanceEvent(target: HTMLElement) {
+    async seanceEvent(target: HTMLElement) {
         const activeClass = 'seances__days-btn--active';
         const chooseBtn = document.querySelector('.seances__days-btn-choose') as HTMLElement;
         const calendar = document.querySelector('.seances__days-calendar') as HTMLElement;
@@ -174,22 +177,36 @@ export default class Seances {
             const modalContent = document.querySelector('.modal-ticket__content-bottom') as HTMLElement;
             const selectPlace = document.querySelectorAll('.modal-ticket__spot--active');
             let places = '';
-            const nameElem = document.querySelector('.modal-ticket__content-name') as HTMLElement;
-            const name = nameElem.textContent;
             const dateElem = document.querySelector('.modal-ticket__content-date-date') as HTMLElement;
             const date = dateElem.textContent;
             const timeElem = document.querySelector('.modal-ticket__content-date-time') as HTMLElement;
             const time = timeElem.textContent;
             const totalPrice = `${this.price} BYN`;
+            const id = window.location.hash.split('/').at(-1);
             selectPlace.forEach((x) => {
                 places += `${x.getAttribute('aria-label')}, `;
             });
 
             modalContent.innerHTML = `
                 <span>Спасибо за покупку!</span>
-                <p>Выши места: ${places}</p>
+                <p>Выши места: ${places.trim().slice(0, -1)}</p>
                 <p>Сумма покупки: ${totalPrice}</p>
             `;
+
+            const userInfo = await this.firebaseStore.getCurrentUser();
+            const newUserInfo = JSON.parse(JSON.stringify(userInfo));
+            const newTickets = {
+                date: `${new Date().getTime()}`,
+                filmID: id,
+                places: places.trim().slice(0, -1),
+                day: date,
+                time,
+            };
+            newUserInfo.tickets.items.push(newTickets);
+            newUserInfo.tickets.total = newUserInfo.tickets.items.length;
+
+            console.log(newUserInfo);
+            await this.firebaseStore.updateUserInfo(newUserInfo);
         }
     }
 }

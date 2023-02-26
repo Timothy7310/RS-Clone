@@ -208,6 +208,17 @@ type WillWatchType = {
     }[],
 };
 
+type TicketsProfileType = {
+    total: number,
+    items: {
+        date: string,
+        filmID: string,
+        places: string,
+        day: string,
+        time: string,
+    }[],
+};
+
 type UserType = {
     avatar: string,
     country: string,
@@ -221,6 +232,7 @@ type UserType = {
     reviews: ReviewsType,
     watched: WatchedType,
     willWatch: WillWatchType,
+    tickets: TicketsProfileType,
 };
 
 type MoviesUserType = {
