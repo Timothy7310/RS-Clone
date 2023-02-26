@@ -1,4 +1,5 @@
 import { Top250PageData } from '../templates/movie/typesMovie';
+import { TFrameImage } from '../types/types';
 
 class ControllerKP {
     tokenNum;
@@ -28,12 +29,10 @@ class ControllerKP {
         this.seasonURL = `${this.baseURL}/season${this.token}`;
     }
 
-    async getRandomMovieFrame(id: string) {
-        const response = await fetch(`${this.imageURL}&page=1&limit=10&movieId=${id}`);
-        const images = await response.json();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const frames = images.docs.filter((x: any) => x.type === 'frame');
-
+    async getImageFromMovie(id: string) {
+        const response = await fetch(`${this.imageURL}&page=1&limit=10&movieId=${id}&type=frame`);
+        const result = await response.json();
+        const frames = result.docs.filter((x: TFrameImage) => x.type === 'frame');
         const randomFrame = frames[Math.floor(Math.random() * frames.length)];
         return randomFrame;
     }

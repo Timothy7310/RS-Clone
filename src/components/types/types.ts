@@ -259,6 +259,17 @@ type CountryBoxOfficeType = {
     total: number,
 };
 
+type TFrameImage = {
+    movieId: number,
+    type: string,
+    language: null, // check it
+    url: string,
+    previewUrl: string,
+    height: null, // check it
+    width: null, // check it
+    id: string;
+};
+
 export {
     Countries,
     Genres,
@@ -274,4 +285,5 @@ export {
     ImagesType,
     MoviesUserType,
     CountryBoxOfficeType,
+    TFrameImage,
 };
