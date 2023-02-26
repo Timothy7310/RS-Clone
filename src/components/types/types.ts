@@ -180,32 +180,32 @@ type MovieTestType = {
 
 type WatchedType = {
     total: number,
-    items: [
-        {
-            date: string,
-            filmID: string,
-            score: null | number,
-        },
-    ]
+    items:
+    {
+        date: string,
+        filmID: string,
+        score: null | number,
+    }[],
 };
 
 type ReviewsType = {
     total: number,
-    items: [{
+    items: {
         date: string,
         filmID: string,
         score: null | number,
+        type: string,
         text: string,
         title: string,
-    }],
+    }[],
 };
 
 type WillWatchType = {
     total: number,
-    items: [{
+    items: {
         date: string,
         filmID: string,
-    }],
+    }[],
 };
 
 type UserType = {
@@ -223,6 +223,43 @@ type UserType = {
     willWatch: WillWatchType,
 };
 
+type MoviesUserType = {
+    movie: number;
+    tvShows: number;
+    shortMovie: number;
+};
+
+type CountryBoxOfficeDocs = {
+    fees: {
+        russia: {
+            value: number,
+            currency: string,
+        },
+        usa: {
+            value: number,
+            currency: string,
+        },
+        world: {
+            value: number,
+            currency: string,
+        }
+    },
+    id: number,
+    name: string,
+    poster: {
+        previewUrl: string,
+        url: string
+    }
+};
+
+type CountryBoxOfficeType = {
+    docs: CountryBoxOfficeDocs[],
+    limit: number,
+    page: number,
+    pages: number,
+    total: number,
+};
+
 export {
     Countries,
     Genres,
@@ -236,4 +273,6 @@ export {
     WillWatchType,
     MovieTestType,
     ImagesType,
+    MoviesUserType,
+    CountryBoxOfficeType,
 };

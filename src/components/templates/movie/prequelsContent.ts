@@ -1,7 +1,6 @@
 import { TMovie } from './typesMovie';
 
 function checkPoster(urlToPoster: {
-    _id: string;
     url: string;
     previewUrl: string;
 }) {

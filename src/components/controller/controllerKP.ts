@@ -1,6 +1,8 @@
 import { Top250PageData } from '../templates/movie/typesMovie';
 
 class ControllerKP {
+    tokenNum;
+
     token;
 
     baseURL;
@@ -16,8 +18,9 @@ class ControllerKP {
     seasonURL;
 
     constructor() {
-        this.token = '?token=XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5';
-        this.baseURL = 'https://api.kinopoisk.dev';
+        this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        this.token = `?token=${this.tokenNum}`;
+        this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
         this.personURL = `${this.baseURL}/person${this.token}`;
         this.reviewURL = `${this.baseURL}/review${this.token}`;
@@ -47,8 +50,7 @@ class ControllerKP {
             const movies = await response.json();
             return movies;
         } catch (e) {
-            console.log(e);
-            alert('Something wrong with getting top 250');
+            console.log(`Something wrong with getting top 250 ${e}`);
             return null;
         }
     }
@@ -89,17 +91,63 @@ class ControllerKP {
         return seasons;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async getRandom() {
-        const response = await fetch('https://test-api.kinopoisk.dev/movie/random', {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': 'QFCANVB-YJK4011-KXBRXVA-652J551',
-                accept: 'application/json',
-            },
-        });
-        const randomMovie = await response.json();
-        return randomMovie;
+        try {
+            const response = await fetch('https://api.kinopoisk.dev/v1/movie/random', {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.tokenNum,
+                    accept: 'application/json',
+                },
+            });
+            const randomMovie = await response.json();
+            return randomMovie;
+        } catch (err) {
+            console.log(`Не получается добыть рандомный фильм из API. ${err}`);
+            return null;
+        }
+    }
+
+    async getMovieForId(id: string) {
+        try {
+            const response = await fetch(`${this.baseURL}/movie/${id}`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.tokenNum,
+                    accept: 'application/json',
+                },
+            });
+            const randomMovie = await response.json();
+            return randomMovie;
+        } catch (err) {
+            console.log(`Не получается найти фильм по id. ${err}`);
+            return null;
+        }
+    }
+
+    async getTop250(page: number, limit = 10) {
+        try {
+            const response = await fetch(`${this.baseURL}/movie?selectFields=id&selectFields=name&selectFields=rating.kp&sortField=rating.kp&sortType=-1&page=${page}&limit=${limit}&top250=%21null`, {
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': this.tokenNum,
+                    accept: 'application/json',
+                },
+            });
+            const randomMovie = await response.json();
+            return randomMovie;
+        } catch (err) {
+            console.log(`Не получается найти топ 250. ${err}`);
+            return null;
+        }
+    }
+
+    async getMoviesByIDs(id: number[]) {
+        const response = await fetch(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
+        const movies = await response.json();
+        console.log(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
+
+        return movies;
     }
 }
 

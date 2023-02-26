@@ -12,7 +12,12 @@ import logInHeader from '../templates/log-in-header';
 import notLogInHeader from '../templates/not-log-in-header';
 import FirebaseAuthUser from '../server/firebaseAuthUser';
 import FirebaseStore from '../server/firebaseStore';
+
 import Search from '../utils/search';
+
+import MoviesTop from '../pages/movies/movies';
+import Main from '../pages/main/Main';
+import Movie from '../pages/movie/MoviePage';
 
 const rootElement = document.querySelector('#content');
 
@@ -31,7 +36,15 @@ export default class App {
 
     firebaseStore;
 
+
     search;
+
+    moviesTop;
+
+    main;
+
+    movie;
+
 
     constructor() {
         if (rootElement) {
@@ -45,13 +58,21 @@ export default class App {
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
+
         this.search = new Search();
+
+        this.moviesTop = new MoviesTop();
+        this.main = new Main();
+        this.movie = new Movie();
+
     }
 
     start() {
         this.drawContent();
         this.initEvent();
+        this.swapHeader();
         this.burger.listen();
+        this.swapHeader();
     }
 
     drawContent() {
@@ -65,10 +86,12 @@ export default class App {
 
         if (isAuth) {
             const user = await this.firebaseStore.getCurrentUser();
-            const src = user[0].avatar;
-            header.innerHTML = logInHeader;
-            const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
-            headerAvatar.src = src;
+            if (user) {
+                const src = user.avatar;
+                header.innerHTML = logInHeader;
+                const headerAvatar = document.querySelector('.header__profile-avatar') as HTMLImageElement;
+                headerAvatar.src = src;
+            }
         } else {
             header.innerHTML = notLogInHeader;
         }
@@ -83,6 +106,9 @@ export default class App {
             this.cinema.cinemaEvent(target);
             this.login.loginEvent(target, e);
             this.userProfile.userProfileEvent(e);
+            this.moviesTop.moviesEvent(e);
+            this.main.mainPageEvent(e);
+            this.movie.moviePageEvents(e);
         });
 
         bodyDOM.addEventListener('change', (e) => {
@@ -90,10 +116,18 @@ export default class App {
         });
 
         bodyDOM.addEventListener('input', (e) => {
+
             this.search.searchEvent(e);
         });
 
         window.addEventListener('popstate', () => {
+
+            this.userProfile.validationMark(e);
+        });
+
+
+        window.addEventListener('popstate', async () => {
+
             const isAuth = localStorage.getItem('isLogIn') === 'true';
             const location = window.location.href;
             if (isAuth && location.includes('#/login')) {
@@ -103,11 +137,7 @@ export default class App {
             if (!isAuth && location.includes('#/profile')) {
                 window.location.href = '#/404';
             }
-            this.swapHeader();
-        });
-
-        window.addEventListener('load', async () => {
-            this.swapHeader();
+            await this.swapHeader();
         });
     }
 }

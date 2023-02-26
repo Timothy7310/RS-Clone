@@ -17,7 +17,7 @@ export default class Trailers {
     }
 
     async draw(parentContainer: HTMLElement, idNumber: string): Promise<void> {
-        const movie = await this.controller.searchMovie(idNumber, 'id');
+        const movie = await this.controller.getMovieForId(idNumber);
         const video = movie.videos.trailers;
         const trailersYoutube = video.filter(
             (trailer: TTrailer) => trailer.site === 'youtube',

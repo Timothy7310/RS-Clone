@@ -12,32 +12,15 @@ const userBlank: UserType = {
     id: localStorage.getItem('userID') || '',
     reviews: {
         total: 0,
-        items: [{
-            date: '',
-            filmID: '',
-            score: null,
-            text: '',
-            title: '',
-        }],
+        items: [],
     },
     watched: {
         total: 0,
-        items: [
-            {
-                date: '',
-                filmID: '',
-                score: null,
-            },
-        ],
+        items: [],
     },
     willWatch: {
         total: 0,
-        items: [
-            {
-                date: '',
-                filmID: '',
-            },
-        ],
+        items: [],
     },
 };
 
