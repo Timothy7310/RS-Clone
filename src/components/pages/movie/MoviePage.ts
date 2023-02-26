@@ -34,13 +34,11 @@ export default class Movie {
 
     id?: string;
 
-
     firebaseStore;
 
     actors: Actors;
 
     creators: Creators;
-
 
     constructor(path?: string, id?: string) {
         this.page = new Page(path);
@@ -58,7 +56,6 @@ export default class Movie {
 
         this.actors = new Actors();
         this.creators = new Creators();
-
     }
 
     draw(): HTMLElement {
@@ -89,8 +86,7 @@ export default class Movie {
             const score = label.dataset.value as string;
             const id = label.dataset.id as string;
 
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
+            const userInfo = await this.firebaseStore.getCurrentUser();
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
             let newWatchedList = newUserInfo.watched.items;
@@ -146,8 +142,7 @@ export default class Movie {
                 return;
             }
             btn.disabled = true;
-            const response = await this.firebaseStore.getCurrentUser();
-            const userInfo = response[0];
+            const userInfo = await this.firebaseStore.getCurrentUser();
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
             const newReviewsList = newUserInfo.reviews.items;
@@ -158,6 +153,7 @@ export default class Movie {
                 text: text.value,
                 title: title.value,
                 type: select.value,
+                score: null,
             };
 
             newReviewsList.push(newReview);

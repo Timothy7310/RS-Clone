@@ -18,7 +18,6 @@ import { UserType } from '../../types/types';
 import UserProfile from '../user_profile/userProfile';
 import CardGenerator from '../../templates/movies/movieCard';
 
-
 export default class MoviesTop {
     component: Component;
 
@@ -43,7 +42,6 @@ export default class MoviesTop {
         parentContainer.classList.add('movie', 'container');
     }
 
-
     // eslint-disable-next-line class-methods-use-this
     async moviesEvent(event: Event) {
         const target = event.target as HTMLButtonElement;
@@ -51,6 +49,10 @@ export default class MoviesTop {
         if (target.closest('.movies__card-rates-will-watch')) {
             this.userProfile.saveWillWatch(target, '.movies__card-rates-will-watch', 'movies__card-rates-will-watch--active');
         }
+
+        // if (target.closest('.movies__card-rates-will-watch')) {
+        //     await this.toggleWatchFilmState(target);
+        // }
     }
 
     generatePageButton(page: number, isActive = false): HTMLLIElement {
@@ -209,13 +211,6 @@ export default class MoviesTop {
         const randomMovie = await this.controller.getRandom();
         const randomMovieId = randomMovie.id;
         return randomMovieId;
-    }
-
-    async moviesEvent(event: Event) {
-        const target = event.target as HTMLButtonElement;
-        if (target.closest('.movies__card-rates-will-watch')) {
-            await this.toggleWatchFilmState(target);
-        }
     }
 
     async toggleWatchFilmState(target: HTMLElement) {

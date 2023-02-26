@@ -96,7 +96,7 @@ class ControllerUnofficialKP {
     async getPremiereIDs() {
         try {
             const ids: number[] = [];
-            const movies = await this.getPremieres();
+            const movies = await this.getPremieres(new Date());
             movies.forEach((item: Premieres) => {
                 ids.push(item.kinopoiskId);
             });
@@ -139,24 +139,6 @@ class ControllerUnofficialKP {
             console.error(`Пока что нельзя получить сборы по странам из API. ${error}`);
             return null;
         }
-    }
-
-    async getBoxOffice(type: FeesType) {
-        const boxOffice: BoxOffice[][] = [];
-        const movies = await this.getPremieres(new Date());
-        movies.forEach(async (movie: Premieres, index: number) => {
-            if (index < 5) {
-                const fees = await this.getFees(movie.kinopoiskId);
-                console.log(fees);
-
-                boxOffice.push(fees);
-            }
-        });
-        console.log(type);
-
-        console.log(boxOffice.flat());
-
-        return boxOffice;
     }
 }
 

@@ -332,7 +332,6 @@ export default class UserProfile {
             const delButton = target.closest('.profile__review-btn--delete') as HTMLButtonElement;
             const id = delButton.dataset.id as string;
 
-
             const userInfo = await this.firebaseStore.getCurrentUser();
 
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));

@@ -46,7 +46,6 @@ export default class Main {
         this.controllerTestKP = new ControllerTestKP();
 
         this.userProfile = new UserProfile();
-
     }
 
     draw(): HTMLElement {
