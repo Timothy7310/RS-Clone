@@ -1,19 +1,23 @@
 import Page from '../Page';
+import GameStartcontainer from './gameStartContainer';
 
-export default class GameStart {
+export default class Gamestart {
     page: Page;
 
     container: HTMLElement;
 
     path: string | undefined;
 
-    constructor(path?: string, id?: string) {
+    gameStartContent: GameStartcontainer;
+
+    constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
+        this.gameStartContent = new GameStartcontainer();
     }
 
     draw(): HTMLElement {
-        this.basic.draw(this.container, this.id);
+        this.gameStartContent.draw(this.container);
         return this.container;
     }
 
