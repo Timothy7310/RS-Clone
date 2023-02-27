@@ -19,7 +19,7 @@ class ControllerKP {
     seasonURL;
 
     constructor() {
-        this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        this.tokenNum = '8DD8D2R-BSJ4163-KC3DTSV-2ZWA2AM';
         this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
@@ -29,11 +29,12 @@ class ControllerKP {
         this.seasonURL = `${this.baseURL}/season${this.token}`;
     }
 
-    async getImageFromMovie(id: string) {
+    async getImageFromMovie(id: string): Promise<TFrameImage> {
         const response = await fetch(`${this.imageURL}&page=1&limit=10&movieId=${id}&type=frame`);
         const result = await response.json();
         const frames = result.docs.filter((x: TFrameImage) => x.type === 'frame');
         const randomFrame = frames[Math.floor(Math.random() * frames.length)];
+        console.log(randomFrame);
         return randomFrame;
     }
 
@@ -126,7 +127,14 @@ class ControllerKP {
 
     async getTop250(page: number, limit = 10) {
         try {
-            const response = await fetch(`${this.baseURL}/movie?selectFields=id&selectFields=name&selectFields=rating.kp&sortField=rating.kp&sortType=-1&page=${page}&limit=${limit}&top250=%21null`, {
+            const selectedFiels = [
+                'id',
+                'name',
+                'rating.kp',
+                'imagesInfo.framesCount',
+            ];
+            const select = selectedFiels.map((field) => `selectFields=${field}`).join('&');
+            const response = await fetch(`${this.baseURL}/movie?${select}&sortField=rating.kp&sortType=-1&page=${page}&limit=${limit}&top250=%21null`, {
                 method: 'GET',
                 headers: {
                     'X-API-KEY': this.tokenNum,
