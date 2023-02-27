@@ -33,7 +33,6 @@
         position: relative;
         z-index: 101;
         padding: 48px;
-        // overflow-x: scroll;
         &-name{
             font-weight: 700;
             font-size: 21px;
@@ -117,6 +116,11 @@
             width: 720px;
             height: 60px;
             margin-bottom: 60px;
+        }
+        &-bottom{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         &-hall{
             row-gap: 6px;

@@ -5,7 +5,7 @@ const soonTemplate = `
             <hr>
             <div class="soon__wrap">
                 <div class="soon-cinema">
-                    <a href="" class="soon-cinema__link">
+                    <a href="#/cinema" class="soon-cinema__link">
                         <h3 class="soon-cinema__link-title">Скоро в кино</h3>
                         <svg class="soon-cinema__link-icon">
                             <use href="./assets/img/sprite.svg#icon_back"></use>

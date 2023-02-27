@@ -7,7 +7,6 @@ export interface IRouter {
     listen: () => void;
     navigateToPage(): void;
     updateCurrentPage(page: Page): void;
-    // updateQuery: (query: string) => void;
 }
 
 export default class Router implements IRouter {

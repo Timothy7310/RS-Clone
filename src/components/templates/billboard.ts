@@ -1,3 +1,5 @@
+const d = new Date();
+
 const billboardTemplate = `
     <section class="billboard">
         <div class="container">
@@ -10,8 +12,8 @@ const billboardTemplate = `
                 </div>
                 <div class="billboard__days">
                     <div class="billboard__days-btns">
-                        <button class="billboard__days-btn" id="billboard-today">Сегодня</button>
-                        <button class="billboard__days-btn" id="billboard-tomorrow">Завтра</button>
+                        <button class="billboard__days-btn" id="billboard-today" data-date="${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}">Сегодня</button>
+                        <button class="billboard__days-btn" id="billboard-tomorrow" data-date="${new Date(d.getTime() + 1 * 86400000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}">Завтра</button>
                         <button class="billboard__days-btn billboard__days-btn-choose" id="billboard-choose">
                             <span class="billboard__days-btn-choose-text">Выбрать день</span>
                             <svg class="billboard__days-btn-choose-icon">
@@ -20,42 +22,6 @@ const billboardTemplate = `
                         </button>
                     </div>
                     <div class="billboard__days-calendar">
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">вт</span>
-                            <span class="billboard__days-calendar--day-month">7</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">ср</span>
-                            <span class="billboard__days-calendar--day-month">8</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">чт</span>
-                            <span class="billboard__days-calendar--day-month">9</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">пт</span>
-                            <span class="billboard__days-calendar--day-month">10</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn billboard__days-calendar-btn--holiday">
-                            <span class="billboard__days-calendar--day-week">сб</span>
-                            <span class="billboard__days-calendar--day-month">11</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn billboard__days-calendar-btn--holiday">
-                            <span class="billboard__days-calendar--day-week">вс</span>
-                            <span class="billboard__days-calendar--day-month">12</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">пн</span>
-                            <span class="billboard__days-calendar--day-month">13</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">вт</span>
-                            <span class="billboard__days-calendar--day-month">14</span>
-                        </button>
-                        <button class="billboard__days-calendar-btn">
-                            <span class="billboard__days-calendar--day-week">ср</span>
-                            <span class="billboard__days-calendar--day-month">15</span>
-                        </button>
                     </div>
                 </div>
                 <ul class="billboard__list">

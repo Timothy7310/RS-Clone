@@ -60,7 +60,6 @@ export default class FirebaseAuthUser {
         await signInWithEmailAndPassword(this.auth, email, password)
             .then((userCredential) => {
                 this.clearErrorMessage();
-                console.log(userCredential);
                 localStorage.setItem('isLogIn', 'true');
                 localStorage.setItem('userID', userCredential.user.uid);
 
@@ -93,13 +92,11 @@ export default class FirebaseAuthUser {
             })
                 .then(() => {
                     // Profile updated!
-                    // ...
                     console.log('User has deleted');
                 })
                 .catch((error) => {
                     console.log(error.message);
                     // An error occurred
-                    // ...
                 });
         }
     };
@@ -116,7 +113,6 @@ export default class FirebaseAuthUser {
                 .catch((error) => {
                     console.log(error.message);
                     // An error ocurred
-                    // ...
                 });
         }
     };
@@ -124,15 +120,8 @@ export default class FirebaseAuthUser {
     isUserAuth = async () => {
         await onAuthStateChanged(this.auth, (user) => {
             if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                // const uid = user.uid;
-                // console.log(this.auth.currentUser);
-                // ...
                 return true;
             }
-            // User is signed out
-            // ...
             return false;
         });
         return localStorage.getItem('isLogIn') === 'true';

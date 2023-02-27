@@ -21,6 +21,12 @@ class ControllerKP {
     constructor() {
         // this.tokenNum = '8DD8D2R-BSJ4163-KC3DTSV-2ZWA2AM';
         this.tokenNum = '4ZKP5GE-A9D47VB-HQ3453N-8WCS1CM'; // запасной
+        // this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        // this.tokenNum = 'XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
+        // this.tokenNum = 'YJJQ1XT-DNJMT7J-PTA5KZF-WWP9ANR'; // еще один
+        // this.tokenNum = '2RGX017-HSV4RZN-MS2TY91-XHEQ1R5'; // еще один
+        // this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551'; // еще один
+        // this.tokenNum = '238H0SS-904MAP9-NHE1XTM-1FVVPQR'; // еще один
         this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
@@ -79,7 +85,6 @@ class ControllerKP {
         return review;
     }
 
-    // TODO: не загружается previewUrl
     async searchImage(value: string, field: string) {
         const response = await fetch(`${this.imageURL}&search=${value}&field=${field}`);
         const image = await response.json();
@@ -153,8 +158,6 @@ class ControllerKP {
     async getMoviesByIDs(id: number[]) {
         const response = await fetch(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
         const movies = await response.json();
-        console.log(`${this.movieURL}&page=1&limit=10&${id.map((x) => `movieId=${x}`).join('&')}`);
-
         return movies;
     }
 }

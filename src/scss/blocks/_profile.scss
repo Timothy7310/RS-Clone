@@ -228,11 +228,20 @@
   &__user-review {
     width: 100%;
     max-width: 578px;
-    background: #E3EFE3;
+    background: #f2f2f2;
     border-radius: 8px;
     padding: 16px 24px 16px 16px;
     box-sizing: border-box;
     margin-bottom: 16px;
+    &--positive{
+      background: #E3EFE3;
+    }
+    &--neutral{
+      background: #f2f2f2;
+    }
+    &--negative{
+      background: #F6E2E2;
+    }
   }
 
   &__review-info-wrap {
@@ -625,6 +634,68 @@
             fill: var(--color-accent);
           }
         }
+      }
+    }
+  }
+  &__tickets{
+    &-info-wrap{
+      margin: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #E8E8E8;
+    }
+    &-img{
+      height: 90px;
+      width: 60px;
+      object-fit: cover;
+      vertical-align: bottom;
+      &-wrap{
+        flex-shrink: 0;
+      }
+    }
+    &-img-info-wrap{
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+    &-title{
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      line-height: 17px;
+      &-english{
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(0, 0, 0, 0.6);
+        margin: 4px 0 0;
+      }
+      &-wrap{
+        flex-shrink: 0;
+        max-width: 200px;
+        width: 100%;
+      }
+    }
+    &-timing{
+      font-size: 14px;
+      line-height: 17px;
+      color: rgba(0, 0, 0, 0.6);
+      margin: 4px 0 0;
+    }
+    &-seance{
+      &-info{
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        gap: 10px;
+      }
+      &-time{
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(0, 0, 0, 0.6);
+      }
+      &-places{
+        font-size: 15px;
+        font-weight: 700;
       }
     }
   }

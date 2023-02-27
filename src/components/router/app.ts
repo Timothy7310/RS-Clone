@@ -8,10 +8,13 @@ import logInHeader from '../templates/log-in-header';
 import notLogInHeader from '../templates/not-log-in-header';
 import FirebaseAuthUser from '../server/firebaseAuthUser';
 import FirebaseStore from '../server/firebaseStore';
+
+import Search from '../utils/search';
+
 import MoviesTop from '../pages/movies/movies';
 import Main from '../pages/main/Main';
 import Movie from '../pages/movie/MoviePage';
-
+import Seances from '../pages/session/Seances';
 
 const rootElement = document.querySelector('#content');
 
@@ -30,27 +33,31 @@ export default class App {
 
     firebaseStore;
 
+    search;
+
     moviesTop;
 
     main;
 
     movie;
 
+    seances;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
         }
         this.cinema = new Cinema();
-
         this.burger = new Burger();
-
         this.login = new Login();
         this.userProfile = new UserProfile();
         this.firebaseAuthUser = new FirebaseAuthUser();
         this.firebaseStore = new FirebaseStore();
+        this.search = new Search();
         this.moviesTop = new MoviesTop();
         this.main = new Main();
         this.movie = new Movie();
+        this.seances = new Seances();
     }
 
     start() {
@@ -95,6 +102,7 @@ export default class App {
             this.moviesTop.moviesEvent(e);
             this.main.mainPageEvent(e);
             this.movie.moviePageEvents(e);
+            this.seances.seanceEvent(target);
         });
 
         bodyDOM.addEventListener('change', (e) => {
@@ -102,9 +110,13 @@ export default class App {
         });
 
         bodyDOM.addEventListener('input', (e) => {
+            this.search.searchEvent(e);
             this.userProfile.validationMark(e);
         });
 
+        bodyDOM.addEventListener('submit', (e) => {
+            this.search.renderSearchPage(e);
+        });
 
         window.addEventListener('popstate', async () => {
             const isAuth = localStorage.getItem('isLogIn') === 'true';

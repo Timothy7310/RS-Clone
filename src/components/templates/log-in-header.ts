@@ -1,8 +1,3 @@
-// import FirebaseStore from '../server/firebaseStore';
-
-// const res = await new FirebaseStore().getCurrentUser();
-// const src = res[0].avatar;
-
 const logInHeader = `
 <h1 class="visually-hidden">RS-Clone Кинопоиск</h1>
 <div class="container">
@@ -108,14 +103,22 @@ const logInHeader = `
             </ul>
         </nav>
 
-        <form action="" class="header__search-form">
-            <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
-            <button type="submit" class="header__search-btn" aria-label="Найти">
-                <svg class="header__search-btn-icon">
-                    <use href="assets/img/sprite.svg#icon_search"></use>
-                </svg>
-            </button>
-        </form>
+        <div class="header__search-form-wrap">
+            <form action="" class="header__search-form">
+                <input class="header__search-input" type="text" placeholder="Фильмы, сериалы, персоны" required="">
+                <button type="submit" class="header__search-btn" aria-label="Найти">
+                    <svg class="header__search-btn-icon">
+                        <use href="./assets/img/sprite.svg#icon_search"></use>
+                    </svg>
+                </button>
+            </form>
+            <div class="header__search-results header__search-results--hidden">
+                <span class="header__search-results-text">Результаты поиска:</span>
+                <div class="header__search-results-wrap">
+                    <span class="header__search-results-not-found">Ничего не найдено</span>
+                </div>
+            </div>
+        </div>
         <a href="#/gamestart">
             <button class="header__quizz-btn">Игра</button>
         </a>

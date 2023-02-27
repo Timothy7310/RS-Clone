@@ -74,11 +74,10 @@ export default class Main {
         let result = '';
         const movies = await (await this.controllerUnofficialKP.getPremieres(new Date()));
         const listDOM = document.querySelector('.tickets__slider') as HTMLElement;
-        // TODO: add rating logic to .tickets__slide-rate
         movies.forEach(async (movie: Premieres) => {
             result += `
                 <li class="tickets__slide">
-                    <a href="#/cinema/seances/${movie.kinopoiskId}" class="tickets__slide-link">
+                    <a href="#/seances/${movie.kinopoiskId}" class="tickets__slide-link">
                         <div class="tickets__slide-img-wrap">
                           <img class="tickets__slide-img" src="${movie.posterUrlPreview}" alt="">
                         </div>
@@ -99,17 +98,17 @@ export default class Main {
             .filter((movie: Premieres) => new Date(movie.premiereRu).getTime() > new Date().getTime()).slice(0, count);
         let result = '';
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
+
         movies.forEach((movie: Premieres) => {
-            // TODO: добавить склонения февраль -> февраля
             const day = new Date(movie.premiereRu).toLocaleDateString('ru-RU', { day: 'numeric' });
             const month = new Date(movie.premiereRu).toLocaleDateString('ru-RU', { month: 'long' });
             result += `
                 <li class="soon-cinema__item">
-                    <a href="#/cinema/seances/${movie.kinopoiskId}">
+                    <a href="#/seances/${movie.kinopoiskId}">
                         <img class="soon-cinema__item-poster" src="${movie.posterUrlPreview}" alt="">
                     </a>
                     <div class="soon-cinema__item-name-container">
-                        <a href="#/cinema/seances/${movie.kinopoiskId}">
+                        <a href="#/seances/${movie.kinopoiskId}">
                             <span class="soon-cinema__item-name">${movie.nameRu}</span>
                         </a>
                         <span class="soon-cinema__item-name-original">${movie.nameEn ?? ''}</span>
@@ -129,7 +128,6 @@ export default class Main {
         listDOM.innerHTML = result;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async renderBoxOffice(type: 'world' | 'russia' | 'usa') {
         const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
         let result = '';
@@ -142,12 +140,12 @@ export default class Main {
 
             result += `
             <li class="cash__card-item">
-                    <a href="#/movie/${movie.id}" class="cash__card-item-poster-wrap">
+                    <a href="#/seances/${movie.id}" class="cash__card-item-poster-wrap">
                         <img src="${movie?.poster?.previewUrl || movie?.poster?.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Out_Of_Poster.jpg/450px-Out_Of_Poster.jpg'}" alt="" class="cash__card-item-poster">
                     </a>
                 <div class="cash__card-item-info">
                         <div class="cash__card-item-info-head">
-                            <a href="#/cinema/seances/${movie.id}" class="cash__card-item-name-wrap">
+                            <a href="#/seances/${movie.id}" class="cash__card-item-name-wrap">
                                 <span class="cash__card-item-name">${movie.name}</span>
                             </a>
                             <span class="cash__card-item-total">${(value / 1000000).toFixed(2)} млн ${currency}</span>
@@ -164,6 +162,43 @@ export default class Main {
 
         if (target.closest('.soon-cinema__item-marker')) {
             this.userProfile.saveWillWatch(target, '.soon-cinema__item-marker', 'soon-cinema__item-marker--active');
+        }
+
+        if (target.closest('.tickets__slider-btn--next')) {
+            const sliderWrap = document.querySelector('.tickets__slider-wrap') as HTMLElement;
+            const sliderWrapRightPos = sliderWrap.getBoundingClientRect().right;
+            const sliderContent = document.querySelector('.tickets__slider') as HTMLElement;
+            const lastSlide = sliderContent.lastElementChild as HTMLElement;
+            const lastSlideRightPos = lastSlide.getBoundingClientRect().right;
+            const sliderElem = document.querySelector('.tickets__slide') as HTMLElement;
+            const sliderWidth = sliderElem.getBoundingClientRect().width;
+            const slidersGap = 8;
+            const currentElemPosition = +getComputedStyle(sliderContent).transform.split(', ')[4];
+
+            if (sliderWrapRightPos >= lastSlideRightPos) {
+                return;
+            }
+
+            const newElemPosition = currentElemPosition - (sliderWidth + slidersGap);
+            sliderContent.style.transform = `translateX(${newElemPosition}px)`;
+        }
+
+        if (target.closest('.tickets__slider-btn--prev')) {
+            const sliderWrap = document.querySelector('.tickets__slider-wrap') as HTMLElement;
+            const sliderWrapLeftPos = sliderWrap.getBoundingClientRect().left;
+            const sliderContent = document.querySelector('.tickets__slider') as HTMLElement;
+            const firstSlide = sliderContent.firstElementChild as HTMLElement;
+            const firstSlideLeftPos = firstSlide.getBoundingClientRect().right;
+            const sliderElem = document.querySelector('.tickets__slide') as HTMLElement;
+            const sliderWidth = sliderElem.getBoundingClientRect().width;
+            const slidersGap = 8;
+            const currentElemPosition = +getComputedStyle(sliderContent).transform.split(', ')[4];
+            if (sliderWrapLeftPos <= (firstSlideLeftPos - sliderWidth)) {
+                return;
+            }
+            const newElemPosition = currentElemPosition + (sliderWidth + slidersGap);
+
+            sliderContent.style.transform = `translateX(${newElemPosition}px)`;
         }
     }
 }

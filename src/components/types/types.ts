@@ -69,7 +69,6 @@ type PersonsType = {
     enProfession: string
 };
 
-// TODO: разбить на несколько типов
 type MovieType = {
     kinopoiskId: number;
     id: number,
@@ -79,6 +78,7 @@ type MovieType = {
     },
     type: string,
     name: string,
+    alternativeName: string,
     description: string,
     slogan: string,
     year: number,
@@ -207,6 +207,18 @@ type WillWatchType = {
     }[],
 };
 
+type TicketsProfileType = {
+    total: number,
+    items: {
+        date: string,
+        filmID: string,
+        places: string,
+        day: string,
+        time: string,
+        hall: string,
+    }[],
+};
+
 type UserType = {
     avatar: string,
     country: string,
@@ -220,6 +232,7 @@ type UserType = {
     reviews: ReviewsType,
     watched: WatchedType,
     willWatch: WillWatchType,
+    tickets: TicketsProfileType,
 };
 
 type MoviesUserType = {
@@ -303,4 +316,5 @@ export {
     TFrameImage,
     TMovieTop,
     TQuestionData,
+    TicketsProfileType,
 };
