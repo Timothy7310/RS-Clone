@@ -74,7 +74,6 @@ export default class Main {
         let result = '';
         const movies = await (await this.controllerUnofficialKP.getPremieres(new Date()));
         const listDOM = document.querySelector('.tickets__slider') as HTMLElement;
-        // TODO: add rating logic to .tickets__slide-rate
         movies.forEach(async (movie: Premieres) => {
             result += `
                 <li class="tickets__slide">
@@ -101,7 +100,6 @@ export default class Main {
         const listDOM = document.querySelector('.soon-cinema__list') as HTMLElement;
 
         movies.forEach((movie: Premieres) => {
-            // TODO: добавить склонения февраль -> февраля
             const day = new Date(movie.premiereRu).toLocaleDateString('ru-RU', { day: 'numeric' });
             const month = new Date(movie.premiereRu).toLocaleDateString('ru-RU', { month: 'long' });
             result += `
@@ -130,7 +128,6 @@ export default class Main {
         listDOM.innerHTML = result;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async renderBoxOffice(type: 'world' | 'russia' | 'usa') {
         const listDOM = document.querySelector(`.cash__card-list--${type}`) as HTMLElement;
         let result = '';

@@ -10,7 +10,6 @@ import {
     NEXT_PAGE,
     PREV_PAGE,
 } from '../../templates/movies/movies';
-// import ticketsTemplate from '../../templates/tickets';
 import Component from '../Component';
 import FirebaseStore from '../../server/firebaseStore';
 
@@ -46,17 +45,12 @@ export default class MoviesTop {
         parentContainer.classList.add('movie', 'container');
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async moviesEvent(event: Event) {
         const target = event.target as HTMLButtonElement;
 
         if (target.closest('.movies__card-rates-will-watch')) {
             this.userProfile.saveWillWatch(target, '.movies__card-rates-will-watch', 'movies__card-rates-will-watch--active');
         }
-
-        // if (target.closest('.movies__card-rates-will-watch')) {
-        //     await this.toggleWatchFilmState(target);
-        // }
     }
 
     generatePageButton(page: number, isActive = false): HTMLLIElement {

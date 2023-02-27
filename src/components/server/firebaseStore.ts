@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import {
     collection,
     doc,
@@ -36,7 +37,6 @@ class FirebaseStore {
         }
     };
 
-    // eslint-disable-next-line class-methods-use-this
     readUsers = async () => {
         const list: DocumentData[] = [];
         const querySnapshot = await getDocs(collection(db, 'users'));
@@ -46,7 +46,6 @@ class FirebaseStore {
         return list;
     };
 
-    // eslint-disable-next-line class-methods-use-this
     getCurrentUser = async (isForce = false) => {
         const id = localStorage.getItem('userID') as string;
         if (isForce || this.user?.id !== id) {
@@ -56,28 +55,18 @@ class FirebaseStore {
         return this.user;
     };
 
-    // eslint-disable-next-line class-methods-use-this
-    // updateUserInfo = async <T extends keyof UserType>(field: T, value: UserType[T]) => {
-    //     userBlank[field] = value;
-    //     const id = localStorage.getItem('userID') as string;
-    //     await setDoc(doc(db, 'users', id), userBlank);
-    // };
-
-    // eslint-disable-next-line class-methods-use-this
     updateUserInfo = async (userObj: UserType) => {
         const id = localStorage.getItem('userID') as string;
         this.user = userObj;
         await setDoc(doc(db, 'users', id), userObj);
     };
 
-    // eslint-disable-next-line class-methods-use-this
     deleteUser = async () => {
         const id = localStorage.getItem('userID') as string;
         await deleteDoc(doc(db, 'users', id));
         localStorage.removeItem('userID');
     };
 
-    // eslint-disable-next-line class-methods-use-this
     uploadFile = async (file: File) => {
         const storageRef = ref(storage, 'images/rivers.jpg');
 

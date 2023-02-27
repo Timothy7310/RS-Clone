@@ -292,7 +292,6 @@ export default class UserProfile {
         willWatchPageCount.textContent = `Билеты (${userInfoTickets.total})`;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async userProfileEvent(event: Event) {
         const target = event.target as HTMLButtonElement;
         if (target.closest('.profile-settings__save')) {
@@ -452,7 +451,6 @@ export default class UserProfile {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async uploadAvatarEvent(event: Event) {
         const target = event.target as HTMLInputElement;
 
@@ -468,7 +466,6 @@ export default class UserProfile {
     validationMark(event: Event) {
         const target = event.target as HTMLInputElement;
 
-        // TODO: изменить логику, можно менять только с помощью стрелок вверх\вниз
         if (target.closest('.profile__mark-change-input')) {
             target.value = `${Math.max(1, Math.min(10, +target.value))}`;
         }

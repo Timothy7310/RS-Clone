@@ -238,7 +238,6 @@
         }
         &-rates{
             display: flex;
-            // flex-direction: column;
             align-items: flex-start;
             margin-right: auto;
             &-num{
@@ -313,7 +312,6 @@
                 }
                 &:hover{
                     color: var(--color-accent);
-                    // background-color: var(--color-accent);
                     & .movies__card-rates-will-watch-icon{
                         fill: var(--color-accent);
                     }

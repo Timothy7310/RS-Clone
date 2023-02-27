@@ -1,7 +1,3 @@
-// import { debounce } from 'ts-debounce';
-// import _ from 'lodash';
-// import { debounce } from 'lodash';
-// import debounceAsync from '../utils/test';
 import Router, { IRouter } from './Router';
 import Cinema from '../pages/cinema/Cinema';
 import Burger from '../utils/burger';

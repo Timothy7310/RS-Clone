@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Page from '../Page';
 import billboardTemplate from '../../templates/billboard';
 import ControllerUnofficialKP from '../../controller/ControllerUnofficialKP';
@@ -64,7 +65,6 @@ export default class Cinema {
         await this.renderCalendar('.billboard__days-calendar');
     }
 
-    // eslint-disable-next-line class-methods-use-this
     cinemaEvent(target: HTMLElement) {
         const activeClass = 'billboard__days-btn--active';
         const chooseBtn = document.querySelector('.billboard__days-btn-choose') as HTMLElement;
@@ -122,7 +122,6 @@ export default class Cinema {
         calendar.classList.remove(calendarActiveClass);
     }
 
-    // eslint-disable-next-line class-methods-use-this
     renderCalendar(parentClass: string, days = 7) {
         const listDOM = document.querySelector(parentClass) as HTMLElement;
         let result = '';

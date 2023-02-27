@@ -29,7 +29,6 @@ export default class GenerateTables {
         this.helper = new Helper();
     }
 
-    // eslint-disable-next-line class-methods-use-this
     getMovieTable(movie: TMovie) {
         const tableData = {
             [TableTitle.year]: movie.year,

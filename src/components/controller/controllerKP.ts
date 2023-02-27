@@ -82,7 +82,6 @@ class ControllerKP {
         return review;
     }
 
-    // TODO: не загружается previewUrl
     async searchImage(value: string, field: string) {
         const response = await fetch(`${this.imageURL}&search=${value}&field=${field}`);
         const image = await response.json();

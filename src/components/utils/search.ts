@@ -1,5 +1,3 @@
-// import { debounce } from 'lodash';
-// import debounce from './test';
 import ControllerTestKP from '../controller/controllerTestKP';
 import { MovieTestType } from '../types/types';
 import MoviesTop from '../pages/movies/movies';
@@ -29,7 +27,6 @@ class Search {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async renderSearchPage(event: Event) {
         const target = event.target as HTMLFormElement;
 

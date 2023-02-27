@@ -92,13 +92,11 @@ export default class FirebaseAuthUser {
             })
                 .then(() => {
                     // Profile updated!
-                    // ...
                     console.log('User has deleted');
                 })
                 .catch((error) => {
                     console.log(error.message);
                     // An error occurred
-                    // ...
                 });
         }
     };
@@ -115,7 +113,6 @@ export default class FirebaseAuthUser {
                 .catch((error) => {
                     console.log(error.message);
                     // An error ocurred
-                    // ...
                 });
         }
     };

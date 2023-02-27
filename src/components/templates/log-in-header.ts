@@ -1,8 +1,3 @@
-// import FirebaseStore from '../server/firebaseStore';
-
-// const res = await new FirebaseStore().getCurrentUser();
-// const src = res[0].avatar;
-
 const logInHeader = `
 <h1 class="visually-hidden">RS-Clone Кинопоиск</h1>
 <div class="container">

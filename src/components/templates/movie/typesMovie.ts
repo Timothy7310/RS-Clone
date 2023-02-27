@@ -37,8 +37,6 @@ export type TTtt = {
     year?: string,
     countries?: string,
     genres?: string,
-    // countries?: string[],
-    // genres?: string[],
     slogan?: string,
     budget?: string,
     feesUSA?: string,

@@ -69,7 +69,6 @@ type PersonsType = {
     enProfession: string
 };
 
-// TODO: разбить на несколько типов
 type MovieType = {
     kinopoiskId: number;
     id: number,

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Page from '../Page';
 import Actors from './section/actors';
 import Basic from './section/basic';
@@ -77,7 +78,6 @@ export default class Movie {
         this.page.clear();
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async moviePageEvents(e: Event) {
         const target = e.target as HTMLElement;
 
@@ -170,7 +170,6 @@ export default class Movie {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
     validateReviewForm(title: HTMLInputElement, text: HTMLTextAreaElement) {
         const checker = [];
         if (title.value.replace(/\s{2,}/g, ' ').trim().length < 4) {
