@@ -287,4 +287,5 @@ export {
     ImagesType,
     MoviesUserType,
     CountryBoxOfficeType,
+    TicketsProfileType,
 };
