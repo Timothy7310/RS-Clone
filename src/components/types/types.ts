@@ -154,7 +154,7 @@ type ImageType = {
     height: null | number,
     id: string,
     language: null,
-    movieId: 426,
+    movieId: number,
     previewUrl: string,
     type: string,
     url: string,
@@ -163,10 +163,10 @@ type ImageType = {
 
 type ImagesType = {
     docs: ImageType[],
-    limit: 10,
-    page: 1,
-    pages: 16,
-    total: 155,
+    limit: number,
+    page: number,
+    pages: number,
+    total: number,
 };
 
 type MovieTestType = {
@@ -270,6 +270,21 @@ type TFrameImage = {
     id: string;
 };
 
+type TMovieTop = {
+    id: number,
+    name: string,
+    rating: { kp: number },
+    imagesInfo: {
+        framesCount: number
+    },
+};
+
+type TQuestionData = {
+    movies: TMovieTop[],
+    picture: string,
+    answerId: number,
+};
+
 export {
     Countries,
     Genres,
@@ -286,4 +301,6 @@ export {
     MoviesUserType,
     CountryBoxOfficeType,
     TFrameImage,
+    TMovieTop,
+    TQuestionData,
 };
