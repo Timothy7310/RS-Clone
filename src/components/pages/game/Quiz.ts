@@ -106,12 +106,10 @@ export default class Quiz {
     checkAnswer(page: TQuestionData) {
         const checkedAnswer = document.querySelector('input:checked');
         const button = checkedAnswer?.closest('div');
-        console.log(checkedAnswer);
         if (checkedAnswer) {
             const userAnswer = Number((checkedAnswer as HTMLInputElement).value);
             if (userAnswer === page.answerId) {
                 this.currentPage += 1;
-                console.log(this.currentPage);
                 button?.classList.add('correct');
                 this.score += 5;
                 this.drawQuestion();
@@ -120,7 +118,6 @@ export default class Quiz {
                 this.score -= 1;
             }
             if (this.currentPage === 11) {
-                console.log(this.score);
                 localStorage.setItem('score', `${this.score}`);
                 window.location.href = '#/gamefinish';
             }

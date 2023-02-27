@@ -30,6 +30,5 @@ export default class GameFinish {
     clearStorage() {
         localStorage.removeItem('score');
         localStorage.clear();
-        console.log('jnhf,jnrf');
     }
 }
