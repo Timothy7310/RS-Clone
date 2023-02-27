@@ -1,4 +1,5 @@
 import Page from '../Page';
+import GamePageContainer from './gamePageContainer';
 
 export default class GamePage {
     page: Page;
@@ -7,17 +8,23 @@ export default class GamePage {
 
     path: string | undefined;
 
-    constructor(path?: string, id?: string) {
+    gamePageContainer: GamePageContainer;
+
+    constructor(path?: string) {
         this.page = new Page(path);
         this.container = this.page.draw();
+        this.gamePageContainer = new GamePageContainer();
     }
 
     draw(): HTMLElement {
-        this.basic.draw(this.container, this.id);
+        this.gamePageContainer.draw(this.container);
         return this.container;
     }
 
     clear(): void {
         this.page.clear();
+    }
+
+    showQuestion() {
     }
 }
