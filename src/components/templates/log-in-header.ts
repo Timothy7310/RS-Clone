@@ -116,7 +116,9 @@ const logInHeader = `
                 </svg>
             </button>
         </form>
-        <button class="header__quizz-btn">Игра</button>
+        <a href="#/gamestart">
+            <button class="header__quizz-btn">Игра</button>
+        </a>
         <a href="#/profile" class="header__profile-btn" id="profile" title="Личный кабинет">
             <img src="" alt="" class="header__profile-avatar">
         </a>
