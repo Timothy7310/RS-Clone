@@ -41,7 +41,6 @@ class ControllerKP {
         const result = await response.json();
         const frames = result.docs.filter((x: TFrameImage) => x.type === 'frame');
         const randomFrame = frames[Math.floor(Math.random() * frames.length)];
-        console.log(randomFrame);
         return randomFrame;
     }
 
