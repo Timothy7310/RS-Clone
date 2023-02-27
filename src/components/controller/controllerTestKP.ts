@@ -18,11 +18,14 @@ class ControllerTestKP {
 
     randomMovieURL;
 
+    tokenNum;
+
     constructor() {
         // this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
         // this.token = '?token=XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
         // this.token = '?token=YJJQ1XT-DNJMT7J-PTA5KZF-WWP9ANR'; // еще один
-        this.token = '?token=2RGX017-HSV4RZN-MS2TY91-XHEQ1R5'; // еще один
+        this.tokenNum = '2RGX017-HSV4RZN-MS2TY91-XHEQ1R5';
+        this.token = `?token=${this.tokenNum}`; // еще один
         // this.token = '?token=238H0SS-904MAP9-NHE1XTM-1FVVPQR'; // еще один
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;
@@ -72,6 +75,18 @@ class ControllerTestKP {
 
         const movies = await this.searchMovie(input.value, page, limit);
         return movies;
+    }
+
+    async getMovieByID(id: string) {
+        const response = await fetch(`${this.baseURL}/movie/${id}`, {
+            method: 'GET',
+            headers: {
+                'X-API-KEY': this.tokenNum,
+                accept: 'application/json',
+            },
+        });
+        const movie = await response.json();
+        return movie;
     }
 }
 

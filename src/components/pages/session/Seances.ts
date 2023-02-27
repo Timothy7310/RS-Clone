@@ -4,6 +4,7 @@ import ControllerKP from '../../controller/controllerKP';
 import Cinema from '../cinema/Cinema';
 import modalTicketTemplates from '../../templates/modal-ticket';
 import FirebaseStore from '../../server/firebaseStore';
+import ControllerTestKP from '../../controller/controllerTestKP';
 
 export default class Seances {
     page: Page;
@@ -22,12 +23,15 @@ export default class Seances {
 
     firebaseStore;
 
+    controllerTestKP;
+
     constructor(path?: string, id?: string) {
         this.page = new Page(path);
         this.id = id;
         this.controllerKP = new ControllerKP();
         this.cinema = new Cinema();
         this.firebaseStore = new FirebaseStore();
+        this.controllerTestKP = new ControllerTestKP();
         this.container = this.page.draw();
         this.price = 0;
     }
@@ -42,7 +46,7 @@ export default class Seances {
     }
 
     async renderSeance() {
-        const movie = await this.controllerKP.getMovieForId(this.id as string);
+        const movie = await this.controllerTestKP.getMovieByID(this.id as string);
 
         this.container.innerHTML = seancesTemplates(movie);
         this.cinema.renderCalendar('.seances__days-calendar');
@@ -132,7 +136,6 @@ export default class Seances {
         if (target.closest('.modal-ticket__spot-sofa-warp')) {
             const priceContainer = document.querySelector('.modal-ticket__content-buy-total-num') as HTMLElement;
             const btnWrap = target.closest('.modal-ticket__spot-sofa-warp') as HTMLElement;
-            console.log(btnWrap.children);
 
             Array.from(btnWrap.children).forEach((x) => x.classList.toggle('modal-ticket__spot--active'));
             btnWrap.classList.toggle('modal-ticket__spot-sofa-warp--active');
@@ -142,7 +145,6 @@ export default class Seances {
                 priceContainer.innerHTML = `${this.price} BYN`;
                 return;
             }
-            console.log(this.price);
 
             this.price -= 36;
             priceContainer.innerHTML = `${this.price} BYN`;
@@ -205,7 +207,6 @@ export default class Seances {
             newUserInfo.tickets.items.push(newTickets);
             newUserInfo.tickets.total = newUserInfo.tickets.items.length;
 
-            console.log(newUserInfo);
             await this.firebaseStore.updateUserInfo(newUserInfo);
         }
     }
