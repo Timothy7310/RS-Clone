@@ -197,6 +197,24 @@ export default class UserProfile {
 
                 const elem = document.createElement('article');
                 elem.classList.add('profile__user-review');
+
+                let typeClass;
+                switch (item.type) {
+                    case 'Положительна':
+                        typeClass = 'profile__user-review--positive';
+                        break;
+                    case 'Нейтральная':
+                        typeClass = 'profile__user-review--neutral';
+                        break;
+                    case 'Отрицательная':
+                        typeClass = 'profile__user-review--negative';
+                        break;
+                    default:
+                        typeClass = '';
+                        break;
+                }
+
+                elem.classList.add(typeClass);
                 elem.innerHTML = profileReviewInfoTemplate(item, movie);
                 reviewsListDOM.prepend(elem);
             });
