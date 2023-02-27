@@ -26,7 +26,6 @@
             flex-wrap: wrap;
             margin-left: 0;
             &_item{
-                cursor: pointer;
                 user-select: none;
                 transition: all .3s ease;
                 margin-bottom: 10px;
@@ -49,6 +48,7 @@
                 }
                 label {
                     text-align: center;
+                    cursor: pointer;
                 }
             }
         }
