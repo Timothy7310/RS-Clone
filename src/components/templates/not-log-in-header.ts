@@ -110,7 +110,9 @@ const notLogInHeader = `
                 </div>
             </div>
         </div>
-        <button class="header__quizz-btn">Игра</button>
+        <a href="#/gamestart">
+            <button class="header__quizz-btn">Игра</button>
+        </a>
         <a href="#/login" class="header__enter-btn" id="log-in">Войти</a>
     </div>
 </div>

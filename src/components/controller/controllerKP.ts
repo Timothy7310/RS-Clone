@@ -1,4 +1,5 @@
 import { Top250PageData } from '../templates/movie/typesMovie';
+import { TFrameImage } from '../types/types';
 
 class ControllerKP {
     tokenNum;
@@ -18,11 +19,13 @@ class ControllerKP {
     seasonURL;
 
     constructor() {
+        // this.tokenNum = '8DD8D2R-BSJ4163-KC3DTSV-2ZWA2AM';
+        this.tokenNum = '4ZKP5GE-A9D47VB-HQ3453N-8WCS1CM'; // запасной
         // this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
         // this.tokenNum = 'XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
         // this.tokenNum = 'YJJQ1XT-DNJMT7J-PTA5KZF-WWP9ANR'; // еще один
         // this.tokenNum = '2RGX017-HSV4RZN-MS2TY91-XHEQ1R5'; // еще один
-        this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551'; // еще один
+        // this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551'; // еще один
         // this.tokenNum = '238H0SS-904MAP9-NHE1XTM-1FVVPQR'; // еще один
         this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
@@ -33,13 +36,12 @@ class ControllerKP {
         this.seasonURL = `${this.baseURL}/season${this.token}`;
     }
 
-    async getRandomMovieFrame(id: string) {
-        const response = await fetch(`${this.imageURL}&page=1&limit=10&movieId=${id}`);
-        const images = await response.json();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const frames = images.docs.filter((x: any) => x.type === 'frame');
-
+    async getImageFromMovie(id: string): Promise<TFrameImage> {
+        const response = await fetch(`${this.imageURL}&page=1&limit=10&movieId=${id}&type=frame`);
+        const result = await response.json();
+        const frames = result.docs.filter((x: TFrameImage) => x.type === 'frame');
         const randomFrame = frames[Math.floor(Math.random() * frames.length)];
+        console.log(randomFrame);
         return randomFrame;
     }
 
@@ -131,7 +133,14 @@ class ControllerKP {
 
     async getTop250(page: number, limit = 10) {
         try {
-            const response = await fetch(`${this.baseURL}/movie?selectFields=id&selectFields=name&selectFields=rating.kp&sortField=rating.kp&sortType=-1&page=${page}&limit=${limit}&top250=%21null`, {
+            const selectedFiels = [
+                'id',
+                'name',
+                'rating.kp',
+                'imagesInfo.framesCount',
+            ];
+            const select = selectedFiels.map((field) => `selectFields=${field}`).join('&');
+            const response = await fetch(`${this.baseURL}/movie?${select}&sortField=rating.kp&sortType=-1&page=${page}&limit=${limit}&top250=%21null`, {
                 method: 'GET',
                 headers: {
                     'X-API-KEY': this.tokenNum,

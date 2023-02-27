@@ -6,6 +6,9 @@ import Page from '../pages/Page';
 import UserProfile from '../pages/user_profile/userProfile';
 import Seances from '../pages/session/Seances';
 import Login from '../pages/login/Login';
+import GameStart from '../pages/game/gameStartPage';
+import GamePage from '../pages/game/gamePage';
+import GameFinish from '../pages/game/gameFinishPage';
 
 export interface IPath {
     path: string;
@@ -22,6 +25,9 @@ export const enum PagePaths {
     ticketsPage = 'cinema/tickets',
     userProfilePage = '#/profile',
     loginPage = '#/login',
+    startGame = '#/gamestart',
+    game = '#/game',
+    finishGame = '#/gamefinish',
 }
 
 export const Paths = [
@@ -56,5 +62,17 @@ export const Paths = [
     {
         path: PagePaths.loginPage,
         getPage: (path?: string) => new Login(path),
+    },
+    {
+        path: PagePaths.startGame,
+        getPage: (path?: string) => new GameStart(path),
+    },
+    {
+        path: PagePaths.game,
+        getPage: (path?: string) => new GamePage(path),
+    },
+    {
+        path: PagePaths.finishGame,
+        getPage: (path?: string) => new GameFinish(path),
     },
 ];
