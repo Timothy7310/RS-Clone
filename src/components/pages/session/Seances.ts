@@ -111,6 +111,7 @@ export default class Seances {
         if (target.closest('.seances__item-time-option-btn')) {
             const body = document.querySelector('body') as HTMLElement;
             const btn = target.closest('.seances__item-time-option-btn') as HTMLButtonElement;
+            const hall = btn.dataset.hall as string;
 
             const modal = document.createElement('div');
             const dateBtn = document.querySelector('.billboard__days-calendar-btn--active') as HTMLElement ?? document.querySelector('.seances__days-btn--active') as HTMLElement ?? document.querySelector('#seances-today') as HTMLElement;
@@ -123,6 +124,7 @@ export default class Seances {
             modal.classList.add('modal-ticket-wrap');
             body.classList.add('lock');
             body.append(modal);
+            modal.dataset.hall = hall;
         }
 
         if (target.closest('.modal-ticket__close')) {
@@ -176,6 +178,7 @@ export default class Seances {
             if (this.price === 0) {
                 return;
             }
+            const modal = document.querySelector('.modal-ticket-wrap') as HTMLElement;
             const modalContent = document.querySelector('.modal-ticket__content-bottom') as HTMLElement;
             const selectPlace = document.querySelectorAll('.modal-ticket__spot--active');
             let places = '';
@@ -185,12 +188,14 @@ export default class Seances {
             const time = timeElem.textContent;
             const totalPrice = `${this.price} BYN`;
             const id = window.location.hash.split('/').at(-1);
+            const hall = modal.dataset.hall as string;
             selectPlace.forEach((x) => {
                 places += `${x.getAttribute('aria-label')}, `;
             });
 
             modalContent.innerHTML = `
                 <span>Спасибо за покупку!</span>
+                <p>Зал: № ${hall}</p>
                 <p>Выши места: ${places.trim().slice(0, -1)}</p>
                 <p>Сумма покупки: ${totalPrice}</p>
             `;
@@ -203,6 +208,7 @@ export default class Seances {
                 places: places.trim().slice(0, -1),
                 day: date,
                 time,
+                hall,
             };
             newUserInfo.tickets.items.push(newTickets);
             newUserInfo.tickets.total = newUserInfo.tickets.items.length;

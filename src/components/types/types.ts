@@ -216,6 +216,7 @@ type TicketsProfileType = {
         places: string,
         day: string,
         time: string,
+        hall: string,
     }[],
 };
 

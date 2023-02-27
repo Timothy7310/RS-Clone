@@ -6,6 +6,7 @@ const profileTicketsCardsTemplate = (movie: TMovie, item: {
     places: string;
     day: string;
     time: string;
+    hall: string;
 }): string => `
 <div class="profile__tickets-info-wrap">
     <div class="profile__tickets-img-info-wrap">
@@ -25,6 +26,7 @@ const profileTicketsCardsTemplate = (movie: TMovie, item: {
             <span class="profile__tickets-seance-time">
                 ${item.day}. ${item.time}
             </span>
+            <span class="profile__tickets-seance-places">Зал: №${item.hall || ''}</span>
             <span class="profile__tickets-seance-places">Ваши места: ${item.places}</span>
         </div>
     </div>

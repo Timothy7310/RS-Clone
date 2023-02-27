@@ -66,19 +66,19 @@ const seancesTemplates = (movie: TMovie) => {
                                 <span class="seances__item-time-type">2D</span>
                                 <ul class="seances__item-time-list">
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">14:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="1">14:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">16:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="1">16:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">18:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="1">18:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">20:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="1">20:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">22:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="1">22:30</button>
                                     </li>
                                 </ul>
                             </div>
@@ -92,25 +92,25 @@ const seancesTemplates = (movie: TMovie) => {
                                 <span class="seances__item-time-type">2D</span>
                                 <ul class="seances__item-time-list">
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">09:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">09:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">11:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">11:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">13:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">13:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">15:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">15:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">17:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">17:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">19:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">19:30</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">21:30</button>
+                                        <button class="seances__item-time-option-btn" data-hall="2">21:30</button>
                                     </li>
                                 </ul>
                             </div>
@@ -124,22 +124,22 @@ const seancesTemplates = (movie: TMovie) => {
                                 <span class="seances__item-time-type">2D</span>
                                 <ul class="seances__item-time-list">
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">10:00</button>
+                                        <button class="seances__item-time-option-btn" data-hall="3">10:00</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">12:00</button>
+                                        <button class="seances__item-time-option-btn" data-hall="3">12:00</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">14:00</button>
+                                        <button class="seances__item-time-option-btn" data-hall="3">14:00</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">18:00</button>
+                                        <button class="seances__item-time-option-btn" data-hall="3">18:00</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">20:00</button>
+                                        <button class="seances__item-time-option-btn" data-hall="3">20:00</button>
                                     </li>
                                     <li class="seances__item-time-option">
-                                        <button class="seances__item-time-option-btn">22:00</button>
+                                        <button class="seances__item-time-option-btn" data-hall="3">22:00</button>
                                     </li>
                                 </ul>
                             </div>
