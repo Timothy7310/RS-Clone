@@ -13,19 +13,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            &_lifes{
-                display: flex;
-                &-icon{
-                    margin-right: 5px;
-                    width: 40px;
-                    height: 40px;
-                }
+            &_exit{
+                color: var(--color-secondary);
             }
         }
         &_image{
             max-width: 650px;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            margin: 10px auto 20px;
         }
         &_questions{
             display: flex;
@@ -43,9 +37,7 @@
                 justify-content: center;
                 align-items: center;
                 padding: 16px 25px;
-                // gap: 10px;
                 width: 320px;
-                //height: 54px;
                 color: white;
                 font-weight: 700;
                 font-size: 18px;
@@ -77,4 +69,12 @@
 
 .quiz__content_questions_item input[type=radio] {
     display: none;
-  }
+}
+
+.correct{
+    background: var(--rate-good);
+}
+
+.incorrect{
+    background: var(--rate-bad);
+}

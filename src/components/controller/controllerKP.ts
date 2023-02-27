@@ -19,7 +19,8 @@ class ControllerKP {
     seasonURL;
 
     constructor() {
-        this.tokenNum = '8DD8D2R-BSJ4163-KC3DTSV-2ZWA2AM';
+        // this.tokenNum = '8DD8D2R-BSJ4163-KC3DTSV-2ZWA2AM';
+        this.tokenNum = '4ZKP5GE-A9D47VB-HQ3453N-8WCS1CM'; // запасной
         this.token = `?token=${this.tokenNum}`;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
         this.movieURL = `${this.baseURL}/movie${this.token}`;

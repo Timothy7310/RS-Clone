@@ -1,5 +1,3 @@
-// import GameTemplate from '../../templates/game/gamePageTemplate';
-// import gamePageTemplate from '../../templates/game/gamePageTemplate';
 import Component from '../Component';
 import Quiz from './Quiz';
 
@@ -14,8 +12,6 @@ export default class GamePageContainer {
     }
 
     draw(parentContainer: HTMLElement) {
-        // const game = new GameTemplate();
-        // this.container.insertAdjacentHTML('afterbegin', gamePageTemplate());
         const quiz = new Quiz(this.container);
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('container');

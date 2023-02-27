@@ -13,11 +13,14 @@ export default class Quiz {
         [page: number]: TQuestionData
     };
 
+    score;
+
     constructor(container: HTMLElement) {
         this.container = container;
         this.controller = new ControllerKP();
         this.pages = [];
         this.currentPage = 1;
+        this.score = 0;
         this.loadFilms(250)
             .then((result) => {
                 const pages = Object.values(result).map((page) => this.generateQuestion(page));
@@ -48,7 +51,6 @@ export default class Quiz {
             this.container.insertAdjacentHTML('afterbegin', gamePageTemplate(page, this.currentPage));
         }
         this.choiceAnswer(page);
-        console.log(page);
     }
 
     async loadFilms(count: number): Promise<{
@@ -96,7 +98,6 @@ export default class Quiz {
 
     choiceAnswer(page: TQuestionData) {
         const answerClick = document.querySelectorAll('input');
-        console.log(answerClick);
         answerClick.forEach((elem) => {
             elem.addEventListener('click', this.checkAnswer.bind(this, page));
         });
@@ -104,18 +105,31 @@ export default class Quiz {
 
     checkAnswer(page: TQuestionData) {
         const checkedAnswer = document.querySelector('input:checked');
+        const button = checkedAnswer?.closest('div');
         console.log(checkedAnswer);
         if (checkedAnswer) {
             const userAnswer = Number((checkedAnswer as HTMLInputElement).value);
-            console.log(userAnswer);
             if (userAnswer === page.answerId) {
                 this.currentPage += 1;
                 console.log(this.currentPage);
+                button?.classList.add('correct');
+                this.score += 5;
                 this.drawQuestion();
+            } else {
+                button?.classList.add('incorrect');
+                this.score -= 1;
             }
             if (this.currentPage === 11) {
+                console.log(this.score);
+                localStorage.setItem('score', `${this.score}`);
                 window.location.href = '#/gamefinish';
             }
         }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    clearStorage() {
+        localStorage.removeItem('score');
+        localStorage.clear();
     }
 }

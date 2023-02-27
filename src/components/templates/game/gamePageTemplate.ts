@@ -7,18 +7,8 @@ const gamePageTemplate = (question: TQuestionData, page: number): string => `
         </h2>
         <div class="quiz__content">
             <div class="quiz__content_conf">
-                <div class="quiz__content_conf_lifes">
-                    <svg class="quiz__content_conf_lifes-icon">
-                        <use href="./assets/img/sprite.svg#filled_heart"></use>
-                    </svg>
-                    <svg class="quiz__content_conf_lifes-icon">
-                        <use href="./assets/img/sprite.svg#filled_heart"></use>
-                    </svg>
-                    <svg class="quiz__content_conf_lifes-icon">
-                        <use href="./assets/img/sprite.svg#filled_heart"></use>
-                    </svg>
-                </div>
                 <div class="quiz__content_conf_counts">вопрос ${page}/10</div>
+                <a href="#/main" class="quiz__content_conf_exit">Выйти из игры</a>
             </div>
             <div class="quiz__content_image">
                 <img src="${question.picture}" alt="frame for movie">

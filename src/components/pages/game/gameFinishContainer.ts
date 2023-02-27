@@ -12,7 +12,12 @@ export default class GameFinishContainer {
     }
 
     draw(parentContainer: HTMLElement) {
-        this.container.insertAdjacentHTML('afterbegin', gameFinishTemplate);
+        const data = localStorage.getItem('score');
+        if (data) {
+            this.container.insertAdjacentHTML('afterbegin', gameFinishTemplate(data));
+        } else {
+            this.container.insertAdjacentHTML('afterbegin', gameFinishTemplate('0'));
+        }
         parentContainer.appendChild(this.container);
         parentContainer.classList.add('container');
     }

@@ -23,5 +23,13 @@ export default class GameFinish {
 
     clear(): void {
         this.page.clear();
+        this.clearStorage();
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    clearStorage() {
+        localStorage.removeItem('score');
+        localStorage.clear();
+        console.log('jnhf,jnrf');
     }
 }
