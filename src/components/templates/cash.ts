@@ -4,7 +4,7 @@ const cashTemplate = `
         <hr>
         <div class="cash__wrap">
             <div class="cash__card">
-                <a href="" class="cash__card-link">
+                <a href="#/cinema" class="cash__card-link">
                     <h3 class="cash__card-link-title">Россия и СНГ</h3>
                     <svg class="cash__card-link-icon">
                         <use href="./assets/img/sprite.svg#icon_back"></use>
@@ -84,7 +84,7 @@ const cashTemplate = `
                 </ol>
             </div>
             <div class="cash__card">
-                <a href="" class="cash__card-link">
+                <a href="#/cinema" class="cash__card-link">
                     <h3 class="cash__card-link-title">Мир</h3>
                     <svg class="cash__card-link-icon">
                         <use href="./assets/img/sprite.svg#icon_back"></use>
@@ -164,7 +164,7 @@ const cashTemplate = `
                 </ol>
             </div>
             <div class="cash__card">
-                <a href="" class="cash__card-link">
+                <a href="#/cinema" class="cash__card-link">
                     <h3 class="cash__card-link-title">США и Канада</h3>
                     <svg class="cash__card-link-icon">
                         <use href="./assets/img/sprite.svg#icon_back"></use>

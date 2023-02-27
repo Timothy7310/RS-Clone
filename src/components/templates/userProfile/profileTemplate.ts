@@ -64,6 +64,14 @@ const profileTemplate = (userInfo: UserType, moviesTypes: MoviesUserType, averag
                     <span class="profile__link-text profile--will-watch-count">Моё (${userInfo.willWatch.total})</span>
                 </a>
             </li>
+            <li class="profile__list">
+                <a href="" class="profile__link profile__link-page profile--tickets">
+                    <svg class="profile__link-icon">
+                        <use href="./assets/img/sprite.svg#movie-logo"></use>
+                    </svg>
+                    <span class="profile__link-text profile--tickets-count">Билеты (${userInfo.willWatch.total})</span>
+                </a>
+            </li>
             <li class="profile__list profile__list--log-out">
                 <a class="profile__log-out" href="#/main">Выйти</a>
             </li>

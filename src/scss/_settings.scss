@@ -16,6 +16,10 @@ body {
     scroll-behavior: smooth;
 }
 
+body.lock{
+    overflow: hidden;
+}
+
 main {
     min-height: calc(100vh - 207.4px);
 }

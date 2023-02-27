@@ -18,6 +18,7 @@ import Search from '../utils/search';
 import MoviesTop from '../pages/movies/movies';
 import Main from '../pages/main/Main';
 import Movie from '../pages/movie/MoviePage';
+import Seances from '../pages/session/Seances';
 
 const rootElement = document.querySelector('#content');
 
@@ -44,6 +45,8 @@ export default class App {
 
     movie;
 
+    seances;
+
     constructor() {
         if (rootElement) {
             this.router = new Router(rootElement);
@@ -58,6 +61,7 @@ export default class App {
         this.moviesTop = new MoviesTop();
         this.main = new Main();
         this.movie = new Movie();
+        this.seances = new Seances();
     }
 
     start() {
@@ -102,6 +106,7 @@ export default class App {
             this.moviesTop.moviesEvent(e);
             this.main.mainPageEvent(e);
             this.movie.moviePageEvents(e);
+            this.seances.seanceEvent(target);
         });
 
         bodyDOM.addEventListener('change', (e) => {

@@ -18,7 +18,7 @@ export const enum PagePaths {
     moviesPage = '#/movies',
     moviePage = '#/movie',
     cinemaPage = '#/cinema',
-    cinemaSeancesPage = '#/cinema/seances',
+    cinemaSeancesPage = '#/seances',
     ticketsPage = 'cinema/tickets',
     userProfilePage = '#/profile',
     loginPage = '#/login',
@@ -42,16 +42,16 @@ export const Paths = [
         getPage: (path?: string) => new MoviesPage(path),
     },
     {
+        path: PagePaths.cinemaSeancesPage,
+        getPage: (path?: string, id?: string) => new Seances(path, id),
+    },
+    {
         path: PagePaths.cinemaPage,
         getPage: (path?: string) => new Cinema(path),
     },
     {
         path: PagePaths.userProfilePage,
         getPage: (path?: string) => new UserProfile(path),
-    },
-    {
-        path: PagePaths.cinemaSeancesPage,
-        getPage: (path?: string) => new Seances(path),
     },
     {
         path: PagePaths.loginPage,

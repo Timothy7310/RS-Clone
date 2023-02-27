@@ -39,10 +39,9 @@ export default class Cinema {
                 return acc;
             }, []).join(', ');
             const time = movie.duration;
-            // TODO: добавить рейтинг в .billboard__item-rate
             result += `
                 <li class="billboard__item">
-                    <a href="#/cinema/seances/${movie.kinopoiskId}" class="billboard__item-link">
+                    <a href="#/seances/${movie.kinopoiskId}" class="billboard__item-link">
                         <div class="billboard__item-tickets">
                             <svg class="billboard__item-tickets-icon">
                                 <use href="./assets/img/sprite.svg#icon_tickets"></use>
@@ -62,7 +61,7 @@ export default class Cinema {
             `;
         });
         listDOM.innerHTML = result;
-        await this.renderCalendar();
+        await this.renderCalendar('.billboard__days-calendar');
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -124,64 +123,66 @@ export default class Cinema {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    renderCalendar(days = 7) {
-        const listDOM = document.querySelector('.billboard__days-calendar') as HTMLElement;
+    renderCalendar(parentClass: string, days = 7) {
+        const listDOM = document.querySelector(parentClass) as HTMLElement;
         let result = '';
         const date = new Date();
         let dateArr = [];
         for (let i = 1; i <= days; i += 1) {
             const d = new Date();
             d.setDate(date.getDate() + i);
-            dateArr.push(d.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric' }));
+            dateArr.push(d.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' }));
         }
-        dateArr = dateArr.map((x) => x.split(', '));
+
+        dateArr = dateArr.map((x) => x.split(', ')).map((x) => [x[0], x[1].split(' ')].flat());
+
         dateArr.forEach((day) => {
-            result += Cinema.calendarDay(day[0], day[1]);
+            result += Cinema.calendarDay(day[0], day[1], `${day[1]} ${day[2]}`);
         });
         listDOM.innerHTML = result;
     }
 
-    static calendarDay(dayWeek: string, day: string) {
+    static calendarDay(dayWeek: string, day: string, date: string) {
         switch (dayWeek) {
             case 'понедельник':
                 return `
-                <button class="billboard__days-calendar-btn">
+                <button class="billboard__days-calendar-btn" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">пн</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;
             case 'вторник':
                 return `
-                <button class="billboard__days-calendar-btn">
+                <button class="billboard__days-calendar-btn" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">вт</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;
             case 'среда':
                 return `
-                <button class="billboard__days-calendar-btn">
+                <button class="billboard__days-calendar-btn" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">ср</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;
             case 'четверг':
                 return `
-                <button class="billboard__days-calendar-btn">
+                <button class="billboard__days-calendar-btn" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">чт</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;
             case 'пятница':
                 return `
-                <button class="billboard__days-calendar-btn">
+                <button class="billboard__days-calendar-btn" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">пт</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;
             case 'суббота':
                 return `
-                <button class="billboard__days-calendar-btn billboard__days-calendar-btn--holiday">
+                <button class="billboard__days-calendar-btn billboard__days-calendar-btn--holiday" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">сб</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;
             case 'воскресенье':
                 return `
-                <button class="billboard__days-calendar-btn billboard__days-calendar-btn--holiday">
+                <button class="billboard__days-calendar-btn billboard__days-calendar-btn--holiday" data-date="${date}">
                     <span class="billboard__days-calendar--day-week">вс</span>
                     <span class="billboard__days-calendar--day-month">${day}</span>
                 </button>`;

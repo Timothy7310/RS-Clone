@@ -2,7 +2,7 @@ const ticketsTemplate = `
     <section class="tickets">
     <div class="container">
         <div class="tickets__wrap">
-            <a href="" class="tickets__link">
+            <a href="#/cinema" class="tickets__link">
                 <h2 class="tickets__link-title">Билеты в кино</h2>
                 <svg class="tickets__link-icon">
                     <use href="./assets/img/sprite.svg#icon_back"></use>

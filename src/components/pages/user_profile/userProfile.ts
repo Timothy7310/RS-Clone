@@ -3,7 +3,7 @@ import userProfileTemplate from '../../templates/userProfile/userProfile';
 import FirebaseStore from '../../server/firebaseStore';
 import FirebaseAuthUser from '../../server/firebaseAuthUser';
 import {
-    UserType, WatchedType, ReviewsType, WillWatchType,
+    UserType, WatchedType, ReviewsType, WillWatchType, TicketsProfileType,
 } from '../../types/types';
 import ControllerKP from '../../controller/controllerKP';
 import settingsPageTemplates from '../../templates/userProfile/settingsPage';
@@ -14,6 +14,8 @@ import profileScoreTemplate from '../../templates/userProfile/profileScoreTempla
 import profileReviewInfoTemplate from '../../templates/userProfile/profileReviewInfo';
 import profileWillWatchTemplate from '../../templates/userProfile/profileWillWatch';
 import profileWillWatchCard from '../../templates/userProfile/profileWillWatchCard';
+import profileTicketsTemplates from '../../templates/userProfile/profileTickets';
+import profileTicketsCardsTemplate from '../../templates/userProfile/profileTicketsCards';
 
 export default class UserProfile {
     page: Page;
@@ -66,6 +68,10 @@ export default class UserProfile {
             case 'willWatch':
                 await this.renderPage();
                 await this.renderWillWatch();
+                break;
+            case 'tickets':
+                await this.renderPage();
+                await this.renderTickets();
                 break;
             default:
                 await this.renderPage();
@@ -246,6 +252,46 @@ export default class UserProfile {
         willWatchPageCount.textContent = `Моё (${userInfoWillWatch.total})`;
     }
 
+    async renderTickets() {
+        const res = await this.firebaseStore.getCurrentUser();
+        const userInfoTickets: TicketsProfileType = res.tickets;
+        const entryPoint = document.querySelector('.profile__content') as HTMLElement;
+
+        const activeClass = 'profile-page--active';
+        const allNavButtons = document.querySelectorAll('.profile__link-page');
+        const ticketsButton = document.querySelector('.profile--tickets');
+        allNavButtons.forEach((btn) => btn.classList.remove(activeClass));
+        ticketsButton?.classList.add(activeClass);
+
+        localStorage.setItem('profilePage', 'tickets');
+
+        const template = profileTicketsTemplates(userInfoTickets);
+        entryPoint.innerHTML = template;
+
+        if (userInfoTickets.total !== 0) {
+            const willWatchListDOM = document.querySelector('.profile__tickets-list') as HTMLElement;
+            // TODO: ограничить массив, иначе будет вывод сразу всех 100 фильмов
+
+            userInfoTickets.items.forEach(async (item) => {
+                const movie = await this.controllerKP.getMovieForId(`${item.filmID}`);
+
+                const elem = document.createElement('article');
+                elem.classList.add('profile__tickets-card');
+                elem.innerHTML = profileTicketsCardsTemplate(movie, item);
+                willWatchListDOM.prepend(elem);
+            });
+
+            const paginations = document.querySelectorAll('.movies__pagination');
+            paginations.forEach((item) => item.classList.remove('movies__pagination--hidden'));
+
+            const warningText = document.querySelector('.profile__score-list-warning-text') as HTMLElement;
+            warningText.remove();
+        }
+
+        const willWatchPageCount = document.querySelector('.profile--tickets-count') as HTMLElement;
+        willWatchPageCount.textContent = `Билеты (${userInfoTickets.total})`;
+    }
+
     // eslint-disable-next-line class-methods-use-this
     async userProfileEvent(event: Event) {
         const target = event.target as HTMLButtonElement;
@@ -308,6 +354,11 @@ export default class UserProfile {
         if (target.closest('.profile--will-watch')) {
             event.preventDefault();
             this.renderWillWatch();
+        }
+
+        if (target.closest('.profile--tickets')) {
+            event.preventDefault();
+            this.renderTickets();
         }
 
         if (target.closest('.profile__will-watch-card-delete')) {
