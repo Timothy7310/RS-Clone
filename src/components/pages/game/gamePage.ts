@@ -24,7 +24,4 @@ export default class GamePage {
     clear(): void {
         this.page.clear();
     }
-
-    showQuestion() {
-    }
 }

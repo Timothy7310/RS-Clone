@@ -114,7 +114,7 @@ export default class Quiz {
                 this.drawQuestion();
             }
             if (this.currentPage === 11) {
-                window.location.href = '#/'
+                window.location.href = '#/gamefinish';
             }
         }
     }

@@ -42,18 +42,21 @@
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                // padding: 16px 110px;
+                padding: 16px 25px;
                 // gap: 10px;
                 width: 320px;
-                height: 54px;
+                //height: 54px;
                 color: white;
                 font-weight: 700;
                 font-size: 18px;
                 line-height: 22px;
                 background: linear-gradient(90deg, #E2756B 0%, #E652A5 29.31%, #9F4FE5 69.27%, #5873E1 100%);
-                border-radius: 30px;
+                border-radius: 100px;
                 &:hover{
                     background: linear-gradient(90deg, #B66159 0%, #AD427E 29.31%, #6B309E 69.27%, #36478F 100%);
+                }
+                label {
+                    text-align: center;
                 }
             }
         }

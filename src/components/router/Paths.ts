@@ -8,6 +8,7 @@ import Seances from '../pages/session/Seances';
 import Login from '../pages/login/Login';
 import GameStart from '../pages/game/gameStartPage';
 import GamePage from '../pages/game/gamePage';
+import GameFinish from '../pages/game/gameFinishPage';
 
 export interface IPath {
     path: string;
@@ -26,6 +27,7 @@ export const enum PagePaths {
     loginPage = '#/login',
     startGame = '#/gamestart',
     game = '#/game',
+    finishGame = '#/gamefinish',
 }
 
 export const Paths = [
@@ -68,5 +70,9 @@ export const Paths = [
     {
         path: PagePaths.game,
         getPage: (path?: string) => new GamePage(path),
+    },
+    {
+        path: PagePaths.finishGame,
+        getPage: (path?: string) => new GameFinish(path),
     },
 ];
