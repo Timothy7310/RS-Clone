@@ -163,5 +163,42 @@ export default class Main {
         if (target.closest('.soon-cinema__item-marker')) {
             this.userProfile.saveWillWatch(target, '.soon-cinema__item-marker', 'soon-cinema__item-marker--active');
         }
+
+        if (target.closest('.tickets__slider-btn--next')) {
+            const sliderWrap = document.querySelector('.tickets__slider-wrap') as HTMLElement;
+            const sliderWrapRightPos = sliderWrap.getBoundingClientRect().right;
+            const sliderContent = document.querySelector('.tickets__slider') as HTMLElement;
+            const lastSlide = sliderContent.lastElementChild as HTMLElement;
+            const lastSlideRightPos = lastSlide.getBoundingClientRect().right;
+            const sliderElem = document.querySelector('.tickets__slide') as HTMLElement;
+            const sliderWidth = sliderElem.getBoundingClientRect().width;
+            const slidersGap = 8;
+            const currentElemPosition = +getComputedStyle(sliderContent).transform.split(', ')[4];
+
+            if (sliderWrapRightPos >= lastSlideRightPos) {
+                return;
+            }
+
+            const newElemPosition = currentElemPosition - (sliderWidth + slidersGap);
+            sliderContent.style.transform = `translateX(${newElemPosition}px)`;
+        }
+
+        if (target.closest('.tickets__slider-btn--prev')) {
+            const sliderWrap = document.querySelector('.tickets__slider-wrap') as HTMLElement;
+            const sliderWrapLeftPos = sliderWrap.getBoundingClientRect().left;
+            const sliderContent = document.querySelector('.tickets__slider') as HTMLElement;
+            const firstSlide = sliderContent.firstElementChild as HTMLElement;
+            const firstSlideLeftPos = firstSlide.getBoundingClientRect().right;
+            const sliderElem = document.querySelector('.tickets__slide') as HTMLElement;
+            const sliderWidth = sliderElem.getBoundingClientRect().width;
+            const slidersGap = 8;
+            const currentElemPosition = +getComputedStyle(sliderContent).transform.split(', ')[4];
+            if (sliderWrapLeftPos <= (firstSlideLeftPos - sliderWidth)) {
+                return;
+            }
+            const newElemPosition = currentElemPosition + (sliderWidth + slidersGap);
+
+            sliderContent.style.transform = `translateX(${newElemPosition}px)`;
+        }
     }
 }

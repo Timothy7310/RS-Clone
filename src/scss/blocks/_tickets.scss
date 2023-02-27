@@ -36,7 +36,10 @@
         display: flex;
         justify-content: space-between;
         gap: 8px;
-        overflow-x: hidden;
+        transition: transform 0.25s ease-in-out;
+        &-wrap{
+            overflow-x: hidden;
+        }
         &-container{
             position: relative;
         }
