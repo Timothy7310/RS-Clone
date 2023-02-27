@@ -23,9 +23,9 @@ const gamePageTemplate = (question: TQuestionData, page: number): string => `
             <div class="quiz__content_image">
                 <img src="${question.picture}" alt="frame for movie">
             </div>
-            <div class="quiz__content_questions">
+            <form class="quiz__content_questions">
                 ${question.movies.map((movie) => answerGameTemplate(movie)).join('')}
-            </div>
+            </form>
         </div>
     `;
 

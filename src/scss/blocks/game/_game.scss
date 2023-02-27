@@ -60,14 +60,17 @@
     }
 }
 
-// .quiz__content_questions_item input[type=radio]:checked + label {
-//     background: lawngreen;
-// }
+.quiz__content_questions_item input[type=radio]:checked + label {
+    color: var(--color-black);
+}
+
+.quiz__content_questions_item.active{
+    color: red;
+}
    
-// .quiz__content_questions_item label:hover {
-//     color: white;
-//     background-color: red
-// }
+.quiz__content_questions_item label:hover {
+    color: white;
+}
 
 .quiz__content_questions_item input[type=radio] {
     display: none;

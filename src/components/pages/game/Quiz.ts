@@ -42,10 +42,13 @@ export default class Quiz {
     }
 
     drawQuestion() {
+        this.container.innerHTML = '';
         const page = this.pages[this.currentPage];
         if (page) {
             this.container.insertAdjacentHTML('afterbegin', gamePageTemplate(page, this.currentPage));
         }
+        this.choiceAnswer(page);
+        console.log(page);
     }
 
     async loadFilms(count: number): Promise<{
@@ -89,5 +92,30 @@ export default class Quiz {
         const max = ids.length - 1;
         const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
         return ids[randomIndex];
+    }
+
+    choiceAnswer(page: TQuestionData) {
+        const answerClick = document.querySelectorAll('input');
+        console.log(answerClick);
+        answerClick.forEach((elem) => {
+            elem.addEventListener('click', this.checkAnswer.bind(this, page));
+        });
+    }
+
+    checkAnswer(page: TQuestionData) {
+        const checkedAnswer = document.querySelector('input:checked');
+        console.log(checkedAnswer);
+        if (checkedAnswer) {
+            const userAnswer = Number((checkedAnswer as HTMLInputElement).value);
+            console.log(userAnswer);
+            if (userAnswer === page.answerId) {
+                this.currentPage += 1;
+                console.log(this.currentPage);
+                this.drawQuestion();
+            }
+            if (this.currentPage === 11) {
+                window.location.href = '#/'
+            }
+        }
     }
 }
