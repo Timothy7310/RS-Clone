@@ -1,0 +1,238 @@
+.billboard{
+    margin-top: 40px;
+    margin-bottom: 60px;
+    &__head{
+        display: flex;
+        align-items: flex-end;
+        gap: 20px;
+        margin-bottom: 32px;
+        &-title{
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 48px;
+            color: var(--color-black);
+            margin: 0px;
+            @include media-mobile-520{
+                font-size: 32px;
+            }
+        }
+        &-icon{
+            width: 83px;
+            height: 27px;
+        }
+    }
+    &__days{
+        margin-bottom: 60px;
+        @include media-mobile-520{
+            margin-bottom: 20px;
+        }
+        &-btns{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            @include media-mobile-520{
+                flex-direction: column;
+            }
+        }
+        &-btn{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            border: 1px solid #e7e7ec;
+            background-color: transparent;
+            color: var(--color-black);
+            border-radius: 16px;
+            transition: border 0.25s ease-in-out;
+            &:hover{
+                border: 1px solid var(--color-accent);
+            }
+            &--active{
+                background-color: var(--color-accent);
+                color: var(--color-white);
+                & .billboard__days-btn-choose-icon{
+                    fill: var(--color-white);
+                }
+            }
+            &-choose{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                &-icon{
+                    width: 18px;
+                    height: 18px;
+                    transform: rotate(90deg);
+                    fill: var(--color-black);
+                }
+            }
+        }
+        &-calendar{
+            position: relative;
+            left: 0px;
+            top: 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            height: 0px;
+            overflow-x: auto;
+            transition: height 0.3s, opacity 0.3s;
+            visibility: hidden;
+            opacity: 0;
+            &--active{
+                height: 70px;
+                visibility: visible;
+                opacity: 1;
+            }
+            &-btn{
+                display: flex;
+                gap: 3px;
+                flex-direction: column;
+                border: none;
+                background-color: transparent;
+                color: var(--color-black);
+                cursor: pointer;
+                &:hover{
+                    .billboard__days-calendar--day-month{
+                        background-color: var(--color-accent);
+                        color: var(--color-white);
+                    }
+                }
+                &--active{
+                    & .billboard__days-calendar--day-month{
+                        background-color: var(--color-accent);
+                        color: var(--color-white);
+                    }
+                }
+                &--holiday{
+                    color: red;
+                }
+            }
+            &--day-week{
+                font-size: 12px;
+            }
+            &--day-month{
+                font-size: 18px;
+                height: 32px;
+                width: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            }
+        }
+    }
+    &__list{
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+        row-gap: 32px;
+        @include media-desktopsmall{
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include media-mobile-520{
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    &__item{
+        &-link{
+            position: relative;
+            display: block;
+            &:hover{
+                & .billboard__item-name{
+                    color: var(--color-accent)
+                }
+                & .billboard__item-poster-wrap::before{
+                    opacity: 1;
+                }
+            }
+        }
+        &-rate{
+            position: absolute;
+            color: var(--color-white);
+            padding: 3px;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+        }
+        &-tickets{
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 0px 2px 2px 0px;
+            position: absolute;
+            left: 0px;
+            top: 20px;
+            z-index: 2;
+            &-icon{
+                width: 19px;
+                height: 19px;
+                fill: var(--color-accent);
+            }
+            &-text{
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 17px;
+                color: var(--color-accent);
+            }
+        }
+        &-poster{
+            object-fit: cover;
+            vertical-align: bottom;
+            min-height: 387px;
+            max-height: 387px;
+            width: 100%;
+            @include media-tablet{
+                min-height: 300px;
+                max-height: 300px;
+            }
+            @include media-tablet-660{
+                min-height: 250px;
+                max-height: 250px;
+            }
+            @include media-mobile{
+                min-height: 200px;
+                max-height: 200px;
+            }
+            &-wrap{
+                margin-bottom: 12px;
+                display: block;
+                position: relative;
+                &::before{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    content: "";
+                    opacity: 0;
+                    background-color: rgba(0,0,0,0.15);
+                    transition: opacity 0.2s ease-in-out;
+                }
+            }
+        }
+        &-name{
+            font-weight: 700;
+            font-size: 17px;
+            line-height: 21px;
+            color: var(--color-black);
+            margin: 0;
+            margin-bottom: 4px;
+            transition: color 0.2s ease-in-out;
+        }
+        &-info{
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            color: var(--color-secondary);
+            letter-spacing: 0.03em;
+        }
+    }
+}

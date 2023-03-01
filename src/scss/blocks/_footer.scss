@@ -1,0 +1,56 @@
+.footer{
+    background-color: var(--color-black);
+    padding: 33px 0px 13px 0px;
+    &__wrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        row-gap: 10px;
+        @include media-tablet-660{
+            flex-direction: column;
+            row-gap: 14px;
+        }
+    }
+    &__logo-icon{
+        width: 178px;
+        height: 40px;
+    }
+    &__school-icon{
+        width: 122px;
+        height: 46px;
+        @include media-mobile-520{
+            width: 80px;
+            height: 30px;
+        }
+    }
+    &__students{
+        color: var(--color-white);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        &_title{
+            @include media-mobile{
+                display: none;
+            }
+        }
+        &-link{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 28px;
+            color: inherit;
+            transition: color 0.3s ease-in-out;
+            &:hover{
+                color: var(--color-accent)
+            }
+        }
+    }
+    &__year{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 28px;
+        color: rgba(255, 255, 255, 0.5);
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,28 @@
+.trailers{
+    &__title{
+        margin-bottom: 24px;
+    }
+    &__video{
+        display: flex;
+        &_item{
+            margin-right: 8px;
+            margin-bottom: 8px;
+            @include media-desktop{
+                &:last-child{
+                    display: none;
+                }
+            }
+            @include media-tablet-850{
+                &:nth-last-child(-n+2){
+                    display: none;
+                }
+            }
+            &_video{
+                @include media-mobile-520{
+                    width: 90%;
+                    height: 90%;
+                }
+            }
+        }
+    }
+}

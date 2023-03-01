@@ -1,0 +1,750 @@
+.movies{
+    margin-top: 40px;
+    &__head{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 32px;
+        @include media-mobile-520{
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+    &__title{
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        color: var(--color-black);
+        margin: 0px;
+    }
+    &__random{
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+        background: var(--main-bg);
+        border: none;
+        color: var(--color-white);
+        cursor: pointer;
+        padding: 17px 27px;
+        border-radius: 30px;
+        &:hover{
+            background: var(--main-hover-bg);
+        }
+    }
+    &__count{
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        color: var(--color-black);
+        margin-bottom: 30px;
+        display: block;
+    }
+    &__pagination{
+        display: inline-flex;
+        gap: 5px;
+        align-items: center;
+        &--hidden{
+            display: none;
+        }
+        &--top{
+            margin-bottom: 30px;
+        }
+        &--bottom{
+            margin-bottom: 60px;
+        }
+        &-btn{
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            border: 1px solid #F1F1F1;
+            background-color: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 18px;
+            color: var(--color-black);
+            transition: border 0.3s ease-in-out;
+            &--active{
+                color: var(--color-white);
+                background-color: var(--color-accent);
+                border: 1px solid var(--color-accent);
+            }
+            &--first{
+                & .movies__pagination-btn-icon{
+                    transform: rotate(180deg);
+                }
+            }
+            &--prev{
+                & .movies__pagination-btn-icon{
+                    transform: rotate(180deg);
+                }
+            }
+            &:hover{
+                border: 1px solid var(--color-accent);
+            }
+            &:disabled{
+                cursor: not-allowed;
+                &:hover{
+                    border: 1px solid #F1F1F1;
+                }
+                & .movies__pagination-btn-icon{
+                    fill: #CCCCCC;;
+                }
+            }
+            &-icon{
+                width: 11px;
+                height: 11px;
+                fill: var(--color-black);
+            }
+            &-icon-wrap{
+                display: flex;
+                & .movies__pagination-btn-icon:first-child{
+                    margin-right: -6px;
+                }
+            }
+        }
+        &-list{
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        &-item{
+            &-dots{
+                height: 100%;
+                display: flex;
+                align-items: end;
+            }
+        }
+        @include media-mobile-520{
+            width: 60%;
+        }
+    }
+    &__list{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        margin-bottom: 60px;
+    }
+    &__card{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #E8E8E8;
+        position: relative;
+        &-first-info{
+            margin-left: auto;
+            display: flex;
+            align-items: flex-start;
+            justify-self: start;
+            width: 100%;
+            gap: 24px;
+        }
+        &-second-info{
+            margin-left: auto;
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+        }
+        &-poster{
+            width: 112px;
+            height: 168px;
+            object-fit: cover;
+            vertical-align: bottom;
+            @include media-tablet-980{
+                max-width: 112px;
+            }
+            @include media-mobile-520{
+                width: 90px;
+                height: 135px;
+            }
+        }
+        &-text{
+            display: flex;
+            flex-direction: column;
+            max-width: 340px;
+            align-items: flex-start;
+        }
+        &-name{
+            font-weight: 700;
+            font-size: 17px;
+            line-height: 21px;
+            color: var(--color-black);
+            margin: 0;
+            margin-bottom: 4px;
+            transition: color 0.3s ease-in-out;
+            &-original{
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                color: var(--color-secondary);
+                margin-bottom: 8px;
+            }
+            &:hover{
+                color: var(--color-accent);
+            }
+        }
+        &-rate{
+            display: none;
+            @include media-mobile-520{
+                display: block;
+                position: absolute;
+                color: var(--color-white);
+                padding: 3px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+        &-genres{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: var(--color-secondary);
+            margin-bottom: 28px;
+        }
+        &-cast{
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            margin-bottom: 13px;
+            &-text{
+                color: var(--color-black);
+            }
+            &-roles{
+                color: var(--color-secondary);
+            }
+        }
+        &-filmmakers{
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            &-text{
+                color: var(--color-black);
+            }
+            &-directors{
+                color: var(--color-secondary);
+            }
+            @include media-mobile-520{
+                display: none;
+            }
+        }
+        &-rates{
+            display: flex;
+            align-items: flex-start;
+            margin-right: auto;
+            &-num{
+                font-weight: 700;
+                font-size: 32px;
+                line-height: 39px;
+                margin-bottom: 8px;
+            }
+            &-count{
+                font-weight: 400;
+                font-size: 13px;
+                line-height: 16px;
+                color: var(--color-secondary);
+                margin-bottom: 16px;
+            }
+            &-stars{
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+                gap: 4px;
+                margin-bottom: 24px;
+                @include media-desktopsmall{
+                    gap: 0px;
+                }
+                @include media-tablet-850{
+                    display: none;
+                }
+            }
+            &-star{
+                &-icon{
+                    width: 24px;
+                    height: 24px;
+                    fill: #CCCCCC;
+                    &--active{
+                        fill: var(--color-accent);
+                    }
+                    @include media-tablet-980{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+            &-will-tablet{
+                cursor: pointer;
+                width: 24px;
+                color: var(--color-black);
+                display: none;
+                @include media-tablet-850{
+                    display: flex;
+                }
+                @include media-tablet-660{
+                    display: none;
+                }
+            }
+            &-will-watch{
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 10px 19px;
+                border-radius: 30px;
+                border: none;
+                background: rgba(#000000, 0.05);
+                cursor: pointer;
+                color: var(--color-black);
+                transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+                &-icon{
+                    width: 20px;
+                    height: 20px;
+                    fill: var(--color-black);
+                    transition: fill 0.3s ease-in-out;
+                }
+                &:hover{
+                    color: var(--color-accent);
+                    & .movies__card-rates-will-watch-icon{
+                        fill: var(--color-accent);
+                    }
+                }
+                &--active{
+                    color: var(--color-white);
+                    background-color: var(--color-accent);
+                    & .movies__card-rates-will-watch-icon{
+                        fill: var(--color-white);
+                    }
+                    &:hover{
+                        color: var(--color-white);
+                        & .movies__card-rates-will-watch-icon{
+                            fill: var(--color-white);
+                        }
+                    }
+                }
+                @include media-tablet-850{
+                    display: none;
+                }
+            }
+            @include media-tablet{
+                flex-direction: row;
+                align-items: center;
+            }
+            @include media-tablet-660{
+                flex-direction: column;
+            }
+            @include media-mobile-520{
+                display: none;
+            }
+        }
+        &-watch{
+            background: rgba(232, 232, 232, 0.5);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 9px 20px;
+            gap: 16px;
+            position: relative;
+            margin-left: 8px;
+            &::before{
+                content: '';
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0px;
+                height: 2px;
+                width: 100%;
+                background-color: #E8E8E8;
+            }
+            &-block{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 9px;
+                &-title{
+                    font-weight: 700;
+                    font-size: 13px;
+                    line-height: 17px;
+                    text-align: center;
+                    color: var(--color-black);
+                    @include media-tablet-850{
+                        margin-bottom: 10px;
+                    }
+                }
+                &-btn{
+                    padding: 10px 18px;
+                    border-radius: 30px;
+                    border: none;
+                    cursor: pointer;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: var(--color-white);
+                    &--offline{
+                        background: var(--main-bg);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        & .movies__card-watch-block-btn-icon{
+                            width: 19px;
+                            height: 19px;
+                            fill: var(--color-white);
+                        }
+                        &:hover{
+                            background: var(--main-hover-bg);
+                        }
+                    }
+                    &--online{
+                        background: var(--online-bg);
+                        &:hover{
+                            background: var(--online-hover-bg);
+                        }
+                    }
+                    &:disabled{
+                        background: rgba(119, 119, 119, 0.5);
+                        cursor: not-allowed;
+                        color: rgba(255, 255, 255, 0.5);
+                        & .movies__card-watch-block-btn-icon{
+                            fill: rgba(255, 255, 255, 0.5);
+                        }
+                    }
+                    @include media-tablet-850{
+                        display: none;
+                    }
+                }
+            }
+            @include media-tablet{
+                display: none;
+            }
+            @include media-tablet-850{
+                padding: 20px 20px;
+                gap: 20px;
+            }
+            @include media-tablet{
+                padding: 10px;
+                gap: 10px;
+            }
+        }
+        @include media-tablet{
+            grid-template-columns: 3fr 1fr;
+        }
+        @include media-mobile-520{
+            grid-template-columns: 1fr 0fr;
+        }
+    }
+}
+
+.profile__score-list-warning-text{
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: bold;
+    display: block;
+    margin: 20px 0px;
+}
+
+.movies__card-rates-stars{
+    &--10{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(8) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(9) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(10) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--9{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(8) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(9) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--8{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(8) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--7{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(7) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--6{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(6) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--5{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(5) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--4{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(4) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--3{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(3) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--2{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+        & .movies__card-rates-star:nth-child(2) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+    &--1{
+        & .movies__card-rates-star:nth-child(1) {
+            & .movies__card-rates-star-icon{
+                fill: var(--color-accent);
+            }
+        }
+    }
+}

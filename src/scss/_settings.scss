@@ -1,0 +1,83 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    overflow-anchor: none;
+    overflow-x: hidden;
+    font-family: "Tahoma", sans-serif;
+    background-color: var(--color-white);
+    scroll-behavior: smooth;
+}
+
+body.lock{
+    overflow: hidden;
+}
+
+main {
+    min-height: calc(100vh - 207.4px);
+}
+
+#content {
+    min-height: calc(100vh - 207.4px);
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+
+.container {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 1180px;
+    @include media-desktopsmall{
+        padding: 0 24px;
+    }
+}
+
+.rate {
+    &--good {
+        background: var(--rate-good);
+    }
+    &--common{
+        background: var(--rate-common);
+    }
+    &--gold{
+        background: var(--rate-gold);
+    }
+}
+
+.rate-num {
+    &--good {
+        color: var(--rate-good);
+    }
+    &--common{
+        color: var(--rate-common);
+    }
+    &--gold{
+        color: var(--rate-gold);
+    }
+}
