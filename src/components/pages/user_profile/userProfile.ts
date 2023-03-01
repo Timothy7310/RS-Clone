@@ -330,8 +330,10 @@ export default class UserProfile {
             const userNickname = document.querySelector('.profile__user-name') as HTMLElement;
             const userCity = document.querySelector('.profile__city') as HTMLElement;
             const userCountry = document.querySelector('.profile__country') as HTMLElement;
+            const headerUserAvatar = document.querySelector('.header__profile-avatar') as HTMLElement;
 
             userAvatar.innerHTML = `<img src="${userObj.avatar}" alt="user">`;
+            headerUserAvatar.innerHTML = `<img src="${userObj.avatar}" alt="" class="header__profile-avatar">`;
             userNickname.textContent = userObj.nickname;
             userCity.textContent = userObj.city;
             userCountry.textContent = userObj.country;
