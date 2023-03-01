@@ -1,5 +1,5 @@
 import ControllerKP from '../../controller/controllerKP';
-import { TMovie, Top250FilmItem, Top250PageData } from '../../templates/movie/typesMovie';
+import { TMovie, Top250PageData } from '../../templates/movie/typesMovie';
 import {
     generateBody,
     generateHeader,
@@ -182,12 +182,17 @@ export default class MoviesTop {
         }
     }
 
-    async getMoviesFromPageData(docs: Top250FilmItem[]): Promise<TMovie[]> {
+    // eslint-disable-next-line class-methods-use-this
+    async getMoviesFromPageData(docs: TMovie[]): Promise<TMovie[]> {
         try {
-            const movies = await Promise.all(
-                docs.map((doc) => this.controller.getMovieForId(`${doc.id}`)),
-            );
-            return movies;
+            // const movies = await Promise.all(
+            //     docs.map((doc) => this.controller.getMovieForId(`${doc.id}`)),
+            // );
+            // console.log(docs);
+            // return movies;
+            console.log(docs);
+
+            return docs;
         } catch (e) {
             console.log(e);
             return [];

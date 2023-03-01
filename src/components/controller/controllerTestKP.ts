@@ -1,5 +1,5 @@
 import { ImagesType } from '../types/types';
-import ControllerKP from './controllerKP';
+// import ControllerKP from './controllerKP';
 import ApiNum from '../utils/apiCount';
 
 class ControllerTestKP {
@@ -76,7 +76,7 @@ class ControllerTestKP {
         const input = document.querySelector('.header__search-input') as HTMLInputElement;
 
         if (input.value.length === 0) {
-            const movies = await new ControllerKP().getTop250(page, limit);
+            const movies = await this.getTop250(page, limit);
             return movies;
         }
 
@@ -93,6 +93,12 @@ class ControllerTestKP {
                 accept: 'application/json',
             },
         });
+        const movie = await response.json();
+        return movie;
+    }
+
+    async getTop250(page: number, limit = 10) {
+        const response = await fetch(`${this.movieURL}&selectFields=id%20poster%20name%20rating%20countries%20genres%20persons%20votes&page=${page}&limit=${limit}&top250=%21null`);
         const movie = await response.json();
         return movie;
     }
