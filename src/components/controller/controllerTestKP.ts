@@ -25,7 +25,7 @@ class ControllerTestKP {
         // this.token = '?token=XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
         // this.token = '?token=YJJQ1XT-DNJMT7J-PTA5KZF-WWP9ANR'; // еще один
         // this.tokenNum = '2RGX017-HSV4RZN-MS2TY91-XHEQ1R5';
-        this.tokenNum = 'QFCANVB-YJK4011-KXBRXVA-652J551';
+        this.tokenNum = 'XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5';
         this.token = `?token=${this.tokenNum}`; // еще один
         // this.token = '?token=238H0SS-904MAP9-NHE1XTM-1FVVPQR'; // еще один
         this.baseURL = 'https://api.kinopoisk.dev/v1';
