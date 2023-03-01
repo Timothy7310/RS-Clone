@@ -133,6 +133,7 @@ export default class Seances {
 
             modal.remove();
             body.classList.remove('lock');
+            this.price = 0;
         }
 
         if (target.closest('.modal-ticket__spot-sofa-warp')) {

@@ -88,6 +88,8 @@ export default class Movie {
 
             const userInfo = await this.firebaseStore.getCurrentUser();
 
+            console.log(userInfo);
+
             const newUserInfo: UserType = JSON.parse(JSON.stringify(userInfo));
             let newWatchedList = newUserInfo.watched.items;
             if (newWatchedList.map((x) => x.filmID).includes(id)) {
