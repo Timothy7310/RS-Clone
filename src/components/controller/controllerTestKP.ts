@@ -1,10 +1,8 @@
 import { ImagesType } from '../types/types';
-// import ControllerKP from './controllerKP';
 import ApiNum from '../utils/apiCount';
+import API_TOKEN from '../../configApi';
 
 class ControllerTestKP {
-    token;
-
     baseURL;
 
     movieURL;
@@ -22,25 +20,26 @@ class ControllerTestKP {
     tokenNum;
 
     constructor() {
-        // this.token = '?token=QFCANVB-YJK4011-KXBRXVA-652J551';
-        // this.token = '?token=XS0Q84W-5ZR44A8-J7FWVZK-MK81GJ5'; // еще один
-        // this.token = '?token=YJJQ1XT-DNJMT7J-PTA5KZF-WWP9ANR'; // еще один
-        this.tokenNum = '2RGX017-HSV4RZN-MS2TY91-XHEQ1R5';
-        // this.tokenNum = '2RGX017-HSV4RZN-MS2TY91-XHEQ1R5';
-        this.token = `?token=${this.tokenNum}`; // еще один
-        // this.token = '?token=238H0SS-904MAP9-NHE1XTM-1FVVPQR'; // еще один
+        this.tokenNum = '8DD8D2R-BSJ4163-KC3DTSV-2ZWA2AM';
+        this.tokenNum = API_TOKEN;
         this.baseURL = 'https://api.kinopoisk.dev/v1';
-        this.movieURL = `${this.baseURL}/movie${this.token}`;
-        this.randomMovieURL = `${this.baseURL}/movie/random${this.token}`;
-        this.personURL = `${this.baseURL}/person${this.token}`;
-        this.reviewURL = `${this.baseURL}/review${this.token}`;
-        this.imageURL = `${this.baseURL}/image${this.token}`;
-        this.seasonURL = `${this.baseURL}/season${this.token}`;
+        this.movieURL = `${this.baseURL}/movie`;
+        this.randomMovieURL = `${this.baseURL}/movie/random`;
+        this.personURL = `${this.baseURL}/person`;
+        this.reviewURL = `${this.baseURL}/review`;
+        this.imageURL = `${this.baseURL}/image`;
+        this.seasonURL = `${this.baseURL}/season`;
     }
 
     async getRandomMovieFrame(id: string) {
         ApiNum();
-        const response = await fetch(`${this.imageURL}&page=1&limit=10&movieId=${id}`);
+        const response = await fetch(`${this.imageURL}?page=1&limit=10&movieId=${id}`, {
+            method: 'GET',
+            headers: {
+                'X-API-KEY': this.tokenNum,
+                accept: 'application/json',
+            },
+        });
         const images: ImagesType = await response.json();
 
         const frames = images.docs.filter((x) => x.type === 'frame');
@@ -51,7 +50,13 @@ class ControllerTestKP {
 
     async getRandomFilm() {
         ApiNum();
-        const response = await fetch(`${this.randomMovieURL}`);
+        const response = await fetch(`${this.randomMovieURL}`, {
+            method: 'GET',
+            headers: {
+                'X-API-KEY': this.tokenNum,
+                accept: 'application/json',
+            },
+        });
         const movie = await response.json();
 
         return movie;
@@ -59,14 +64,26 @@ class ControllerTestKP {
 
     async searchMovie(name: string, page = 1, limit = 10) {
         ApiNum();
-        const response = await fetch(`${this.movieURL}&page=${page}&limit:${limit}&name=${name}`);
+        const response = await fetch(`${this.movieURL}?page=${page}&limit:${limit}&name=${name}`, {
+            method: 'GET',
+            headers: {
+                'X-API-KEY': this.tokenNum,
+                accept: 'application/json',
+            },
+        });
         const movies = await response.json();
         return movies;
     }
 
     async getMoviesBoxOffice(id: number[], country: string, limit = 5) {
         ApiNum();
-        const response = await fetch(`${this.movieURL}&selectFields=id%20name%20fees%20poster&sortField=fees.${country}.value&sortType=-1&page=1&limit=${limit}&${id.map((x) => `id=${x}`).join('&')}`);
+        const response = await fetch(`${this.movieURL}?selectFields=id%20name%20fees%20poster&sortField=fees.${country}.value&sortType=-1&page=1&limit=${limit}&${id.map((x) => `id=${x}`).join('&')}`, {
+            method: 'GET',
+            headers: {
+                'X-API-KEY': this.tokenNum,
+                accept: 'application/json',
+            },
+        });
         const movies = await response.json();
         return movies;
     }
@@ -98,7 +115,13 @@ class ControllerTestKP {
     }
 
     async getTop250(page: number, limit = 10) {
-        const response = await fetch(`${this.movieURL}&selectFields=id%20poster%20name%20rating%20countries%20genres%20persons%20votes&page=${page}&limit=${limit}&top250=%21null`);
+        const response = await fetch(`${this.movieURL}?selectFields=id%20poster%20name%20rating%20countries%20genres%20persons%20votes&page=${page}&limit=${limit}&top250=%21null`, {
+            method: 'GET',
+            headers: {
+                'X-API-KEY': this.tokenNum,
+                accept: 'application/json',
+            },
+        });
         const movie = await response.json();
         return movie;
     }
