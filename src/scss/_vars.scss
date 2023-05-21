@@ -1,0 +1,36 @@
+:root {
+  --color-black: #141414;
+  --color-white: #fff;
+  --color-focus: #036fc7;
+  --search-bar-bg: #373737;
+  --color-secondary: rgba(0, 0, 0, 0.6);
+  --main-bg: linear-gradient(90deg, #F76417 0%, #FB6416 79.25%, #DDA82D 92.3%);
+  --popular-bg: linear-gradient(90deg, #000000 38.46%, rgba(0, 0, 0, 0.05) 82.28%);
+  --rate-good: #3BB33B;
+  --rate-bad: red;
+  --rate-common: #777777;
+  --rate-gold: linear-gradient(110.67deg, #EDCC86 17.02%, #AA9B79 83.33%);
+  --color-accent: #FF5500;
+  --online-bg: linear-gradient(90deg, #E2756B 0%, #E652A5 29.31%, #9F4FE5 69.27%, #5873E1 100%);
+  --online-hover-bg: linear-gradient(90deg, #eb5547, #d84092 26.56%, #793cdc 75%, #3a60e5);
+  --main-hover-bg: linear-gradient(135deg, #eb4e00 69.91%, #c5ac00);
+  --rate-bg-good: rgba(59,179,59,.1);
+  --rate-bg-bad: rgba(255,0,0,.08);
+  --rate-bg-neutral: rgba(0,0,0,.05);
+  --free-spot: #8AD88A;
+  --sofa-spot: #FFB996;
+  --low-cost-spot: #FFB5B5;
+  --disable-spot: #a2a5b4;
+}
+
+$desktop-width: 1200px;
+$desktop-small-width: 1024px;
+$tablet-width: 768px;
+$mobile-width: 360px;
+
+$tablet-980: 980px;
+$tablet-850: 850px;
+$tablet-660: 660px;
+
+$mobile-520: 520px;
+
